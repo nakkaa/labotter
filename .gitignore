@@ -2,3 +2,5 @@
 *.db
 *.dll
 *.exe
+*.bak
+key.txt
