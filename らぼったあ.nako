@@ -1,5 +1,5 @@
 // ラボ入退室記録アプリ らぼったあ
-// Version 1.00 (2016/07/24)
+// Version 1.01 (2016/07/26)
 // 作った人:nakkaa
 // 連絡先:nakkaa[at]7ka.org //[at]を@へ置換
 //
@@ -10,7 +10,7 @@
 // 
 
 //定数
-VERSION=「1.00」//バージョン番号
+VERSION=「1.01」//バージョン番号
 EDITION=「」//テスト版かどうか
 WINDOW_TITLE=「らぼったあ」//ウィンドウのタイトル
 
@@ -420,18 +420,34 @@ SQLITE3自動変換=オン
 　修正ID=修正データ\0\0
 　もし、修正ID==0ならば、戻る
 　STARTDATE=修正データ\0\1
-　ENDDATE=修正データ\0\2
+　ENDDATE=修正データ\0\2　　
 　MEMO=修正データ\0\4
 　開始日付のテキスト=STARTDATEを「yyyy/mm/dd」に日時形式変換
 　開始時刻文=STARTDATEを「hh:nn:ss」に日時形式変換して「:」で区切る
 　開始時のテキストは開始時刻文\0
 　開始分のテキストは開始時刻文\1
 　開始秒のテキストは開始時刻文\2
-　終了日付のテキスト=ENDDATEを「yyyy/mm/dd」に日時形式変換
-　終了時刻文=ENDDATEを「hh:nn:ss」に日時形式変換して「:」で区切る
-　終了時のテキストは終了時刻文\0
-　終了分のテキストは終了時刻文\1
-　終了秒のテキストは終了時刻文\2
+　もし、修正ID==LAST_IDならば、
+　　終了日付の有効はオフ
+　　終了日付選択ボタンの有効はオフ
+　　終了時の有効はオフ
+　　終了分の有効はオフ
+　　終了秒の有効はオフ
+　　終了日付のテキスト=「」
+　　終了時のテキストは「」
+　　終了分のテキストは「」
+　　終了秒のテキストは「」
+　違えば、
+　　終了日付の有効はオン
+　　終了日付選択ボタンの有効はオン
+　　終了時の有効はオン
+　　終了分の有効はオン
+　　終了秒の有効はオン
+　　終了日付のテキスト=ENDDATEを「yyyy/mm/dd」に日時形式変換
+　　終了時刻文=ENDDATEを「hh:nn:ss」に日時形式変換して「:」で区切る
+　　終了時のテキストは終了時刻文\0
+　　終了分のテキストは終了時刻文\1
+　　終了秒のテキストは終了時刻文\2
 　メモ欄のテキストはMEMO
 　日時編集ウィンドウを中央移動
 　日時編集ウィンドウをモーダル表示
@@ -443,8 +459,17 @@ SQLITE3自動変換=オン
 　日付選択
 　もし、それが空でなければ、終了日付のテキストはそれ
 ●設定保存処理
-　修正開始日時=開始日付のテキスト&「 」&開始時のテキスト&「:」&開始分のテキスト&「:」&開始秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
-　修正終了日時=終了日付のテキスト&「 」&終了時のテキスト&「:」&終了分のテキスト&「:」&終了秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
+　エラー監視
+　　修正開始日時=開始日付のテキスト&「 」&開始時のテキスト&「:」&開始分のテキスト&「:」&開始秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
+　エラーならば、「[エラー]{~}開始日時の値がおかしいめう。」という
+　　戻る
+　もし、修正ID==LAST_IDならば、
+　　修正終了日時=「」
+　違えば、
+　　エラー監視
+　　　修正終了日時=終了日付のテキスト&「 」&終了時のテキスト&「:」&終了分のテキスト&「:」&終了秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
+　　エラーならば、「[エラー]{~}終了日時の値がおかしいめう。」という
+　　　戻る
 　「UPDATE ltt set start = '{修正開始日時}', end = '{修正終了日時}', memo = '{メモ欄のテキスト}' where id = {修正ID};」をSQLITE3実行
 　日時編集ウィンドウを閉じる
 　履歴描画処理
@@ -582,11 +607,11 @@ TWIのテキストは「Twitter認証」
 
 ●退室処理
 　もし、LAST_ID!=0ならば、
+　　現在時刻=(今日の「/」を「-」に置換)&「 」&今
 　　もし、Memo_flag==1ならば、
 　　　メモ内容=「進捗状況等のメモがあれば記入」と尋ねる
-　　違えば、メモ内容=空
-　　現在時刻=(今日の「/」を「-」に置換)&「 」&今
-　　「UPDATE ltt set end = '{現在時刻}',memo = '{メモ内容}' where id = {LAST_ID};」をSQLITE3実行。
+　　　「UPDATE ltt set end = '{現在時刻}',memo = '{メモ内容}' where id = {LAST_ID};」をSQLITE3実行。
+　　違えば、「UPDATE ltt set end = '{現在時刻}' where id = {LAST_ID};」をSQLITE3実行。
 　　退室情報のテキストは「{退室ボタン名}：{現在時刻}」
 　　twi_labo_out
 　　退室ボタンの有効はオフ
@@ -604,7 +629,7 @@ TWIのテキストは「Twitter認証」
 　　キー保存先を開いてTwiKeyへ代入
 　　プログラム側キー=TwiKey\0
 　　プログラム側シークレット=TwiKey\1
-　エラーならば、「[Key読み込みエラー]」という
+　エラーならば、「[エラー]{~}key.txtが存在しないめう」という
 　　初期設定処理
 　　終了処理
 　初期設定処理
@@ -707,11 +732,11 @@ TWIのテキストは「Twitter認証」
 　設定ウィンドウをモーダル表示
 
 ●DB検索処理
-　検索抽出結果=「SELECT id AS "ID", start AS "らぼいん", end AS "らぼりだ",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "滞在時間",memo AS "メモ" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
-　累計滞在時間=「SELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"日"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
-　平均滞在時間=「SELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"日"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
-　履歴ステータスバーのテキストは「累計時間は{累計滞在時間\1}　平均時間は{平均滞在時間\1}」
-　直近入退室履歴のアイテムは検索抽出結果
+　　検索抽出結果=「SELECT id AS "ID", start AS "らぼいん", end AS "らぼりだ",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "滞在時間",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
+　　累計滞在時間=「SELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"日"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
+　　平均滞在時間=「SELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"日"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
+　　履歴ステータスバーのテキストは「累計時間は{累計滞在時間\1}　平均時間は{平均滞在時間\1}」
+　　直近入退室履歴のアイテムは検索抽出結果
 //Twitter処理関係
 ●twi_oauth
 　エラー監視
