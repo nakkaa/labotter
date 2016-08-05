@@ -1,5 +1,5 @@
 // ラボ入退室記録アプリ らぼったあ
-// Version 1.03 (2016/08/04)
+// Version 1.03 (2016/08/05)
 // 作った人:nakkaa
 // 連絡先:nakkaa[at]7ka.org //[at]を@へ置換
 //
@@ -86,7 +86,7 @@ SQLITE3自動変換=オン
 //履歴ボタン
 履歴ボタンとはボタン
 これについて
-　テキストは「履歴」
+　テキストは「履歴(&H)」
 　W=110
 　H=40
 　Y=150
@@ -102,6 +102,7 @@ SQLITE3自動変換=オン
 　H=40
 　Y=150
 　X=150
+　テキストは「設定(&S)」
 　クリックした時は～
 　　設定ウィンドウ開処理
 
@@ -150,7 +151,7 @@ SQLITE3自動変換=オン
 そのX=10
 そのY=10
 そのW=150
-そのテキストは「CSVファイルで出力」
+そのテキストは「CSVファイルで出力(&C)」
 そのクリックした時は～
 　履歴出力処理
 
@@ -175,7 +176,7 @@ SQLITE3自動変換=オン
 そのX=450
 そのY=10
 そのW=150
-そのテキストは「選択した履歴を編集」
+そのテキストは「選択した履歴を編集(&E)」
 そのクリックした時は～
 　日時編集情報描画処理
 
@@ -183,8 +184,8 @@ SQLITE3自動変換=オン
 その親部品は履歴バー
 そのX=620
 そのY=10
-そのW=50
-そのテキストは「削除」
+そのW=60
+そのテキストは「削除(&D)」
 そのクリックした時は～
 　削除処理
 
@@ -375,7 +376,7 @@ SQLITE3自動変換=オン
 そのY=208
 そのW=112
 そのH=32
-そのテキスト=「OK」
+そのテキスト=「OK(&O)」
 その親部品は日時編集ウィンドウ
 そのクリックした時は～
 　設定保存処理
@@ -385,7 +386,7 @@ SQLITE3自動変換=オン
 そのY=208
 そのW=112
 そのH=32
-そのテキスト=「キャンセル」
+そのテキスト=「キャンセル(&C)」
 その親部品は日時編集ウィンドウ
 そのクリックした時は～
 　日時編集ウィンドウを閉じる
@@ -404,7 +405,8 @@ SQLITE3自動変換=オン
 そのW=488
 そのH=64
 そのテキスト=「」
-そのスクロールバー=「縦」
+そのダブルクリックした時は～
+　メモ欄を全選択
 その親部品は日時編集ウィンドウ
 その変更した時は～
 　もし、(メモ欄のテキストが「^*(\s|\"|\'|\,)」で正規表現マッチ)が空でなければ、//禁止文字が使用されていれば「OKボタンを押せなくする」
@@ -571,11 +573,13 @@ TWIとはボタン
 
 //GUI ここまで
 
+設定読込処理
+
 入室ボタンのテキストは入室ボタン名
 退室ボタンのテキストは退室ボタン名
 TWIのテキストは「Twitter認証」
 
-設定読込処理
+
 
 //コマンドライン引数に「-laboin」が含まれていたとき入室処理を実行する
 もし、コマンドラインが「*-laboin*」にワイルドカード一致ならば、
@@ -671,6 +675,13 @@ TWIのテキストは「Twitter認証」
 
 ●設定読込処理
 　設定保存先のINI開いて設定ハンドルに代入。
+　設定ハンドルで「設定」の「VERSION」をINI読んで設定バージョンへ代入
+　もし、設定バージョン<1.03ならば、
+　　設定ハンドルで「カスタマイズ」の「入室ボタン名」に入室ボタン名をINI書く
+　　設定ハンドルで「カスタマイズ」の「退室ボタン名」に退室ボタン名をINI書く
+　　設定ハンドルで「設定」の「VERSION」にVERSIONをINI書く
+　設定ハンドルで「カスタマイズ」の「入室ボタン名」をINI読んで入室ボタン名へ代入
+　設定ハンドルで「カスタマイズ」の「退室ボタン名」をINI読んで退室ボタン名へ代入
 　設定ハンドルで「設定」の「Twitter」をINI読んでtwi_flagへ代入
 　設定ハンドルで「設定」の「最後に挿入したID」をINI読んでLAST_IDへ代入
 　設定ハンドルで「設定」の「メモ機能」をINI読んでMemo_flagへ代入
@@ -699,6 +710,8 @@ TWIのテキストは「Twitter認証」
 　　設定ハンドルで「カスタマイズ」の「入室文」に入室文をINI書く
 　　設定ハンドルで「カスタマイズ」の「退室文」に退室文をINI書く
 　　設定ハンドルで「カスタマイズ」の「ハッシュタグ」にハッシュタグをINI書く
+　　設定ハンドルで「カスタマイズ」の「入室ボタン名」に入室ボタン名をINI書く
+　　設定ハンドルで「カスタマイズ」の「退室ボタン名」に退室ボタン名をINI書く
 　　設定ハンドルのINI閉じる
 　　
 //設定ウィンドウ関連
@@ -733,7 +746,7 @@ TWIのテキストは「Twitter認証」
 　設定ウィンドウをモーダル表示
 
 ●DB検索処理
-　　検索抽出結果=「SELECT id AS "ID", start AS "らぼいん", end AS "らぼりだ",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "滞在時間",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
+　　検索抽出結果=「SELECT id AS "ID", start AS "{入室ボタン名}", end AS "{退室ボタン名}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "滞在時間",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
 　　累計滞在時間=「SELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"日"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
 　　平均滞在時間=「SELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"日"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
 　　履歴ステータスバーのテキストは「累計時間は{累計滞在時間\1}　平均時間は{平均滞在時間\1}」
