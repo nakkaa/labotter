@@ -1324,41 +1324,6 @@ HANDLE hObject // オブジェクトのハンドル
 　『既に起動しています』という。
 　終わり。
 
-// タスクトレイ右クリックメニュー
-■POINT
-　・X
-　・Y
-
-!POINT_TYPEとは文字列="DWORD,DWORD"
-
-●GetCursorPos({参照渡し}p)=DLL("USER32.DLL",
-"INT GetCursorPos(
-char* pPoint)")
-
-●GetMenu(hWnd)=DLL("USER32.DLL",
-"DWORD GetMenu(DWORD hWnd)")
-
-●GetSubMenu(hMenu,I)=DLL("USER32.DLL",
-"DWORD GetSubMenu(
-DWORD hWnd,
-DWORD Index)")
-
-●TrackPopupMenu(hMenu,f,x,y,r,hWnd,p)=DLL("USER32.DLL",
-"Int TrackPopupMenu(
-Int hMenu,
-Int wFlags,
-Int x,
-Int y,
-Int nReserved,
-Int hWnd,
-Int lPrc)")
-
-●SetForegroundWindow(hWnd) =DLL("user32.dll",
-"BOOL SetForegroundWindow(
-HWND hWnd
-)")
-
-
 ●MessageBox(h,t,c,u) =DLL("user32.dll", "int MessageBoxA(
         HWND hWnd, // handle of owner window
         LPCTSTR lpText, // address of text in message box
@@ -1366,10 +1331,6 @@ HWND hWnd
         UINT uType  // style of message box
     )")#"
     
-●カーソルアイコン取得(ファイルの種類の) = DLL("user32.dll","DWORD LoadCursorA(BOOL,DWORD)")
-●マウスカーソル設定(Iに) = DLL("user32.dll","DWORD SetCursor(DWORD)")
-●カーソルアイコン取得(ファイルの種類の) = DLL("user32.dll","DWORD LoadCursorA(BOOL,DWORD)")
-●マウスカーソル設定(Iに) = DLL("user32.dll","DWORD SetCursor(DWORD)")
 // INiキーを削除する
 // http://nako.ezpoppa.com/sample/inisetting
 ●INI設定(セクション名,キー名,文字列,ファイル名)=DLL("kernel32.dll","BOOL WritePrivateProfileStringA(LPCTSTR lpAppName,LPCTSTR lpKeyName,LPCTSTR lpString,LPCTSTR lpFileName)")
