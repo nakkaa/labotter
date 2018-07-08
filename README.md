@@ -8,8 +8,10 @@
 # 初期設定
 * labotter.nakoと同階層にkey.txtを作成してください。書式は以下の通りです。
 
+```
 xxxx(Twitter API トークンキー)
 yyyy(Twitter API シークレットキー)
+```
 
 # 操作方法など
 * 詳しくは、https://7ka.org/software/labotter/ を見てください。
