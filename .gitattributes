@@ -1,1 +1,2 @@
-*.nako diff=sjis
+*.nako text diff=sjis eol=crlf
+*.txt text diff=sjis eol=crlf
