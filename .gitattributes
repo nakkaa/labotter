@@ -1,1 +1,2 @@
 *.nako diff=sjis
+*.txt diff=sjis

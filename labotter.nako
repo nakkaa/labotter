@@ -1,1093 +1,1089 @@
-// ãƒ©ãƒœå…¥é€€å®¤è¨˜éŒ²ã‚¢ãƒ—ãƒª ã‚‰ã¼ã£ãŸã‚
-// Version 1.13ã€€(2017/11/05)
-// ä½œã£ãŸäºº:ãªã£ã‹ã‚(ã¨ã—ã¤ãƒ¼ã‚‹)
-// é€£çµ¡å…ˆ:tnakkaa[at]gmail.com //[at]ã‚’@ã¸ç½®æ›
-// ãƒ©ã‚¤ã‚»ãƒ³ã‚¹:MIT License
+// ƒ‰ƒ{“ü‘ÞŽº‹L˜^ƒAƒvƒŠ ‚ç‚Ú‚Á‚½‚ 
+// Version 1.14 (2022/02/22)
+// ŠJ”­ŽÒ: nakkaa(‚Æ‚µ‚Â[‚é)
+// ˜A—æ:tnakkaa[at]gmail.com //[at]‚ð@‚Ö’uŠ·
 //
-// å®Ÿè¡Œã«ã¯æ—¥æœ¬èªžãƒ—ãƒªã‚°ãƒ©ãƒŸãƒ³ã‚°è¨€èªžã€Œãªã§ã—ã“ã€ãŒå¿…è¦ã§ã™ã€‚
-// ãªã§ã—ã“ã®æœ€æ–°ç‰ˆã§å‹•ä½œç¢ºèªæ¸ˆã¿ã€‚
-//
-// â€»ã‚‰ã¼ã£ãŸã‚ã¯Nakotterã‚’åˆ©ç”¨ã—ã¦ã„ã¾ã™ã€‚
-
-//å®šæ•°
-VERSION=ã€Œ1.13ã€//ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·
-EDITION=ã€Œã€//ãƒ†ã‚¹ãƒˆç‰ˆã‹ã©ã†ã‹
-WINDOW_TITLE=ã€Œã‚‰ã¼ã£ãŸã‚ã€//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚¿ã‚¤ãƒˆãƒ«
-
-//æ–‡å­—åˆ—
-å…¥å®¤æ–‡=ã€Œã‚‰ã¼ã„ã‚“ã£ï¼ã€€ã€//Tweetã™ã‚‹å†…å®¹
-é€€å®¤æ–‡=ã€Œã‚‰ã¼ã‚Šã ã£ï¼ã€€ã€
-ãªã†æ–‡=ã€Œã‚‰ã¼ãªã†ï¼ ã€€ã€
-ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°=ã€Œ#ã‚‰ã¼ã£ãŸã‚ã€
-å¾Œä»˜æ–‡=ã€Œhttps://7ka.org/software/labotterã€
-URL_HELP=ã€Œhttps://7ka.org/software/labotter/manã€
-å±¥æ­´å…¥å®¤æ™‚åç§°=ã€Œã‚‰ã¼ã„ã‚“ã€
-å±¥æ­´é€€å®¤æ™‚åç§°=ã€Œã‚‰ã¼ã‚Šã ã€
-ãƒŸãƒ¥ãƒ¼ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰=ã€Žã‚‰ã¼ã£ãŸã‚ã€//ã“ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãŒè¢«ã£ãŸã‚‰å¤šé‡èµ·å‹•ã¨ãªã‚‹
-ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚­ãƒ¼ã¨ã¯æ–‡å­—åˆ—//Twitterã®ã‚¢ãƒ—ãƒªå´ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã¨ã¯æ–‡å­—åˆ—//Twitterã®ã‚¢ãƒ—ãƒªå´ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã‚­ãƒ¼
-ãƒ¡ãƒ¢å†…å®¹ã¯ç©º
-STARTDATE=ã€Œã€
-ENDDATE=ã€Œã€
-
-//å„ç¨®ãƒ•ãƒ©ã‚°
-twi_flag=0 //Twitteræ©Ÿèƒ½ã‚’ä½¿ã†ã‹ã©ã†ã‹(0:ç„¡åŠ¹ 1:æœ‰åŠ¹)
-LAST_ID=0 //ç ”ç©¶å®¤ã®å…¥å®¤çŠ¶æ…‹ãŒç¶™ç¶šä¸­ã‹(0:ç¶™ç¶šã—ã¦ã„ãªã„(é€€å®¤ä¸­))
-Memo_flag=0 //ãƒ¡ãƒ¢æ©Ÿèƒ½ã®ãƒ•ãƒ©ã‚°
-labourl_flag=0 //ã‚‰ã¼ã£ãŸã‚ã®é…å¸ƒURLã‚’å‘Ÿãã‹ã©ã†ã‹(0:å‘Ÿãã€1:å‘Ÿã‹ãªã„)
-
-//ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜å ´æ‰€ãªã©
-DBä¿å­˜å…ˆ=æ¯è‰¦ãƒ‘ã‚¹&ã€Œlabotime.dbã€//å…¥é€€å®¤æ™‚åˆ»ã®ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®ä¿å­˜å…ˆ
-è¨­å®šä¿å­˜å…ˆ=æ¯è‰¦ãƒ‘ã‚¹&ã€Œsetting.iniã€ //å„ç¨®è¨­å®šä¿å­˜å…ˆ
-ã‚­ãƒ¼ä¿å­˜å…ˆ=ã€Œkey.txtã€ // Twitter APIã‚­ãƒ¼ã®ä¿å­˜å…ˆ (key.txtã«ã‚¢ãƒ—ãƒªã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ã¨ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã‚­ãƒ¼ã‚’æ”¹è¡Œã—ã¦ä¿å­˜ã—ã¦ã‚ã‚‹)
-
-//SQLITE3ã‚’ãªã§ã—ã“ã§ä½¿ã†ã¨ãã«å¿…è¦ã€‚æ–‡å­—ã‚³ãƒ¼ãƒ‰ã‚’å‹æ‰‹ã«å¤‰æ›ã—ã¦ãã‚Œã‚‹
-SQLITE3è‡ªå‹•å¤‰æ›=ã‚ªãƒ³
-
-//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ•ã‚©ãƒ³ãƒˆ
-æ–‡å­—æ›¸ä½“ã¯ã€ŽMeiryo UIã€
-
-//ãƒ¡ã‚¤ãƒ³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¨­å®š
-!æ¯è‰¦è¨­è¨ˆ=ã€Žæ¯è‰¦ã®å¯è¦–ã¯ã‚ªãƒ•ã€
-æ¯è‰¦ã«ã¤ã„ã¦
-ã€€ã‚¿ã‚¤ãƒˆãƒ«ã¯ã€Œ{WINDOW_TITLE}ã€
-ã€€H=300
-ã€€W=300
-ã€€ã‚ªãƒ•ã«æœ€å¤§åŒ–ãƒœã‚¿ãƒ³æœ‰åŠ¹å¤‰æ›´
-ã€€èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-ã€€ã‚¹ã‚¿ã‚¤ãƒ«ã¯ã€Œæž å›ºå®šã€ã€€
-ã€€é–‰ã˜ãŸæ™‚ã¯ï½ž
-ã€€ã€€çµ‚äº†å‡¦ç†
-
-//èµ·å‹•æ™‚ã«è¡Œã†å‡¦ç†
-èµ·å‹•æ™‚å‡¦ç†
-
-//GUIè¨­è¨ˆ ã“ã“ã‹ã‚‰
-
-//Twitterã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ç”Ÿæˆ
-ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã¯Nakotter
-ãã®oauthã®ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ï¼ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚­ãƒ¼ã€‚
-ãã®oauthã®ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆï¼ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã€‚
-
-//ã‚‰ã¼ã„ã‚“ãƒœã‚¿ãƒ³
-
-å…¥é€€å®¤ãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€X=10ã€‚H=50ã€‚W=110ã€‚Y=30ã€‚
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€å…¥é€€å®¤å‡¦ç†
-
-å‘Ÿããƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€X=150ã€‚H=50ã€‚W=110ã€‚Y=30
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ãªã†ã€
-ã€€ãƒ’ãƒ³ãƒˆã¯ã€Œã‚‰ã¼ãªã†ï¼ã¨å‘Ÿãã¾ã™ã€
-ã€€æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€twi_labo_now
-ã€€ã€€
-//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼
-ã‚¹ãƒ†ãƒãƒ¼ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¯ã€Œä¸‹ã€
-ãã®ç·¨é›†ã¯ã‚ªãƒ•
-ãã®èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitteræœªèªè¨¼ã€
-
-//å±¥æ­´ãƒœã‚¿ãƒ³
-å±¥æ­´ãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œå±¥æ­´(&H)ã€
-ã€€ãƒ’ãƒ³ãƒˆã¯ã€Œå…¥é€€å®¤è¨˜éŒ²ã‚’è¦‹ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€
-ã€€W=110
-ã€€H=40
-ã€€Y=150
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¸­å¤®ç§»å‹•
-ã€€ã€€å±¥æ­´æç”»å‡¦ç†
-ã€€ã€€å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ãƒ¢ãƒ¼ãƒ€ãƒ«è¡¨ç¤º
-
-//è¨­å®šãƒœã‚¿ãƒ³
-è¨­å®šã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€W=110
-ã€€H=40
-ã€€Y=150
-ã€€X=150
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œè¨­å®š(&S)ã€
-ã€€ãƒ’ãƒ³ãƒˆã¯ã€ŒTwitteré€£æºã‚„ãƒ„ã‚¤ãƒ¼ãƒˆå†…å®¹ã®å¤‰æ›´ãŒã§ãã¾ã™ã€
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–‹å‡¦ç†
-
-//ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ãƒ©ãƒ™ãƒ«
-æƒ…å ±ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€X=10
-ã€€Y=210
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œãƒãƒ¼ã‚¸ãƒ§ãƒ³ {VERSION} {EDITION}ã€
-ã€€
-VER_TLã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€Y=210
-ã€€X=190
-ã€€//æ–‡å­—æ›¸ä½“ã¯ã€Œãƒ¡ã‚¤ãƒªã‚ª|10|ä¸‹ç·šã€
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œä½¿ã„æ–¹(&M)ã€
-ã€€ãƒ’ãƒ³ãƒˆã¯ã€Œã‚ªãƒ³ãƒ©ã‚¤ãƒ³ãƒ˜ãƒ«ãƒ—ã‚’é–‹ãã¾ã™ã€
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€URL_HELPã‚’èµ·å‹•
-
-//å…¥é€€å®¤ã®æ™‚åˆ»ã‚’è¡¨ç¤ºã™ã‚‹ãƒ©ãƒ™ãƒ«ã€€
-å…¥å®¤æƒ…å ±ã¨ã¯ãƒ©ãƒ™ãƒ«
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã„ã‚“ï¼šã€
-ã€€Y=100
-
-é€€å®¤æƒ…å ±ã¨ã¯ãƒ©ãƒ™ãƒ«
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã ï¼šã€
-ã€€Y=120
-ã€€
-
-//å…¥é€€å®¤ã®å±¥æ­´ã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨ã¯ãƒ•ã‚©ãƒ¼ãƒ 
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ã‚¿ã‚¤ãƒˆãƒ«ã¯ã€Œå±¥æ­´ã€
-ã€€W=800
-ã€€H=500
-ã€€ã‚ªãƒ•ã«æœ€å°åŒ–ãƒœã‚¿ãƒ³æœ‰åŠ¹å¤‰æ›´
-
-ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã¨ã¯ã‚°ãƒªãƒƒãƒ‰
-ãã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¯ã€Œå…¨ä½“ã€
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®ç·¨é›†ã¯ã‚ªãƒ•
-ãã®ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€æ—¥æ™‚ç·¨é›†æƒ…å ±æç”»å‡¦ç†
-
-
-å±¥æ­´ãƒãƒ¼ã¨ã¯ãƒ‘ãƒãƒ«
-ãã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¯ã€Œä¸Šã€
-ãã®ã‚¹ã‚¿ã‚¤ãƒ«ã¯ã€Œå‡¸ã€
-ãã®èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-å±¥æ­´å‡ºåŠ›ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ãƒãƒ¼
-ãã®X=10
-ãã®Y=10
-ãã®W=150
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒCSVãƒ•ã‚¡ã‚¤ãƒ«ã§å‡ºåŠ›(&C)ã€
-ãã®ãƒ’ãƒ³ãƒˆã¯ã€Œä»Šè¡¨ç¤ºã—ã¦ã„ã‚‹å±¥æ­´ã‚’CSVå½¢å¼ã§å‡ºåŠ›ã—ã¾ã™ã€
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€å±¥æ­´å‡ºåŠ›å‡¦ç†
-
-å±¥æ­´æ¤œç´¢ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ãƒãƒ¼
-ãã®X=200
-ãã®Y=15
-ãã®W=25
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œæ¤œç´¢ï¼šã€
-
-å±¥æ­´ç·¨é›†ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ãƒãƒ¼
-ãã®X=240
-ãã®Y=10
-ãã®W=150
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã€
-ãã®ãƒ’ãƒ³ãƒˆã¯ã€ŒIDã€ã‚‰ã¼ã„ã‚“ã€ã‚‰ã¼ã‚Šã ã€ãƒ¡ãƒ¢ã‹ã‚‰æ¤œç´¢ã—ã¾ã™ã€
-ãã®å¤‰æ›´ã—ãŸæ™‚ã¯ï½ž
-ã€€DBæ¤œç´¢å‡¦ç†
-
-å±¥æ­´ç·¨é›†ãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ãƒãƒ¼
-ãã®X=450
-ãã®Y=10
-ãã®W=150
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œé¸æŠžã—ãŸå±¥æ­´ã‚’ç·¨é›†(&E)ã€
-ãã®ãƒ’ãƒ³ãƒˆã¯ã€Œæ—¥ä»˜æ™‚åˆ»ã€ãƒ¡ãƒ¢ã®ç·¨é›†ãŒè¡Œãˆã¾ã™ã€
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€æ—¥æ™‚ç·¨é›†æƒ…å ±æç”»å‡¦ç†
-
-å±¥æ­´å‰Šé™¤ãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®è¦ªéƒ¨å“ã¯å±¥æ­´ãƒãƒ¼
-ãã®X=620
-ãã®Y=10
-ãã®W=60
-ãã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œå‰Šé™¤(&D)ã€
-ãã®ãƒ’ãƒ³ãƒˆã¯ã€Œå±¥æ­´ã‚’å‰Šé™¤ã—ã¾ã™ã€
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€å‰Šé™¤å‡¦ç†
-
-å±¥æ­´ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¯ã€Œä¸‹ã€
-ã€€ç·¨é›†ã¯ã‚ªãƒ•
-ã€€èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-ã€€è¦ªéƒ¨å“ã¯å±¥æ­´ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨ã¯ãƒ•ã‚©ãƒ¼ãƒ 
-ãã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆW=640
-ãã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆH=214
-ãã®ã‚¿ã‚¤ãƒˆãƒ«=ã€Œæ—¥æ™‚ç·¨é›†ã€
-ãã®èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-ãã®ã‚¹ã‚¿ã‚¤ãƒ«ã¯ã€Œãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¹ã‚¿ã‚¤ãƒ«ã€
-
-æ—¥ä»˜é¸æŠžãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=216
-ãã®Y=32
-ãã®W=72
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œæ—¥ä»˜é¸æŠžã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€é–‹å§‹æ—¥ä»˜é¸æŠžå‡¦ç†
-
-é–‹å§‹æ—¥ä»˜ã¨ã¯ãƒ¡ãƒ¢
-ãã®X=104
-ãã®Y=32
-ãã®W=112
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-é–‹å§‹æ™‚ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=304
-ãã®Y=32
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯23
-
-é–‹å§‹åˆ†ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=400
-ãã®Y=32
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯59
-
-é–‹å§‹ç§’ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=496
-ãã®Y=32
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯59
-
-é–‹å§‹æ™‚ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=368
-ãã®Y=40
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œæ™‚ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-é–‹å§‹åˆ†ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=464
-ãã®Y=40
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œåˆ†ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-é–‹å§‹ç§’ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=560
-ãã®Y=40
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œç§’ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-çµ‚äº†æ—¥ä»˜é¸æŠžãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=216
-ãã®Y=64
-ãã®W=72
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œæ—¥ä»˜é¸æŠžã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€çµ‚äº†æ—¥ä»˜é¸æŠžå‡¦ç†
-
-çµ‚äº†æ—¥ä»˜ã¨ã¯ãƒ¡ãƒ¢
-ãã®X=104
-ãã®Y=64
-ãã®W=112
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-çµ‚äº†æ™‚ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=304
-ãã®Y=64
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯23
-
-çµ‚äº†åˆ†ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=400
-ãã®Y=64
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯59
-
-çµ‚äº†ç§’ã¨ã¯ã‚¹ãƒ”ãƒ³ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=496
-ãã®Y=64
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®æœ€å°å€¤ã¯0
-ãã®æœ€å¤§å€¤ã¯59
-
-çµ‚äº†æ™‚ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=368
-ãã®Y=72
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œæ™‚ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-çµ‚äº†åˆ†ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=464
-ãã®Y=72
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œåˆ†ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-çµ‚äº†ç§’ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=560
-ãã®Y=72
-ãã®W=32
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œç§’ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-é–‹å§‹æ™‚åˆ»è¡¨ç¤ºã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=32
-ãã®Y=32
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œé–‹å§‹æ™‚åˆ»ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-çµ‚äº†æ™‚åˆ»è¡¨ç¤ºã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=32
-ãã®Y=64
-ãã®W=64
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œçµ‚äº†æ™‚åˆ»ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-æ—¥æ™‚ç·¨é›†OKãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=376
-ãã®Y=158
-ãã®W=112
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€ŒOK(&O)ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€è¨­å®šä¿å­˜å‡¦ç†
-
-æ—¥æ™‚ç·¨é›†ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=504
-ãã®Y=158
-ãã®W=112
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã‚­ãƒ£ãƒ³ã‚»ãƒ«(&C)ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
-ã€€
-
-ãƒ¡ãƒ¢ã‚¿ãƒ©ãƒ™ãƒ«ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=32
-ãã®Y=112
-ãã®W=64
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œãƒ¡ãƒ¢ã€
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ¡ãƒ¢æ¬„ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=104
-ãã®Y=112
-ãã®W=488
-ãã®H=64
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ãƒ¡ãƒ¢æ¬„ã‚’å…¨é¸æŠž
-ãã®è¦ªéƒ¨å“ã¯æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ãã®å¤‰æ›´ã—ãŸæ™‚ã¯ï½ž
-ã€€ã‚‚ã—ã€(ãƒ¡ãƒ¢æ¬„ã®ãƒ†ã‚­ã‚¹ãƒˆãŒã€Œ^*(\s|\"|\'|\,)ã€ã§æ­£è¦è¡¨ç¾ãƒžãƒƒãƒ)ãŒç©ºã§ãªã‘ã‚Œã°ã€//ç¦æ­¢æ–‡å­—ãŒä½¿ç”¨ã•ã‚Œã¦ã„ã‚Œã°ã€ŒOKãƒœã‚¿ãƒ³ã‚’æŠ¼ã›ãªãã™ã‚‹ã€
-ã€€ã€€æ—¥æ™‚ç·¨é›†OKãƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€é•ãˆã°ã€æ—¥æ™‚ç·¨é›†OKãƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-
-â—æ—¥æ™‚ç·¨é›†æƒ…å ±æç”»å‡¦ç†
-ã€€ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ä¿®æ­£ãƒ‡ãƒ¼ã‚¿ã¸ä»£å…¥
-ã€€ä¿®æ­£ID=ä¿®æ­£ãƒ‡ãƒ¼ã‚¿\0\0
-ã€€ã‚‚ã—ã€ä¿®æ­£ID==0ãªã‚‰ã°ã€æˆ»ã‚‹
-ã€€STARTDATE=ä¿®æ­£ãƒ‡ãƒ¼ã‚¿\0\1
-ã€€ENDDATE=ä¿®æ­£ãƒ‡ãƒ¼ã‚¿\0\2ã€€ã€€
-ã€€MEMO=ä¿®æ­£ãƒ‡ãƒ¼ã‚¿\0\4
-ã€€é–‹å§‹æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆ=STARTDATEã‚’ã€Œyyyy/mm/ddã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›
-ã€€é–‹å§‹æ™‚åˆ»æ–‡=STARTDATEã‚’ã€Œhh:nn:ssã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›ã—ã¦ã€Œ:ã€ã§åŒºåˆ‡ã‚‹
-ã€€é–‹å§‹æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆã¯é–‹å§‹æ™‚åˆ»æ–‡\0
-ã€€é–‹å§‹åˆ†ã®ãƒ†ã‚­ã‚¹ãƒˆã¯é–‹å§‹æ™‚åˆ»æ–‡\1
-ã€€é–‹å§‹ç§’ã®ãƒ†ã‚­ã‚¹ãƒˆã¯é–‹å§‹æ™‚åˆ»æ–‡\2
-ã€€ã‚‚ã—ã€ä¿®æ­£ID==LAST_IDãªã‚‰ã°ã€
-ã€€ã€€çµ‚äº†æ—¥ä»˜ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã€€çµ‚äº†æ—¥ä»˜é¸æŠžãƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã€€çµ‚äº†æ™‚ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã€€çµ‚äº†åˆ†ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã€€çµ‚äº†ç§’ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€ã€€çµ‚äº†æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ã€€ã€€çµ‚äº†æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã€
-ã€€ã€€çµ‚äº†åˆ†ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã€
-ã€€ã€€çµ‚äº†ç§’ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã€
-ã€€é•ãˆã°ã€
-ã€€ã€€çµ‚äº†æ—¥ä»˜ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã€€çµ‚äº†æ—¥ä»˜é¸æŠžãƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã€€çµ‚äº†æ™‚ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã€€çµ‚äº†åˆ†ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã€€çµ‚äº†ç§’ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã€€çµ‚äº†æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆ=ENDDATEã‚’ã€Œyyyy/mm/ddã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›
-ã€€ã€€çµ‚äº†æ™‚åˆ»æ–‡=ENDDATEã‚’ã€Œhh:nn:ssã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›ã—ã¦ã€Œ:ã€ã§åŒºåˆ‡ã‚‹
-ã€€ã€€çµ‚äº†æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆã¯çµ‚äº†æ™‚åˆ»æ–‡\0
-ã€€ã€€çµ‚äº†åˆ†ã®ãƒ†ã‚­ã‚¹ãƒˆã¯çµ‚äº†æ™‚åˆ»æ–‡\1
-ã€€ã€€çµ‚äº†ç§’ã®ãƒ†ã‚­ã‚¹ãƒˆã¯çµ‚äº†æ™‚åˆ»æ–‡\2
-ã€€ãƒ¡ãƒ¢æ¬„ã®ãƒ†ã‚­ã‚¹ãƒˆã¯MEMO
-ã€€æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¸­å¤®ç§»å‹•
-ã€€æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ãƒ¢ãƒ¼ãƒ€ãƒ«è¡¨ç¤º
-
-â—é–‹å§‹æ—¥ä»˜é¸æŠžå‡¦ç†
-ã€€æ—¥ä»˜é¸æŠž
-ã€€ã‚‚ã—ã€ãã‚ŒãŒç©ºã§ãªã‘ã‚Œã°ã€é–‹å§‹æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ãã‚Œ
-â—çµ‚äº†æ—¥ä»˜é¸æŠžå‡¦ç†
-ã€€æ—¥ä»˜é¸æŠž
-ã€€ã‚‚ã—ã€ãã‚ŒãŒç©ºã§ãªã‘ã‚Œã°ã€çµ‚äº†æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ãã‚Œ
-â—è¨­å®šä¿å­˜å‡¦ç†
-ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ä¿®æ­£é–‹å§‹æ—¥æ™‚=é–‹å§‹æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ ã€&é–‹å§‹æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ:ã€&é–‹å§‹åˆ†ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ:ã€&é–‹å§‹ç§’ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ã€Œyyyy-mm-dd hh:nn:ssã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›
-ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€ã€Œ[ã‚¨ãƒ©ãƒ¼]{~}é–‹å§‹æ—¥æ™‚ã®å€¤ãŒãŠã‹ã—ã„ã‚ã†ã€‚ã€ã¨ã„ã†
-ã€€ã€€æˆ»ã‚‹
-ã€€ã‚‚ã—ã€ä¿®æ­£ID==LAST_IDãªã‚‰ã°ã€
-ã€€ã€€ä¿®æ­£çµ‚äº†æ—¥æ™‚=ã€Œã€
-ã€€é•ãˆã°ã€
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã€€ä¿®æ­£çµ‚äº†æ—¥æ™‚=çµ‚äº†æ—¥ä»˜ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ ã€&çµ‚äº†æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ:ã€&çµ‚äº†åˆ†ã®ãƒ†ã‚­ã‚¹ãƒˆ&ã€Œ:ã€&çµ‚äº†ç§’ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ã€Œyyyy-mm-dd hh:nn:ssã€ã«æ—¥æ™‚å½¢å¼å¤‰æ›
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€ã€Œ[ã‚¨ãƒ©ãƒ¼]{~}çµ‚äº†æ—¥æ™‚ã®å€¤ãŒãŠã‹ã—ã„ã‚ã†ã€‚ã€ã¨ã„ã†
-ã€€ã€€ã€€æˆ»ã‚‹
-ã€€ã€ŒUPDATE ltt set start = '{ä¿®æ­£é–‹å§‹æ—¥æ™‚}', end = '{ä¿®æ­£çµ‚äº†æ—¥æ™‚}', memo = '{ãƒ¡ãƒ¢æ¬„ã®ãƒ†ã‚­ã‚¹ãƒˆ}' where id = {ä¿®æ­£ID};ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€æ—¥æ™‚ç·¨é›†ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
-ã€€å±¥æ­´æç”»å‡¦ç†
-
-
-//è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–¢é€£
-è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¨ã¯ãƒ•ã‚©ãƒ¼ãƒ 
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆW=384
-ã€€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆH=314
-ã€€ã‚¿ã‚¤ãƒˆãƒ«=ã€Œè¨­å®šã€
-ã€€ã‚¹ã‚¿ã‚¤ãƒ«ã¯ã€Œãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¹ã‚¿ã‚¤ãƒ«ã€
-ã€€èƒŒæ™¯è‰²ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦èƒŒæ™¯è‰²
-
-ãƒœã‚¿ãƒ³1ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=144
-ãã®Y=258
-ãã®W=96
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€ŒOKã€
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½žãƒœã‚¿ãƒ³1__ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚#ã‚¤ãƒ™ãƒ³ãƒˆ
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒœã‚¿ãƒ³2ã¨ã¯ãƒœã‚¿ãƒ³
-ãã®X=248
-ãã®Y=258
-ãã®W=96
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€
-ãã®ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½žãƒœã‚¿ãƒ³2__ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚#ã‚¤ãƒ™ãƒ³ãƒˆ
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ã‚¨ãƒ‡ã‚£ã‚¿1ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=128
-ãã®Y=24
-ãã®W=232
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ã‚¨ãƒ‡ã‚£ã‚¿2ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=128
-ãã®Y=64
-ãã®W=232
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ã‚¨ãƒ‡ã‚£ã‚¿3ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=128
-ãã®Y=104
-ãã®W=232
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ã‚¨ãƒ‡ã‚£ã‚¿4ã¨ã¯ã‚¨ãƒ‡ã‚£ã‚¿
-ãã®X=128
-ãã®Y=144
-ãã®W=232
-ãã®H=24
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ©ãƒ™ãƒ«2ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=8
-ãã®Y=24
-ãã®W=104
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œå…¥å®¤æ™‚ã¤ã¶ã‚„ãæ–‡ã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ©ãƒ™ãƒ«3ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=8
-ãã®Y=64
-ãã®W=104
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œé€€å®¤æ™‚ã¤ã¶ã‚„ãæ–‡ã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ©ãƒ™ãƒ«4ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=8
-ãã®Y=104
-ãã®W=104
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œåœ¨å®¤æ™‚ã¤ã¶ã‚„ãæ–‡ã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ©ãƒ™ãƒ«5ã¨ã¯ãƒ©ãƒ™ãƒ«
-ãã®X=8
-ãã®Y=144
-ãã®W=104
-ãã®H=32
-ãã®ãƒ†ã‚­ã‚¹ãƒˆ=ã€Œãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã€
-ãã®è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-ãƒ¡ãƒ¢æ©Ÿèƒ½ãƒã‚§ãƒƒã‚¯ã¨ã¯ãƒã‚§ãƒƒã‚¯
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€X=140
-ã€€Y=190
-ã€€W=180
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã æ™‚ã«ãƒ¡ãƒ¢å…¥åŠ›ç”»é¢ã‚’é–‹ãã€
-ã€€è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-å®£ä¼ãƒã‚§ãƒƒã‚¯ã¨ã¯ãƒã‚§ãƒƒã‚¯
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€X=140
-ã€€Y=220
-ã€€W=230
-ã€€ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã£ãŸã‚ã®é…å¸ƒãƒšãƒ¼ã‚¸ã®ãƒªãƒ³ã‚¯ã‚’å‘Ÿã‹ãªã„ã€
-ã€€è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-
-TWIã¨ã¯ãƒœã‚¿ãƒ³
-ã“ã‚Œã«ã¤ã„ã¦
-ã€€W=110
-ã€€H=40
-ã€€Y=200
-ã€€X=10
-ã€€è¦ªéƒ¨å“ã¯è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
-ã€€ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã¯ï½ž
-ã€€ã€€ã‚‚ã—ã€twi_flag==0ãªã‚‰ã°ã€
-ã€€ã€€ã€€twi_setting_load
-ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€twi_setting_delete
-//è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–¢é€£ã“ã“ã¾ã§
-
-//GUI ã“ã“ã¾ã§
-
-TWIã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterèªè¨¼ã€
-
-è¨­å®šèª­è¾¼å‡¦ç†
-
-
-
-//ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°ã«ã€Œ-laboinã€ãŒå«ã¾ã‚Œã¦ã„ãŸã¨ãå…¥å®¤å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
-ã‚‚ã—ã€ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ãŒã€Œ*-laboin*ã€ã«ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ä¸€è‡´ãªã‚‰ã°ã€
-ã€€ã‚‚ã—ã€LAST_ID==0ãªã‚‰ã°ã€
-ã€€ã€€å…¥å®¤å‡¦ç†
-ã€€çµ‚äº†å‡¦ç†
-//ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³å¼•æ•°ã«ã€Œ-laboutã€ãŒå«ã¾ã‚Œã¦ã„ãŸã¨ãé€€å®¤å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹
-ã‚‚ã—ã€ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ãŒã€Œ*-labout*ã€ã«ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ä¸€è‡´ãªã‚‰ã°ã€
-ã€€é€€å®¤å‡¦ç†
-ã€€çµ‚äº†å‡¦ç†
-
-ã‚‚ã—ã€ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ãŒã€Œ*-noupdate*ã€ã«ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰ä¸€è‡´ã§ãªã‘ã‚Œã°ã€
-ã€€æœ€æ–°ç‰ˆç¢ºèªå‡¦ç†
-
-æ¯è‰¦ã‚’ä¸­å¤®ç§»å‹•
-æ¯è‰¦ã®å¯è¦–ã¯ã‚ªãƒ³
-è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¸­å¤®ç§»å‹•
-
-â—å…¥é€€å®¤å‡¦ç†
-ã€€ã‚‚ã—ã€LAST_ID==0ãªã‚‰ã°ã€
-ã€€ã€€å…¥å®¤å‡¦ç†
-ã€€é•ãˆã°ã€
-ã€€ã€€é€€å®¤å‡¦ç†
-ã€€ã€€
-
-â—å…¥å®¤å‡¦ç†
-ã€€ç¾åœ¨æ™‚åˆ»=(ä»Šæ—¥ã®ã€Œ/ã€ã‚’ã€Œ-ã€ã«ç½®æ›)&ã€Œ ã€&ä»Š
-ã€€ã€ŒINSERT INTO ltt(start) values('ã€&ç¾åœ¨æ™‚åˆ»&ã€Œ');ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€LAST_ID=SQLITE3ä»ŠæŒ¿å…¥ã—ãŸID
-ã€€å…¥å®¤æƒ…å ±ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã„ã‚“ï¼š{ç¾åœ¨æ™‚åˆ»}ã€
-ã€€é€€å®¤æƒ…å ±ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã ï¼šã€
-ã€€twi_labo_in
-ã€€å‘Ÿããƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€å…¥é€€å®¤ãƒœã‚¿ãƒ³ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã ã€
-
-â—é€€å®¤å‡¦ç†
-ã€€ã‚‚ã—ã€LAST_ID!=0ãªã‚‰ã°ã€
-ã€€ã€€ç¾åœ¨æ™‚åˆ»=(ä»Šæ—¥ã®ã€Œ/ã€ã‚’ã€Œ-ã€ã«ç½®æ›)&ã€Œ ã€&ä»Š
-ã€€ã€€ã‚‚ã—ã€Memo_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã€€ãƒ¡ãƒ¢å†…å®¹=ã€Œé€²æ—çŠ¶æ³ç­‰ã®ãƒ¡ãƒ¢ãŒã‚ã‚Œã°è¨˜å…¥ã€ã¨å°‹ã­ã‚‹
-ã€€ã€€ã€€ã‚‚ã—ã€(ãƒ¡ãƒ¢å†…å®¹ãŒã€Œ^*(\s|\"|\'|\,)ã€ã§æ­£è¦è¡¨ç¾ãƒžãƒƒãƒ)ãŒç©ºã§ãªã‘ã‚Œã°ã€ã€ŒåŠè§’ã‚¹ãƒšãƒ¼ã‚¹ã‚„åŠè§’è¨˜å·ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“ã€ã¨ã„ã†
-ã€€ã€€ã€€ã€€æˆ»ã‚‹
-ã€€ã€€ã€€é•ãˆã°ã€ã€ŒUPDATE ltt set end = '{ç¾åœ¨æ™‚åˆ»}',memo = '{ãƒ¡ãƒ¢å†…å®¹}' where id = {LAST_ID};ã€ã‚’SQLITE3å®Ÿè¡Œã€‚
-ã€€ã€€é•ãˆã°ã€ã€ŒUPDATE ltt set end = '{ç¾åœ¨æ™‚åˆ»}' where id = {LAST_ID};ã€ã‚’SQLITE3å®Ÿè¡Œã€‚
-ã€€ã€€ã€ŒUPDATE ltt set end = '{ç¾åœ¨æ™‚åˆ»}' where id = {LAST_ID};ã€ã‚’SQLITE3å®Ÿè¡Œã€‚
-ã€€ã€€é€€å®¤æƒ…å ±ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã ï¼š{ç¾åœ¨æ™‚åˆ»}ã€
-ã€€ã€€twi_labo_out
-ã€€ã€€å‘Ÿããƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ•ã€€ã€€
-ã€€ã€€LAST_ID=0
-ã€€ã€€å…¥é€€å®¤ãƒœã‚¿ãƒ³ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã„ã‚“ã€
-â—å±¥æ­´æç”»å‡¦ç†
-ã€€DBæ¤œç´¢å‡¦ç†
-
-â—å±¥æ­´å‡ºåŠ›å‡¦ç†
-ã€€CSVä¿å­˜å…ˆ=ã€Œcsvã€ã®ã€Œ{ä»Šæ—¥ã®ã€Ž/ã€ã‚’ã€Ž-ã€ã¸ç½®æ›}_{ä»Šã®ã€Ž:ã€ã‚’ã€Ž-ã€ã¸ç½®æ›}ã€ã§ä¿å­˜ãƒ•ã‚¡ã‚¤ãƒ«é¸æŠž
-ã€€ã‚‚ã—ã€CSVä¿å­˜å…ˆãŒç©ºã§ãªã‘ã‚Œã°ã€ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’CSVä¿å­˜å…ˆã¸ä¿å­˜
-
-â—èµ·å‹•æ™‚å‡¦ç†
-ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã‚­ãƒ¼ä¿å­˜å…ˆã‚’é–‹ã„ã¦TwiKeyã¸ä»£å…¥
-ã€€ã€€ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚­ãƒ¼=TwiKey\0
-ã€€ã€€ãƒ—ãƒ­ã‚°ãƒ©ãƒ å´ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ=TwiKey\1
-ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€ã€Œ[ã‚¨ãƒ©ãƒ¼]{~}key.txtãŒå­˜åœ¨ã—ãªã„ã‚ã†ã€ã¨ã„ã†
-ã€€ã€€çµ‚äº†å‡¦ç†
-ã€€åˆæœŸè¨­å®šå‡¦ç†
-ã€€ã‚‚ã—ã€DBä¿å­˜å…ˆãŒå­˜åœ¨ã§ãªã‘ã‚Œã°ã€
-ã€€ã€€DBä¿å­˜å…ˆã‚’SQLITE3é–‹ãã€‚
-ã€€ã€€ã€ŒCREATE TABLE ltt(id INTEGER PRIMARY KEY,start TEXT,end TEXT,memo TEXT);ã€ã‚’SQLITE3å®Ÿè¡Œã€‚
-ã€€é•ãˆã°ã€
-ã€€ã€€DBä¿å­˜å…ˆã‚’SQLITE3é–‹ãã€‚
-
-â—çµ‚äº†å‡¦ç†
-ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒTwitterã€ã«twi_flagã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œæœ€å¾Œã«æŒ¿å…¥ã—ãŸIDã€ã«LAST_IDã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€DBä¿å­˜å…ˆã®SQLITE3é–‰ã˜ã‚‹
-ã€€ReleaseMutex(ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹)ã€‚
-ã€€CloseHandle(ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹)ã€‚
-ã€€çµ‚äº†
-
-â—å‰Šé™¤å‡¦ç†
-ã€€å‰Šé™¤ID=ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã®ãƒ†ã‚­ã‚¹ãƒˆã®ã€Œ"ã€ã‹ã‚‰ã€Œ"ã€ã¾ã§ç¯„å›²å†…åˆ‡ã‚Šå–ã‚‹
-ã€€ã‚‚ã—ã€(å‰Šé™¤ID==0)ã¾ãŸã¯(å‰Šé™¤ID==LAST_ID)ã§ãªã‘ã‚Œã°ã€
-ã€€ã€€ã€Œä»¥ä¸‹ã®é …ç›®ã‚’å‰Šé™¤ã—ã¾ã™ã‹ï¼Ÿ{~}{~}{ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã®ãƒ†ã‚­ã‚¹ãƒˆ}ã€ã‚’äºŒæŠž
-ã€€ã€€ã‚‚ã—ã€ãã‚ŒãŒã¯ã„ãªã‚‰ã°ã€
-ã€€ã€€ã€€ã€ŒDELETE FROM ltt WHERE id=ã€&å‰Šé™¤ID&ã€Œ;ã€ã‚’SQLITE3å®Ÿè¡Œã€‚
-ã€€å±¥æ­´æç”»å‡¦ç†
-ã€€
-â—æœ€æ–°ç‰ˆç¢ºèªå‡¦ç†
-ã€€//ãƒãƒƒãƒˆã«æŽ¥ç¶šã—ã¦ã„ãªã‘ã‚Œã°ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆç¢ºèªã‚’ã‚¹ã‚­ãƒƒãƒ—
-ã€€ã‚‚ã—ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šåˆ¤å®š==0ãªã‚‰ã°ã€æˆ»ã‚‹
-ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€çµŒéŽãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã¯ã‚ªãƒ•
-ã€€ã€€ã€Œhttps://7ka.org/file/ltr/version.txtã€ã‹ã‚‰HTTPãƒ‡ãƒ¼ã‚¿å–å¾—ã—ã¦æœ€æ–°ç‰ˆæƒ…å ±ã¸ä»£å…¥
-ã€€ã€€ã‚‚ã—ã€æœ€æ–°ç‰ˆæƒ…å ±\0>VERSIONãªã‚‰ã°ã€
-ã€€ã€€ã€€MessageBox((æ¯è‰¦ã®ã€ãƒãƒ³ãƒ‰ãƒ«),ã€Œã‚‰ã¼ã£ãŸã‚ã®æ–°ã—ã„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒã‚ã‚Šã¾ã™ã€‚
-ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ã‹ï¼Ÿã€,ã€Œã‚‰ã¼ã£ãŸã‚ã®æ›´æ–°ã€,$42044)ã€‚
-ã€€ã€€ã€€ã‚‚ã—ã€ãã‚ŒãŒ6/*ã¯ã„*/ãªã‚‰ã°ã€æœ€æ–°ç‰ˆæƒ…å ±\1ã‚’èµ·å‹•
-ã€€ã€€ã€€ã€€çµ‚äº†
-ã€€ã€€ã€€ã‚‚ã—ã€ãã‚ŒãŒ7/*ã„ã„ãˆ*/ãªã‚‰ã°ã€æŠœã‘ã‚‹
-ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€æŠœã‘ã‚‹
-
-â—è¨­å®šèª­è¾¼å‡¦ç†
-ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã«ä»£å…¥ã€‚
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒVERSIONã€ã‚’INIèª­ã‚“ã§è¨­å®šãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¸ä»£å…¥ã€€
-ã€€ã‚‚ã—ã€è¨­å®šãƒãƒ¼ã‚¸ãƒ§ãƒ³<1.10ãªã‚‰ã°ã€
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãªã†æ–‡ã€ã«ãªã†æ–‡ã‚’INIæ›¸ã
-ã€€ã‚‚ã—ã€è¨­å®šãƒãƒ¼ã‚¸ãƒ§ãƒ³<1.11ãªã‚‰ã°ã€
-ã€€ã€€ã‚‚ã—ã€(è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå…¥å®¤ãƒœã‚¿ãƒ³åã€ã‚’INIèª­ã‚€)!=ç©ºãªã‚‰ã°ã€ãã‚Œã‚’å±¥æ­´å…¥å®¤æ™‚åç§°ã¸ä»£å…¥
-ã€€ã€€ã‚‚ã—ã€(è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œé€€å®¤ãƒœã‚¿ãƒ³åã€ã‚’INIèª­ã‚€)!=ç©ºãªã‚‰ã°ã€ãã‚Œã‚’å±¥æ­´é€€å®¤æ™‚åç§°ã¸ä»£å…¥
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´å…¥å®¤æ™‚åç§°ã€ã«å±¥æ­´å…¥å®¤æ™‚åç§°ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´é€€å®¤æ™‚åç§°ã€ã«å±¥æ­´é€€å®¤æ™‚åç§°ã‚’INIæ›¸ã
-ã€€ã€€INIè¨­å®š(ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€,ã€Œå…¥å®¤ãƒœã‚¿ãƒ³åã€,ç©º,è¨­å®šä¿å­˜å…ˆ) //INIã‚­ãƒ¼ã®å‰Šé™¤
-ã€€ã€€INIè¨­å®š(ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€,ã€Œé€€å®¤ãƒœã‚¿ãƒ³åã€,ç©º,è¨­å®šä¿å­˜å…ˆ) 
-ã€€ã‚‚ã—ã€è¨­å®šãƒãƒ¼ã‚¸ãƒ§ãƒ³<1.13ãªã‚‰ã°ã€
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå®£ä¼ãƒ•ãƒ©ã‚°ã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒVERSIONã€ã«VERSIONã‚’INIæ›¸ã
-ã€€ã€€ã€Œãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚¢ãƒƒãƒ—ãŒå®Œäº†ã—ã¾ã—ãŸã€‚{~}{~}ã€æ–°æ©Ÿèƒ½ãªã©ã€‘{~}è»½å¾®ãªãƒã‚°ä¿®æ­£ã¨ã€ã‚‰ã¼ã£ãŸã‚ã®é…å¸ƒãƒšãƒ¼ã‚¸ã®URLã‚’å‘Ÿã‹ãªã„é¸æŠžè‚¢ã‚’è¿½åŠ ã—ã¾ã—ãŸã€‚{~}{~}è©³ã—ã„ä½¿ã„æ–¹ã«ã¤ã„ã¦ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å³ä¸‹ã®ã€Žä½¿ã„æ–¹ã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚ã€ã¨ã„ã†
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´å…¥å®¤æ™‚åç§°ã€ã‚’INIèª­ã‚“ã§å±¥æ­´å…¥å®¤æ™‚åç§°ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´é€€å®¤æ™‚åç§°ã€ã‚’INIèª­ã‚“ã§å±¥æ­´é€€å®¤æ™‚åç§°ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãªã†æ–‡ã€ã‚’INIèª­ã‚“ã§ãªã†æ–‡ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒTwitterã€ã‚’INIèª­ã‚“ã§twi_flagã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œæœ€å¾Œã«æŒ¿å…¥ã—ãŸIDã€ã‚’INIèª­ã‚“ã§LAST_IDã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒ¡ãƒ¢æ©Ÿèƒ½ã€ã‚’INIèª­ã‚“ã§Memo_flagã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå…¥å®¤æ–‡ã€ã‚’INIèª­ã‚“ã§å…¥å®¤æ–‡ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œé€€å®¤æ–‡ã€ã‚’INIèª­ã‚“ã§é€€å®¤æ–‡ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã€ã‚’INIèª­ã‚“ã§ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå®£ä¼ãƒ•ãƒ©ã‚°ã€ã‚’INIèª­ã‚“ã§labourl_flagã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€ã‚‚ã—ã€LAST_ID==0ãªã‚‰ã°ã€
-ã€€ã€€å…¥é€€å®¤ãƒœã‚¿ãƒ³ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã„ã‚“ã€
-ã€€ã€€å‘Ÿããƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ•
-ã€€é•ãˆã°ã€
-ã€€ã€€å…¥é€€å®¤ãƒœã‚¿ãƒ³ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã‚Šã ã€
-ã€€ã€€å…¥å®¤æ™‚é–“=ã€ŒSELECT start FROM ltt WHERE id=ã€&LAST_ID&ã€Œ;ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€ã€€å…¥å®¤æƒ…å ±ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚‰ã¼ã„ã‚“ï¼š{å…¥å®¤æ™‚é–“\1}ã€
-ã€€ã€€å‘Ÿããƒœã‚¿ãƒ³ã®æœ‰åŠ¹ã¯ã‚ªãƒ³
-ã€€ã‚‚ã—ã€twi_flag==1ãªã‚‰ã°ã€twi_setting_load
-ã€€è¨­å®šæƒ…å ±æç”»å‡¦ç†
-
-//åˆå›žèµ·å‹•æ™‚ã®è¨­å®š
-â—åˆæœŸè¨­å®šå‡¦ç†
-ã€€ã‚‚ã—ã€è¨­å®šä¿å­˜å…ˆãŒå­˜åœ¨ã§ãªã‘ã‚Œã°ã€
-ã€€ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã¸ä»£å…¥
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒVERSIONã€ã«VERSIONã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œæœ€å¾Œã«æŒ¿å…¥ã—ãŸIDã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€ŒTwitterã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒ¡ãƒ¢æ©Ÿèƒ½ã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå®£ä¼ãƒ•ãƒ©ã‚°ã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå…¥å®¤æ–‡ã€ã«å…¥å®¤æ–‡ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œé€€å®¤æ–‡ã€ã«é€€å®¤æ–‡ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã€ã«ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´å…¥å®¤æ™‚åç§°ã€ã«å±¥æ­´å…¥å®¤æ™‚åç§°ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå±¥æ­´é€€å®¤æ™‚åç§°ã€ã«å±¥æ­´é€€å®¤æ™‚åç§°ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãªã†æ–‡ã€ã«ãªã†æ–‡ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå®£ä¼ãƒ•ãƒ©ã‚°ã€ã«ã€Œ0ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€ã€€ã€Œã‚‰ã¼ã£ãŸã‚ {VERSION}ã¸ã‚ˆã†ã“ãï¼{~}è©³ã—ã„ä½¿ã„æ–¹ã«ã¤ã„ã¦ã¯ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å³ä¸‹ã®ã€Žä½¿ã„æ–¹ã€ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ãã ã•ã„ã€‚ã€ã¨ã„ã†
-ã€€ã€€
-//è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–¢é€£
-â—ãƒœã‚¿ãƒ³2__ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚
-ã€€ã€€è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
-
-â—ãƒœã‚¿ãƒ³1__ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚
-ã€€ã€€è¨­å®šæƒ…å ±ä¸Šæ›¸ä¿å­˜å‡¦ç†
-
-â—è¨­å®šæƒ…å ±æç”»å‡¦ç†
-ã€€ã‚¨ãƒ‡ã‚£ã‚¿1ã®ãƒ†ã‚­ã‚¹ãƒˆã¯å…¥å®¤æ–‡
-ã€€ã‚¨ãƒ‡ã‚£ã‚¿2ã®ãƒ†ã‚­ã‚¹ãƒˆã¯é€€å®¤æ–‡
-ã€€ã‚¨ãƒ‡ã‚£ã‚¿3ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ãªã†æ–‡
-ã€€ã‚¨ãƒ‡ã‚£ã‚¿4ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°
-ã€€ãƒ¡ãƒ¢æ©Ÿèƒ½ãƒã‚§ãƒƒã‚¯ã®å€¤ã¯Memo_flag
-ã€€å®£ä¼ãƒã‚§ãƒƒã‚¯ã®å€¤ã¯labourl_flag
-
-â—è¨­å®šæƒ…å ±ä¸Šæ›¸ä¿å­˜å‡¦ç†
-ã€€å…¥å®¤æ–‡ã¯ã‚¨ãƒ‡ã‚£ã‚¿1ã®ãƒ†ã‚­ã‚¹ãƒˆ
-ã€€é€€å®¤æ–‡ã¯ã‚¨ãƒ‡ã‚£ã‚¿2ã®ãƒ†ã‚­ã‚¹ãƒˆ
-ã€€ãªã†æ–‡ã¯ã‚¨ãƒ‡ã‚£ã‚¿3ã®ãƒ†ã‚­ã‚¹ãƒˆ
-ã€€ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã¯ã‚¨ãƒ‡ã‚£ã‚¿4ã®ãƒ†ã‚­ã‚¹ãƒˆ
-ã€€Memo_flagã¯ãƒ¡ãƒ¢æ©Ÿèƒ½ãƒã‚§ãƒƒã‚¯ã®å€¤
-ã€€labourl_flagã¯å®£ä¼ãƒã‚§ãƒƒã‚¯ã®å€¤
-ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã«ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå…¥å®¤æ–‡ã€ã«å…¥å®¤æ–‡ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œé€€å®¤æ–‡ã€ã«é€€å®¤æ–‡ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãªã†æ–‡ã€ã«ãªã†æ–‡ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã€ã«ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒ¡ãƒ¢æ©Ÿèƒ½ã€ã«Memo_flagã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºã€ã®ã€Œå®£ä¼ãƒ•ãƒ©ã‚°ã€ã«labourl_flagã‚’INIæ›¸ã
-ã€€è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-
-â—è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–‹å‡¦ç†
-ã€€è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä¸­å¤®ç§»å‹•
-ã€€è¨­å®šæƒ…å ±æç”»å‡¦ç†
-ã€€è¨­å®šã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ãƒ¢ãƒ¼ãƒ€ãƒ«è¡¨ç¤º
-
-â—DBæ¤œç´¢å‡¦ç†
-ã€€ã€€æ¤œç´¢æŠ½å‡ºçµæžœ=ã€ŒSELECT id AS "ID", start AS "{å±¥æ­´å…¥å®¤æ™‚åç§°}", end AS "{å±¥æ­´é€€å®¤æ™‚åç§°}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "æ»žåœ¨æ™‚é–“",memo AS "ãƒ¡ãƒ¢" FROM ltt WHERE start LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' or end LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' or memo LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' OR id LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%'  ORDER BY id DESC;ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€ã€€ç´¯è¨ˆæ»žåœ¨æ™‚é–“=ã€ŒSELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"æ—¥"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"æ™‚é–“"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"åˆ†" from ltt where start LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' or end LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' ORDER BY id DESC;ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€ã€€å¹³å‡æ»žåœ¨æ™‚é–“=ã€ŒSELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"æ—¥"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"æ™‚é–“"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"åˆ†" from ltt where start LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' or end LIKE '%{å±¥æ­´ç·¨é›†ã®ãƒ†ã‚­ã‚¹ãƒˆ}%' ORDER BY id DESC;ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€ã€€å±¥æ­´ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œç´¯è¨ˆæ™‚é–“ã¯{ç´¯è¨ˆæ»žåœ¨æ™‚é–“\1}ã€€å¹³å‡æ™‚é–“ã¯{å¹³å‡æ»žåœ¨æ™‚é–“\1}ã€
-ã€€ã€€ç›´è¿‘å…¥é€€å®¤å±¥æ­´ã®ã‚¢ã‚¤ãƒ†ãƒ ã¯æ¤œç´¢æŠ½å‡ºçµæžœ
-//Twitterå‡¦ç†é–¢ä¿‚
-â—twi_oauth
-ã€€ã‚‚ã—ã€ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆæŽ¥ç¶šåˆ¤å®š==0ãªã‚‰ã°ã€
-ã€€ã€€æˆ»ã‚‹
-ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã§èªè¨¼ã™ã‚‹ã€‚
-ã€€ã€€èªè¨¼æƒ…å ±ã¯ãã‚Œã€‚
-ã€€ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã¸ä»£å…¥
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ã€ã«ã€Œ{èªè¨¼æƒ…å ±@oauth_token}ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã‚­ãƒ¼ã€ã«ã€Œ{èªè¨¼æƒ…å ±@oauth_token_secret}ã€ã‚’INIæ›¸ã
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€
-ã€€ã€€twi_nako_error_view
-
-â—twi_setting_load
-ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã‚‚ã—ã€twi_flag==0ãªã‚‰ã°ã€twi_oauth
-ã€€ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã«ä»£å…¥ã€‚
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ã€ã‚’INIèª­ã‚“ã§TWI_TOKEN_KEYã¸ä»£å…¥
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã‚­ãƒ¼ã€ã‚’INIèª­ã‚“ã§TWI_TOKEN_SECRETã¸ä»£å…¥
-ã€€ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€ã€€ã‚‚ã—ã€(TWI_TOKEN_KEY==ç©º)ã¾ãŸã¯(TWI_TOKEN_SECRET==ç©º)ãªã‚‰ã°ã€
-ã€€ã€€ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œèªè¨¼ã‚­ãƒ¼ãŒã‚ã‚Šã¾ã›ã‚“ã€
-ã€€ã€€ã€€twi_flag=0
-ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®oauthã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼=TWI_TOKEN_KEY
-ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®oauthã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ=TWI_TOKEN_SECRET
-ã€€ã€€ã€€twi_flag=1
-ã€€ã€€twi_button_refresh
-ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã„ã†
-ã€€ã€€twi_nako_error_view
-
-â—twi_setting_delete
-ã€€twi_flag=0
-ã€€è¨­å®šä¿å­˜å…ˆã®INIé–‹ã„ã¦è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã¸ä»£å…¥
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ã€ã«ã€Œã€ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã§ã€Œè¨­å®šã€ã®ã€Œãƒˆãƒ¼ã‚¯ãƒ³ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆã‚­ãƒ¼ã€ã«ã€Œã€ã‚’INIæ›¸ã
-ã€€è¨­å®šãƒãƒ³ãƒ‰ãƒ«ã®INIé–‰ã˜ã‚‹
-ã€€twi_button_refresh
-
-â—twi_labo_now
-ã€€ç¾åœ¨æ™‚åˆ»=(ä»Šæ—¥ã®ã€Œ/ã€ã‚’ã€Œ-ã€ã«ç½®æ›)&ã€Œ ã€&ä»Š
-ã€€ã‚‚ã—ã€twi_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã€€ã‚‚ã—ã€labourl_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{ãªã†æ–‡} {ç¾åœ¨æ™‚åˆ»} {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ã
-ã€€ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{ãªã†æ–‡} {ç¾åœ¨æ™‚åˆ»} {å¾Œä»˜æ–‡} {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ã
-ã€€ã€€ã€€ãã‚Œã§twi_tweet_error_check
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€twi_nako_error_view
-ã€€é•ãˆã°ã€ã€ŒTwitterèªè¨¼ã‚’ã™ã‚‹ã¨ã€ã‚‰ã¼ãªã†ï¼ã¨å‘Ÿã‘ã¾ã™ã€‚ã€ã¨ã„ã†
-â—twi_labo_in
-ã€€ã‚‚ã—ã€twi_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã€€ã‚‚ã—ã€labourl_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{å…¥å®¤æ–‡}{ç¾åœ¨æ™‚åˆ»} {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ã
-ã€€ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{å…¥å®¤æ–‡}{ç¾åœ¨æ™‚åˆ»} {å¾Œä»˜æ–‡} {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ã
-ã€€ã€€ã€€ãã‚Œã§twi_tweet_error_check
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€twi_nako_error_view
-â—twi_labo_out
-ã€€ã‚‚ã—ã€twi_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã€€ç´¯è¨ˆæ™‚åˆ»=ã€ŒSELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"æ—¥"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"æ™‚é–“"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"åˆ†" from ltt where id = {LAST_ID};ã€ã‚’SQLITE3å®Ÿè¡Œ
-ã€€ã€€ã€€ã‚‚ã—ã€labourl_flag==1ãªã‚‰ã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{é€€å®¤æ–‡}{ç¾åœ¨æ™‚åˆ»} ä»Šå›žã®ã‚‰ã¼æ»žåœ¨æ™‚é–“ã¯{ç´¯è¨ˆæ™‚åˆ»\1}ã§ã—ãŸã€‚ {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ã
-ã€€ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€ã€€ãªã“ã£ãŸãƒ¼ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã€Œ{é€€å®¤æ–‡}{ç¾åœ¨æ™‚åˆ»} ä»Šå›žã®ã‚‰ã¼æ»žåœ¨æ™‚é–“ã¯{ç´¯è¨ˆæ™‚åˆ»\1}ã§ã—ãŸã€‚ {å¾Œä»˜æ–‡} {ãƒãƒƒã‚·ãƒ¥ã‚¿ã‚°}ã€ã¨ã¤ã¶ã‚„ãã€€ã€€
-ã€€ã€€ã€€ãã‚Œã§twi_tweet_error_check
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°ã€twi_nako_error_view
-â—twi_tweet_error_check(Sã§)
-ã€€ã‚‚ã—ã€SãŒã€Œerrors*ã€ã«ä¸€è‡´ãªã‚‰ã°ã€//ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°
-ã€€ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitteræŽ¥ç¶šã‚¨ãƒ©ãƒ¼(ã‚³ãƒ¼ãƒ‰:{S@`errors`@`code`})ã€
-ã€€é•ãˆã°ã€
-ã€€ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterã«ã¤ã¶ã‚„ãã¾ã—ãŸã€//{~}{S@`user`@`name`}{~}{S@`text`}ã€
-â—twi_button_refresh
-ã€€ã‚‚ã—ã€twi_flag==1ãªã‚‰ã°ã€
-ã€€ã€€TWIã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterèªè¨¼è§£é™¤ã€
-ã€€ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterèªè¨¼æ¸ˆã¿ã€
-ã€€é•ãˆã°ã€
-ã€€ã€€TWIã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterèªè¨¼ã€
-ã€€ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitteræœªèªè¨¼ã€
-ã€€ã€€
-â—twi_nako_error_view
-ã€€ã‚¹ãƒ†ãƒãƒ¼ã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ(Twitterèªè¨¼ã«å¤±æ•—)ã€
-ã€€ã€€
+// ¦‚ç‚Ú‚Á‚½‚ ‚ÍNakotter‚ð—˜—p‚µ‚Ä‚¢‚Ü‚·B
+
+//’è”
+VERSION=u1.14v//ƒo[ƒWƒ‡ƒ“”Ô†
+EDITION=uv//ƒeƒXƒg”Å‚©‚Ç‚¤‚©
+WINDOW_TITLE=u‚ç‚Ú‚Á‚½‚ v//ƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹
+
+//•¶Žš—ñ
+“üŽº•¶=u‚ç‚Ú‚¢‚ñ‚ÁI@v//Tweet‚·‚é“à—e
+‘ÞŽº•¶=u‚ç‚Ú‚è‚¾‚ÁI@v
+‚È‚¤•¶=u‚ç‚Ú‚È‚¤I @v
+ƒnƒbƒVƒ…ƒ^ƒO=u#‚ç‚Ú‚Á‚½‚ v
+Œã•t•¶=uhttps://7ka.org/software/labotterv
+URL_HELP=uhttps://7ka.org/software/labotter/manv
+—š—ð“üŽºŽž–¼Ì=u‚ç‚Ú‚¢‚ñv
+—š—ð‘ÞŽºŽž–¼Ì=u‚ç‚Ú‚è‚¾v
+ƒ~ƒ…[ƒL[ƒ[ƒh=w‚ç‚Ú‚Á‚½‚ x//‚±‚ÌƒL[ƒ[ƒh‚ª”í‚Á‚½‚ç‘½d‹N“®‚Æ‚È‚é
+ƒvƒƒOƒ‰ƒ€‘¤ƒL[‚Æ‚Í•¶Žš—ñ//Twitter‚ÌƒAƒvƒŠ‘¤ƒg[ƒNƒ“ƒL[
+ƒvƒƒOƒ‰ƒ€‘¤ƒV[ƒNƒŒƒbƒg‚Æ‚Í•¶Žš—ñ//Twitter‚ÌƒAƒvƒŠ‘¤ƒV[ƒNƒŒƒbƒgƒL[
+ƒƒ‚“à—e‚Í‹ó
+STARTDATE=uv
+ENDDATE=uv
+
+//ŠeŽíƒtƒ‰ƒO
+twi_flag=0 //Twitter‹@”\‚ðŽg‚¤‚©‚Ç‚¤‚©(0:–³Œø 1:—LŒø)
+LAST_ID=0 //Œ¤‹†Žº‚Ì“üŽºó‘Ô‚ªŒp‘±’†‚©(0:Œp‘±‚µ‚Ä‚¢‚È‚¢(‘ÞŽº’†))
+Memo_flag=0 //ƒƒ‚‹@”\‚Ìƒtƒ‰ƒO
+labourl_flag=0 //‚ç‚Ú‚Á‚½‚ ‚Ì”z•zURL‚ð™ê‚­‚©‚Ç‚¤‚©(0:™ê‚­A1:™ê‚©‚È‚¢)
+
+//ƒtƒ@ƒCƒ‹‚Ì•Û‘¶êŠ‚È‚Ç
+DB•Û‘¶æ=•êŠÍƒpƒX&ulabotime.dbv//“ü‘ÞŽºŽž‚Ìƒf[ƒ^ƒx[ƒX‚Ì•Û‘¶æ
+Ý’è•Û‘¶æ=•êŠÍƒpƒX&usetting.iniv //ŠeŽíÝ’è•Û‘¶æ
+ƒL[•Û‘¶æ=ukey.txtv // Twitter APIƒL[‚Ì•Û‘¶æ (key.txt‚ÉƒAƒvƒŠ‚Ìƒg[ƒNƒ“ƒL[‚ÆƒV[ƒNƒŒƒbƒgƒL[‚ð‰üs‚µ‚Ä•Û‘¶‚µ‚Ä‚ ‚é)
+
+//SQLITE3‚ð‚È‚Å‚µ‚±‚ÅŽg‚¤‚Æ‚«‚É•K—vB•¶ŽšƒR[ƒh‚ðŸŽè‚É•ÏŠ·‚µ‚Ä‚­‚ê‚é
+SQLITE3Ž©“®•ÏŠ·=ƒIƒ“
+
+//ƒfƒtƒHƒ‹ƒg‚ÌƒtƒHƒ“ƒg
+•¶Žš‘‘Ì‚ÍwMeiryo UIx
+
+//ƒƒCƒ“ƒEƒBƒ“ƒhƒE‚ÌÝ’è
+!•êŠÍÝŒv=w•êŠÍ‚Ì‰ÂŽ‹‚ÍƒIƒtx
+•êŠÍ‚É‚Â‚¢‚Ä
+@ƒ^ƒCƒgƒ‹‚Íu{WINDOW_TITLE}v
+@H=300
+@W=300
+@ƒIƒt‚ÉÅ‘å‰»ƒ{ƒ^ƒ“—LŒø•ÏX
+@”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+@ƒXƒ^ƒCƒ‹‚Íu˜gŒÅ’èv@
+@•Â‚¶‚½Žž‚Í`
+@@I—¹ˆ—
+
+//‹N“®Žž‚És‚¤ˆ—
+‹N“®Žžˆ—
+
+//GUIÝŒv ‚±‚±‚©‚ç
+
+//TwitterƒNƒ‰ƒCƒAƒ“ƒg‚Ì¶¬
+‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚Æ‚ÍNakotter
+‚»‚Ìoauth‚ÌƒRƒ“ƒVƒ…[ƒ}‚Ìƒg[ƒNƒ“ƒL[ƒvƒƒOƒ‰ƒ€‘¤ƒL[B
+‚»‚Ìoauth‚ÌƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒgƒvƒƒOƒ‰ƒ€‘¤ƒV[ƒNƒŒƒbƒgB
+
+//‚ç‚Ú‚¢‚ñƒ{ƒ^ƒ“
+
+“ü‘ÞŽºƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@X=10BH=50BW=110BY=30B
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@“ü‘ÞŽºˆ—
+
+™ê‚«ƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@X=150BH=50BW=110BY=30
+@ƒeƒLƒXƒg‚Íu‚ç‚Ú‚È‚¤v
+@ƒqƒ“ƒg‚Íu‚ç‚Ú‚È‚¤I‚Æ™ê‚«‚Ü‚·v
+@—LŒø‚ÍƒIƒt
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@twi_labo_now
+@@
+//ƒXƒe[ƒ^ƒXƒo[
+ƒXƒeƒo[‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌƒŒƒCƒAƒEƒg‚Íu‰ºv
+‚»‚Ì•ÒW‚ÍƒIƒt
+‚»‚Ì”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+‚»‚ÌƒeƒLƒXƒg‚ÍuTwitter–¢”FØv
+
+//—š—ðƒ{ƒ^ƒ“
+—š—ðƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒeƒLƒXƒg‚Íu—š—ð(&H)v
+@ƒqƒ“ƒg‚Íu“ü‘ÞŽº‹L˜^‚ðŒ©‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·v
+@W=110
+@H=40
+@Y=150
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@—š—ðƒEƒBƒ“ƒhƒE‚ð’†‰›ˆÚ“®
+@@—š—ð•`‰æˆ—
+@@—š—ðƒEƒBƒ“ƒhƒE‚ðƒ‚[ƒ_ƒ‹•\Ž¦
+
+//Ý’èƒ{ƒ^ƒ“
+Ý’è‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@W=110
+@H=40
+@Y=150
+@X=150
+@ƒeƒLƒXƒg‚ÍuÝ’è(&S)v
+@ƒqƒ“ƒg‚ÍuTwitter˜AŒg‚âƒcƒC[ƒg“à—e‚Ì•ÏX‚ª‚Å‚«‚Ü‚·v
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@Ý’èƒEƒBƒ“ƒhƒEŠJˆ—
+
+//ƒo[ƒWƒ‡ƒ“î•ñ‚ð•\Ž¦‚·‚éƒ‰ƒxƒ‹
+î•ñƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚±‚ê‚É‚Â‚¢‚Ä
+@X=10
+@Y=210
+@ƒeƒLƒXƒg‚Íuƒo[ƒWƒ‡ƒ“ {VERSION} {EDITION}v
+@
+VER_TL‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@Y=210
+@X=190
+@//•¶Žš‘‘Ì‚ÍuƒƒCƒŠƒI|10|‰ºüv
+@ƒeƒLƒXƒg‚ÍuŽg‚¢•û(&M)v
+@ƒqƒ“ƒg‚ÍuƒIƒ“ƒ‰ƒCƒ“ƒwƒ‹ƒv‚ðŠJ‚«‚Ü‚·v
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@URL_HELP‚ð‹N“®
+
+//“ü‘ÞŽº‚ÌŽž‚ð•\Ž¦‚·‚éƒ‰ƒxƒ‹@
+“üŽºî•ñ‚Æ‚Íƒ‰ƒxƒ‹
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒeƒLƒXƒg‚Íu‚ç‚Ú‚¢‚ñFv
+@Y=100
+
+‘ÞŽºî•ñ‚Æ‚Íƒ‰ƒxƒ‹
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾Fv
+@Y=120
+@
+
+//“ü‘ÞŽº‚Ì—š—ð‚ð•\Ž¦‚·‚é‚½‚ß‚ÌƒEƒBƒ“ƒhƒE
+—š—ðƒEƒBƒ“ƒhƒE‚Æ‚ÍƒtƒH[ƒ€
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒ^ƒCƒgƒ‹‚Íu—š—ðv
+@W=800
+@H=500
+@ƒIƒt‚ÉÅ¬‰»ƒ{ƒ^ƒ“—LŒø•ÏX
+
+’¼‹ß“ü‘ÞŽº—š—ð‚Æ‚ÍƒOƒŠƒbƒh
+‚»‚ÌƒŒƒCƒAƒEƒg‚Íu‘S‘Ìv
+‚»‚Ìe•”•i‚Í—š—ðƒEƒBƒ“ƒhƒE
+‚»‚Ì•ÒW‚ÍƒIƒt
+‚»‚Ìƒ_ƒuƒ‹ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@“úŽž•ÒWî•ñ•`‰æˆ—
+
+
+—š—ðƒo[‚Æ‚Íƒpƒlƒ‹
+‚»‚ÌƒŒƒCƒAƒEƒg‚Íuãv
+‚»‚ÌƒXƒ^ƒCƒ‹‚Íu“Êv
+‚»‚Ì”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+‚»‚Ìe•”•i‚Í—š—ðƒEƒBƒ“ƒhƒE
+
+—š—ðo—Í‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚Ìe•”•i‚Í—š—ðƒo[
+‚»‚ÌX=10
+‚»‚ÌY=10
+‚»‚ÌW=150
+‚»‚ÌƒeƒLƒXƒg‚ÍuCSVƒtƒ@ƒCƒ‹‚Åo—Í(&C)v
+‚»‚Ìƒqƒ“ƒg‚Íu¡•\Ž¦‚µ‚Ä‚¢‚é—š—ð‚ðCSVŒ`Ž®‚Åo—Í‚µ‚Ü‚·v
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@—š—ðo—Íˆ—
+
+—š—ðŒŸõƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚Ìe•”•i‚Í—š—ðƒo[
+‚»‚ÌX=200
+‚»‚ÌY=15
+‚»‚ÌW=25
+‚»‚ÌƒeƒLƒXƒg‚ÍuŒŸõFv
+
+—š—ð•ÒW‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚Ìe•”•i‚Í—š—ðƒo[
+‚»‚ÌX=240
+‚»‚ÌY=10
+‚»‚ÌW=150
+‚»‚ÌƒeƒLƒXƒg‚Íuv
+‚»‚Ìƒqƒ“ƒg‚ÍuIDA‚ç‚Ú‚¢‚ñA‚ç‚Ú‚è‚¾Aƒƒ‚‚©‚çŒŸõ‚µ‚Ü‚·v
+‚»‚Ì•ÏX‚µ‚½Žž‚Í`
+@DBŒŸõˆ—
+
+—š—ð•ÒWƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚Ìe•”•i‚Í—š—ðƒo[
+‚»‚ÌX=450
+‚»‚ÌY=10
+‚»‚ÌW=150
+‚»‚ÌƒeƒLƒXƒg‚Íu‘I‘ð‚µ‚½—š—ð‚ð•ÒW(&E)v
+‚»‚Ìƒqƒ“ƒg‚Íu“ú•tŽžAƒƒ‚‚Ì•ÒW‚ªs‚¦‚Ü‚·v
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@“úŽž•ÒWî•ñ•`‰æˆ—
+
+—š—ðíœƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚Ìe•”•i‚Í—š—ðƒo[
+‚»‚ÌX=620
+‚»‚ÌY=10
+‚»‚ÌW=60
+‚»‚ÌƒeƒLƒXƒg‚Íuíœ(&D)v
+‚»‚Ìƒqƒ“ƒg‚Íu—š—ð‚ðíœ‚µ‚Ü‚·v
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@íœˆ—
+
+—š—ðƒXƒe[ƒ^ƒXƒo[‚Æ‚ÍƒGƒfƒBƒ^
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒŒƒCƒAƒEƒg‚Íu‰ºv
+@•ÒW‚ÍƒIƒt
+@”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+@e•”•i‚Í—š—ðƒEƒBƒ“ƒhƒE
+
+“úŽž•ÒWƒEƒBƒ“ƒhƒE‚Æ‚ÍƒtƒH[ƒ€
+‚»‚ÌƒNƒ‰ƒCƒAƒ“ƒgW=640
+‚»‚ÌƒNƒ‰ƒCƒAƒ“ƒgH=214
+‚»‚Ìƒ^ƒCƒgƒ‹=u“úŽž•ÒWv
+‚»‚Ì”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+‚»‚ÌƒXƒ^ƒCƒ‹‚Íuƒ_ƒCƒAƒƒOƒXƒ^ƒCƒ‹v
+
+“ú•t‘I‘ðƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=216
+‚»‚ÌY=32
+‚»‚ÌW=72
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=u“ú•t‘I‘ðv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@ŠJŽn“ú•t‘I‘ðˆ—
+
+ŠJŽn“ú•t‚Æ‚Íƒƒ‚
+‚»‚ÌX=104
+‚»‚ÌY=32
+‚»‚ÌW=112
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+ŠJŽnŽž‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=304
+‚»‚ÌY=32
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í23
+
+ŠJŽn•ª‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=400
+‚»‚ÌY=32
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í59
+
+ŠJŽn•b‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=496
+‚»‚ÌY=32
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í59
+
+ŠJŽnŽžƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=368
+‚»‚ÌY=40
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uŽžv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+ŠJŽn•ªƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=464
+‚»‚ÌY=40
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u•ªv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+ŠJŽn•bƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=560
+‚»‚ÌY=40
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u•bv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+I—¹“ú•t‘I‘ðƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=216
+‚»‚ÌY=64
+‚»‚ÌW=72
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=u“ú•t‘I‘ðv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@I—¹“ú•t‘I‘ðˆ—
+
+I—¹“ú•t‚Æ‚Íƒƒ‚
+‚»‚ÌX=104
+‚»‚ÌY=64
+‚»‚ÌW=112
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+I—¹Žž‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=304
+‚»‚ÌY=64
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í23
+
+I—¹•ª‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=400
+‚»‚ÌY=64
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í59
+
+I—¹•b‚Æ‚ÍƒXƒsƒ“ƒGƒfƒBƒ^
+‚»‚ÌX=496
+‚»‚ÌY=64
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚ÌƒXƒNƒ[ƒ‹ƒo[=uv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌÅ¬’l‚Í0
+‚»‚ÌÅ‘å’l‚Í59
+
+I—¹Žžƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=368
+‚»‚ÌY=72
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uŽžv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+I—¹•ªƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=464
+‚»‚ÌY=72
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u•ªv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+I—¹•bƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=560
+‚»‚ÌY=72
+‚»‚ÌW=32
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u•bv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+ŠJŽnŽž•\Ž¦‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=32
+‚»‚ÌY=32
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uŠJŽnŽžv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+I—¹Žž•\Ž¦‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=32
+‚»‚ÌY=64
+‚»‚ÌW=64
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uI—¹Žžv
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+“úŽž•ÒWOKƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=376
+‚»‚ÌY=158
+‚»‚ÌW=112
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uOK(&O)v
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@Ý’è•Û‘¶ˆ—
+
+“úŽž•ÒWƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=504
+‚»‚ÌY=158
+‚»‚ÌW=112
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uƒLƒƒƒ“ƒZƒ‹(&C)v
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@“úŽž•ÒWƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é
+@
+
+ƒƒ‚ƒ^ƒ‰ƒxƒ‹‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=32
+‚»‚ÌY=112
+‚»‚ÌW=64
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uƒƒ‚v
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+
+ƒƒ‚—“‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌX=104
+‚»‚ÌY=112
+‚»‚ÌW=488
+‚»‚ÌH=64
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚Ìƒ_ƒuƒ‹ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@ƒƒ‚—“‚ð‘S‘I‘ð
+‚»‚Ìe•”•i‚Í“úŽž•ÒWƒEƒBƒ“ƒhƒE
+‚»‚Ì•ÏX‚µ‚½Žž‚Í`
+@‚à‚µA(ƒƒ‚—“‚ÌƒeƒLƒXƒg‚ªu^*(\s|\"|\'|\,)v‚Å³‹K•\Œ»ƒ}ƒbƒ`)‚ª‹ó‚Å‚È‚¯‚ê‚ÎA//‹ÖŽ~•¶Žš‚ªŽg—p‚³‚ê‚Ä‚¢‚ê‚ÎuOKƒ{ƒ^ƒ“‚ð‰Ÿ‚¹‚È‚­‚·‚év
+@@“úŽž•ÒWOKƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒt
+@ˆá‚¦‚ÎA“úŽž•ÒWOKƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒ“
+
+œ“úŽž•ÒWî•ñ•`‰æˆ—
+@’¼‹ß“ü‘ÞŽº—š—ð‚ÌƒeƒLƒXƒg‚ðC³ƒf[ƒ^‚Ö‘ã“ü
+@C³ID=C³ƒf[ƒ^\0\0
+@‚à‚µAC³ID==0‚È‚ç‚ÎA–ß‚é
+@STARTDATE=C³ƒf[ƒ^\0\1
+@ENDDATE=C³ƒf[ƒ^\0\2@@
+@MEMO=C³ƒf[ƒ^\0\4
+@ŠJŽn“ú•t‚ÌƒeƒLƒXƒg=STARTDATE‚ðuyyyy/mm/ddv‚É“úŽžŒ`Ž®•ÏŠ·
+@ŠJŽnŽž•¶=STARTDATE‚ðuhh:nn:ssv‚É“úŽžŒ`Ž®•ÏŠ·‚µ‚Äu:v‚Å‹æØ‚é
+@ŠJŽnŽž‚ÌƒeƒLƒXƒg‚ÍŠJŽnŽž•¶\0
+@ŠJŽn•ª‚ÌƒeƒLƒXƒg‚ÍŠJŽnŽž•¶\1
+@ŠJŽn•b‚ÌƒeƒLƒXƒg‚ÍŠJŽnŽž•¶\2
+@‚à‚µAC³ID==LAST_ID‚È‚ç‚ÎA
+@@I—¹“ú•t‚Ì—LŒø‚ÍƒIƒt
+@@I—¹“ú•t‘I‘ðƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒt
+@@I—¹Žž‚Ì—LŒø‚ÍƒIƒt
+@@I—¹•ª‚Ì—LŒø‚ÍƒIƒt
+@@I—¹•b‚Ì—LŒø‚ÍƒIƒt
+@@I—¹“ú•t‚ÌƒeƒLƒXƒg=uv
+@@I—¹Žž‚ÌƒeƒLƒXƒg‚Íuv
+@@I—¹•ª‚ÌƒeƒLƒXƒg‚Íuv
+@@I—¹•b‚ÌƒeƒLƒXƒg‚Íuv
+@ˆá‚¦‚ÎA
+@@I—¹“ú•t‚Ì—LŒø‚ÍƒIƒ“
+@@I—¹“ú•t‘I‘ðƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒ“
+@@I—¹Žž‚Ì—LŒø‚ÍƒIƒ“
+@@I—¹•ª‚Ì—LŒø‚ÍƒIƒ“
+@@I—¹•b‚Ì—LŒø‚ÍƒIƒ“
+@@I—¹“ú•t‚ÌƒeƒLƒXƒg=ENDDATE‚ðuyyyy/mm/ddv‚É“úŽžŒ`Ž®•ÏŠ·
+@@I—¹Žž•¶=ENDDATE‚ðuhh:nn:ssv‚É“úŽžŒ`Ž®•ÏŠ·‚µ‚Äu:v‚Å‹æØ‚é
+@@I—¹Žž‚ÌƒeƒLƒXƒg‚ÍI—¹Žž•¶\0
+@@I—¹•ª‚ÌƒeƒLƒXƒg‚ÍI—¹Žž•¶\1
+@@I—¹•b‚ÌƒeƒLƒXƒg‚ÍI—¹Žž•¶\2
+@ƒƒ‚—“‚ÌƒeƒLƒXƒg‚ÍMEMO
+@“úŽž•ÒWƒEƒBƒ“ƒhƒE‚ð’†‰›ˆÚ“®
+@“úŽž•ÒWƒEƒBƒ“ƒhƒE‚ðƒ‚[ƒ_ƒ‹•\Ž¦
+
+œŠJŽn“ú•t‘I‘ðˆ—
+@“ú•t‘I‘ð
+@‚à‚µA‚»‚ê‚ª‹ó‚Å‚È‚¯‚ê‚ÎAŠJŽn“ú•t‚ÌƒeƒLƒXƒg‚Í‚»‚ê
+œI—¹“ú•t‘I‘ðˆ—
+@“ú•t‘I‘ð
+@‚à‚µA‚»‚ê‚ª‹ó‚Å‚È‚¯‚ê‚ÎAI—¹“ú•t‚ÌƒeƒLƒXƒg‚Í‚»‚ê
+œÝ’è•Û‘¶ˆ—
+@ƒGƒ‰[ŠÄŽ‹
+@@C³ŠJŽn“úŽž=ŠJŽn“ú•t‚ÌƒeƒLƒXƒg&u v&ŠJŽnŽž‚ÌƒeƒLƒXƒg&u:v&ŠJŽn•ª‚ÌƒeƒLƒXƒg&u:v&ŠJŽn•b‚ÌƒeƒLƒXƒg‚ðuyyyy-mm-dd hh:nn:ssv‚É“úŽžŒ`Ž®•ÏŠ·
+@ƒGƒ‰[‚È‚ç‚ÎAu[ƒGƒ‰[]{~}ŠJŽn“úŽž‚Ì’l‚ª‚¨‚©‚µ‚¢‚ß‚¤Bv‚Æ‚¢‚¤
+@@–ß‚é
+@‚à‚µAC³ID==LAST_ID‚È‚ç‚ÎA
+@@C³I—¹“úŽž=uv
+@ˆá‚¦‚ÎA
+@@ƒGƒ‰[ŠÄŽ‹
+@@@C³I—¹“úŽž=I—¹“ú•t‚ÌƒeƒLƒXƒg&u v&I—¹Žž‚ÌƒeƒLƒXƒg&u:v&I—¹•ª‚ÌƒeƒLƒXƒg&u:v&I—¹•b‚ÌƒeƒLƒXƒg‚ðuyyyy-mm-dd hh:nn:ssv‚É“úŽžŒ`Ž®•ÏŠ·
+@@ƒGƒ‰[‚È‚ç‚ÎAu[ƒGƒ‰[]{~}I—¹“úŽž‚Ì’l‚ª‚¨‚©‚µ‚¢‚ß‚¤Bv‚Æ‚¢‚¤
+@@@–ß‚é
+@uUPDATE ltt set start = '{C³ŠJŽn“úŽž}', end = '{C³I—¹“úŽž}', memo = '{ƒƒ‚—“‚ÌƒeƒLƒXƒg}' where id = {C³ID};v‚ðSQLITE3ŽÀs
+@“úŽž•ÒWƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é
+@—š—ð•`‰æˆ—
+
+
+//Ý’èƒEƒBƒ“ƒhƒEŠÖ˜A
+Ý’èƒEƒBƒ“ƒhƒE‚Æ‚ÍƒtƒH[ƒ€
+‚±‚ê‚É‚Â‚¢‚Ä
+@ƒNƒ‰ƒCƒAƒ“ƒgW=384
+@ƒNƒ‰ƒCƒAƒ“ƒgH=314
+@ƒ^ƒCƒgƒ‹=uÝ’èv
+@ƒXƒ^ƒCƒ‹‚Íuƒ_ƒCƒAƒƒOƒXƒ^ƒCƒ‹v
+@”wŒiF‚ÍƒEƒBƒ“ƒhƒE”wŒiF
+
+ƒ{ƒ^ƒ“1‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=144
+‚»‚ÌY=258
+‚»‚ÌW=96
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uOKv
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`ƒ{ƒ^ƒ“1__ƒNƒŠƒbƒN‚µ‚½Žž#ƒCƒxƒ“ƒg
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒ{ƒ^ƒ“2‚Æ‚Íƒ{ƒ^ƒ“
+‚»‚ÌX=248
+‚»‚ÌY=258
+‚»‚ÌW=96
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uƒLƒƒƒ“ƒZƒ‹v
+‚»‚ÌƒNƒŠƒbƒN‚µ‚½Žž‚Í`ƒ{ƒ^ƒ“2__ƒNƒŠƒbƒN‚µ‚½Žž#ƒCƒxƒ“ƒg
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒGƒfƒBƒ^1‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌX=128
+‚»‚ÌY=24
+‚»‚ÌW=232
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒGƒfƒBƒ^2‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌX=128
+‚»‚ÌY=64
+‚»‚ÌW=232
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒGƒfƒBƒ^3‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌX=128
+‚»‚ÌY=104
+‚»‚ÌW=232
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒGƒfƒBƒ^4‚Æ‚ÍƒGƒfƒBƒ^
+‚»‚ÌX=128
+‚»‚ÌY=144
+‚»‚ÌW=232
+‚»‚ÌH=24
+‚»‚ÌƒeƒLƒXƒg=uv
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒ‰ƒxƒ‹2‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=8
+‚»‚ÌY=24
+‚»‚ÌW=104
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u“üŽºŽž‚Â‚Ô‚â‚­•¶v
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒ‰ƒxƒ‹3‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=8
+‚»‚ÌY=64
+‚»‚ÌW=104
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=u‘ÞŽºŽž‚Â‚Ô‚â‚­•¶v
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒ‰ƒxƒ‹4‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=8
+‚»‚ÌY=104
+‚»‚ÌW=104
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uÝŽºŽž‚Â‚Ô‚â‚­•¶v
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒ‰ƒxƒ‹5‚Æ‚Íƒ‰ƒxƒ‹
+‚»‚ÌX=8
+‚»‚ÌY=144
+‚»‚ÌW=104
+‚»‚ÌH=32
+‚»‚ÌƒeƒLƒXƒg=uƒnƒbƒVƒ…ƒ^ƒOv
+‚»‚Ìe•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+ƒƒ‚‹@”\ƒ`ƒFƒbƒN‚Æ‚Íƒ`ƒFƒbƒN
+‚±‚ê‚É‚Â‚¢‚Ä
+@X=140
+@Y=190
+@W=180
+@ƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾Žž‚Éƒƒ‚“ü—Í‰æ–Ê‚ðŠJ‚­v
+@e•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+é“`ƒ`ƒFƒbƒN‚Æ‚Íƒ`ƒFƒbƒN
+‚±‚ê‚É‚Â‚¢‚Ä
+@X=140
+@Y=220
+@W=230
+@ƒeƒLƒXƒg‚Íu‚ç‚Ú‚Á‚½‚ ‚Ì”z•zƒy[ƒW‚ÌƒŠƒ“ƒN‚ð™ê‚©‚È‚¢v
+@e•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+
+TWI‚Æ‚Íƒ{ƒ^ƒ“
+‚±‚ê‚É‚Â‚¢‚Ä
+@W=110
+@H=40
+@Y=200
+@X=10
+@e•”•i‚ÍÝ’èƒEƒBƒ“ƒhƒE
+@ƒNƒŠƒbƒN‚µ‚½Žž‚Í`
+@@‚à‚µAtwi_flag==0‚È‚ç‚ÎA
+@@@twi_setting_load
+@@ˆá‚¦‚ÎA
+@@@twi_setting_delete
+//Ý’èƒEƒBƒ“ƒhƒEŠÖ˜A‚±‚±‚Ü‚Å
+
+//GUI ‚±‚±‚Ü‚Å
+
+TWI‚ÌƒeƒLƒXƒg‚ÍuTwitter”FØv
+
+Ý’è“Çžˆ—
+
+
+
+//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚Éu-laboinv‚ªŠÜ‚Ü‚ê‚Ä‚¢‚½‚Æ‚«“üŽºˆ—‚ðŽÀs‚·‚é
+‚à‚µAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ªu*-laboin*v‚ÉƒƒCƒ‹ƒhƒJ[ƒhˆê’v‚È‚ç‚ÎA
+@‚à‚µALAST_ID==0‚È‚ç‚ÎA
+@@“üŽºˆ—
+@I—¹ˆ—
+//ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”‚Éu-laboutv‚ªŠÜ‚Ü‚ê‚Ä‚¢‚½‚Æ‚«‘ÞŽºˆ—‚ðŽÀs‚·‚é
+‚à‚µAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ªu*-labout*v‚ÉƒƒCƒ‹ƒhƒJ[ƒhˆê’v‚È‚ç‚ÎA
+@‘ÞŽºˆ—
+@I—¹ˆ—
+
+‚à‚µAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ªu*-noupdate*v‚ÉƒƒCƒ‹ƒhƒJ[ƒhˆê’v‚Å‚È‚¯‚ê‚ÎA
+@ÅV”ÅŠm”Fˆ—
+
+•êŠÍ‚ð’†‰›ˆÚ“®
+•êŠÍ‚Ì‰ÂŽ‹‚ÍƒIƒ“
+Ý’èƒEƒBƒ“ƒhƒE‚ð’†‰›ˆÚ“®
+
+œ“ü‘ÞŽºˆ—
+@‚à‚µALAST_ID==0‚È‚ç‚ÎA
+@@“üŽºˆ—
+@ˆá‚¦‚ÎA
+@@‘ÞŽºˆ—
+@@
+
+œ“üŽºˆ—
+@Œ»ÝŽž=(¡“ú‚Ìu/v‚ðu-v‚É’uŠ·)&u v&¡
+@uINSERT INTO ltt(start) values('v&Œ»ÝŽž&u');v‚ðSQLITE3ŽÀs
+@LAST_ID=SQLITE3¡‘}“ü‚µ‚½ID
+@“üŽºî•ñ‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚¢‚ñF{Œ»ÝŽž}v
+@‘ÞŽºî•ñ‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾Fv
+@twi_labo_in
+@™ê‚«ƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒ“
+@“ü‘ÞŽºƒ{ƒ^ƒ“‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾v
+
+œ‘ÞŽºˆ—
+@‚à‚µALAST_ID!=0‚È‚ç‚ÎA
+@@Œ»ÝŽž=(¡“ú‚Ìu/v‚ðu-v‚É’uŠ·)&u v&¡
+@@‚à‚µAMemo_flag==1‚È‚ç‚ÎA
+@@@ƒƒ‚“à—e=ui’»ó‹µ“™‚Ìƒƒ‚‚ª‚ ‚ê‚Î‹L“üv‚Æq‚Ë‚é
+@@@‚à‚µA(ƒƒ‚“à—e‚ªu^*(\s|\"|\'|\,)v‚Å³‹K•\Œ»ƒ}ƒbƒ`)‚ª‹ó‚Å‚È‚¯‚ê‚ÎAu”¼ŠpƒXƒy[ƒX‚â”¼Šp‹L†‚ÍŽg—p‚Å‚«‚Ü‚¹‚ñv‚Æ‚¢‚¤
+@@@@–ß‚é
+@@@ˆá‚¦‚ÎAuUPDATE ltt set end = '{Œ»ÝŽž}',memo = '{ƒƒ‚“à—e}' where id = {LAST_ID};v‚ðSQLITE3ŽÀsB
+@@ˆá‚¦‚ÎAuUPDATE ltt set end = '{Œ»ÝŽž}' where id = {LAST_ID};v‚ðSQLITE3ŽÀsB
+@@uUPDATE ltt set end = '{Œ»ÝŽž}' where id = {LAST_ID};v‚ðSQLITE3ŽÀsB
+@@‘ÞŽºî•ñ‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾F{Œ»ÝŽž}v
+@@twi_labo_out
+@@™ê‚«ƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒt@@
+@@LAST_ID=0
+@@“ü‘ÞŽºƒ{ƒ^ƒ“‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚¢‚ñv
+œ—š—ð•`‰æˆ—
+@DBŒŸõˆ—
+
+œ—š—ðo—Íˆ—
+@CSV•Û‘¶æ=ucsvv‚Ìu{¡“ú‚Ìw/x‚ðw-x‚Ö’uŠ·}_{¡‚Ìw:x‚ðw-x‚Ö’uŠ·}v‚Å•Û‘¶ƒtƒ@ƒCƒ‹‘I‘ð
+@‚à‚µACSV•Û‘¶æ‚ª‹ó‚Å‚È‚¯‚ê‚ÎA’¼‹ß“ü‘ÞŽº—š—ð‚ÌƒAƒCƒeƒ€‚ðCSV•Û‘¶æ‚Ö•Û‘¶
+
+œ‹N“®Žžˆ—
+@ƒGƒ‰[ŠÄŽ‹
+@@ƒL[•Û‘¶æ‚ðŠJ‚¢‚ÄTwiKey‚Ö‘ã“ü
+@@ƒvƒƒOƒ‰ƒ€‘¤ƒL[=TwiKey\0
+@@ƒvƒƒOƒ‰ƒ€‘¤ƒV[ƒNƒŒƒbƒg=TwiKey\1
+@ƒGƒ‰[‚È‚ç‚ÎAu[ƒGƒ‰[]{~}key.txt‚ª‘¶Ý‚µ‚È‚¢‚ß‚¤v‚Æ‚¢‚¤
+@@I—¹ˆ—
+@‰ŠúÝ’èˆ—
+@‚à‚µADB•Û‘¶æ‚ª‘¶Ý‚Å‚È‚¯‚ê‚ÎA
+@@DB•Û‘¶æ‚ðSQLITE3ŠJ‚­B
+@@uCREATE TABLE ltt(id INTEGER PRIMARY KEY,start TEXT,end TEXT,memo TEXT);v‚ðSQLITE3ŽÀsB
+@ˆá‚¦‚ÎA
+@@DB•Û‘¶æ‚ðSQLITE3ŠJ‚­B
+
+œI—¹ˆ—
+@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuTwitterv‚Étwi_flag‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuÅŒã‚É‘}“ü‚µ‚½IDv‚ÉLAST_ID‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@DB•Û‘¶æ‚ÌSQLITE3•Â‚¶‚é
+@ReleaseMutex(ƒ~ƒ…[ƒeƒbƒNƒX)B
+@CloseHandle(ƒ~ƒ…[ƒeƒbƒNƒX)B
+@I—¹
+
+œíœˆ—
+@íœID=’¼‹ß“ü‘ÞŽº—š—ð‚ÌƒeƒLƒXƒg‚Ìu"v‚©‚çu"v‚Ü‚Å”ÍˆÍ“àØ‚èŽæ‚é
+@‚à‚µA(íœID==0)‚Ü‚½‚Í(íœID==LAST_ID)‚Å‚È‚¯‚ê‚ÎA
+@@uˆÈ‰º‚Ì€–Ú‚ðíœ‚µ‚Ü‚·‚©H{~}{~}{’¼‹ß“ü‘ÞŽº—š—ð‚ÌƒeƒLƒXƒg}v‚ð“ñ‘ð
+@@‚à‚µA‚»‚ê‚ª‚Í‚¢‚È‚ç‚ÎA
+@@@uDELETE FROM ltt WHERE id=v&íœID&u;v‚ðSQLITE3ŽÀsB
+@—š—ð•`‰æˆ—
+@
+œÅV”ÅŠm”Fˆ—
+@//ƒlƒbƒg‚ÉÚ‘±‚µ‚Ä‚¢‚È‚¯‚ê‚ÎƒAƒbƒvƒf[ƒgŠm”F‚ðƒXƒLƒbƒv
+@‚à‚µAƒCƒ“ƒ^[ƒlƒbƒgÚ‘±”»’è==0‚È‚ç‚ÎA–ß‚é
+@ƒGƒ‰[ŠÄŽ‹
+@@Œo‰ßƒ_ƒCƒAƒƒO‚ÍƒIƒt
+@@uhttps://7ka.org/file/ltr/version.txtv‚©‚çHTTPƒf[ƒ^Žæ“¾‚µ‚ÄÅV”Åî•ñ‚Ö‘ã“ü
+@@‚à‚µAÅV”Åî•ñ\0>VERSION‚È‚ç‚ÎA
+@@@MessageBox((•êŠÍ‚ÌAƒnƒ“ƒhƒ‹),u‚ç‚Ú‚Á‚½‚ ‚ÌV‚µ‚¢ƒo[ƒWƒ‡ƒ“‚ª‚ ‚è‚Ü‚·B
+ƒ_ƒEƒ“ƒ[ƒh‚µ‚Ü‚·‚©Hv,u‚ç‚Ú‚Á‚½‚ ‚ÌXVv,$42044)B
+@@@‚à‚µA‚»‚ê‚ª6/*‚Í‚¢*/‚È‚ç‚ÎAÅV”Åî•ñ\1‚ð‹N“®
+@@@@I—¹
+@@@‚à‚µA‚»‚ê‚ª7/*‚¢‚¢‚¦*/‚È‚ç‚ÎA”²‚¯‚é
+@ƒGƒ‰[‚È‚ç‚ÎA”²‚¯‚é
+
+œÝ’è“Çžˆ—
+@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚É‘ã“üB
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuVERSIONv‚ðINI“Ç‚ñ‚ÅÝ’èƒo[ƒWƒ‡ƒ“‚Ö‘ã“ü@
+@‚à‚µAÝ’èƒo[ƒWƒ‡ƒ“<1.10‚È‚ç‚ÎA
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‚È‚¤•¶v‚É‚È‚¤•¶‚ðINI‘‚­
+@‚à‚µAÝ’èƒo[ƒWƒ‡ƒ“<1.11‚È‚ç‚ÎA
+@@‚à‚µA(Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu“üŽºƒ{ƒ^ƒ“–¼v‚ðINI“Ç‚Þ)!=‹ó‚È‚ç‚ÎA‚»‚ê‚ð—š—ð“üŽºŽž–¼Ì‚Ö‘ã“ü
+@@‚à‚µA(Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‘ÞŽºƒ{ƒ^ƒ“–¼v‚ðINI“Ç‚Þ)!=‹ó‚È‚ç‚ÎA‚»‚ê‚ð—š—ð‘ÞŽºŽž–¼Ì‚Ö‘ã“ü
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð“üŽºŽž–¼Ìv‚É—š—ð“üŽºŽž–¼Ì‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð‘ÞŽºŽž–¼Ìv‚É—š—ð‘ÞŽºŽž–¼Ì‚ðINI‘‚­
+@@INIÝ’è(uƒJƒXƒ^ƒ}ƒCƒYv,u“üŽºƒ{ƒ^ƒ“–¼v,‹ó,Ý’è•Û‘¶æ) //INIƒL[‚Ìíœ
+@@INIÝ’è(uƒJƒXƒ^ƒ}ƒCƒYv,u‘ÞŽºƒ{ƒ^ƒ“–¼v,‹ó,Ý’è•Û‘¶æ) 
+@‚à‚µAÝ’èƒo[ƒWƒ‡ƒ“<1.13‚È‚ç‚ÎA
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìué“`ƒtƒ‰ƒOv‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuVERSIONv‚ÉVERSION‚ðINI‘‚­
+@@uƒo[ƒWƒ‡ƒ“ƒAƒbƒv‚ªŠ®—¹‚µ‚Ü‚µ‚½B{~}{~}yV‹@”\‚È‚Çz{~}Œy”÷‚ÈƒoƒOC³‚ÆA‚ç‚Ú‚Á‚½‚ ‚Ì”z•zƒy[ƒW‚ÌURL‚ð™ê‚©‚È‚¢‘I‘ðŽˆ‚ð’Ç‰Á‚µ‚Ü‚µ‚½B{~}{~}Ú‚µ‚¢Žg‚¢•û‚É‚Â‚¢‚Ä‚ÍƒEƒBƒ“ƒhƒE‰E‰º‚ÌwŽg‚¢•ûx‚ðƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢Bv‚Æ‚¢‚¤
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð“üŽºŽž–¼Ìv‚ðINI“Ç‚ñ‚Å—š—ð“üŽºŽž–¼Ì‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð‘ÞŽºŽž–¼Ìv‚ðINI“Ç‚ñ‚Å—š—ð‘ÞŽºŽž–¼Ì‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‚È‚¤•¶v‚ðINI“Ç‚ñ‚Å‚È‚¤•¶‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuTwitterv‚ðINI“Ç‚ñ‚Åtwi_flag‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuÅŒã‚É‘}“ü‚µ‚½IDv‚ðINI“Ç‚ñ‚ÅLAST_ID‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒƒ‚‹@”\v‚ðINI“Ç‚ñ‚ÅMemo_flag‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu“üŽº•¶v‚ðINI“Ç‚ñ‚Å“üŽº•¶‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‘ÞŽº•¶v‚ðINI“Ç‚ñ‚Å‘ÞŽº•¶‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚ÌuƒnƒbƒVƒ…ƒ^ƒOv‚ðINI“Ç‚ñ‚ÅƒnƒbƒVƒ…ƒ^ƒO‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìué“`ƒtƒ‰ƒOv‚ðINI“Ç‚ñ‚Ålabourl_flag‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@‚à‚µALAST_ID==0‚È‚ç‚ÎA
+@@“ü‘ÞŽºƒ{ƒ^ƒ“‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚¢‚ñv
+@@™ê‚«ƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒt
+@ˆá‚¦‚ÎA
+@@“ü‘ÞŽºƒ{ƒ^ƒ“‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚è‚¾v
+@@“üŽºŽžŠÔ=uSELECT start FROM ltt WHERE id=v&LAST_ID&u;v‚ðSQLITE3ŽÀs
+@@“üŽºî•ñ‚ÌƒeƒLƒXƒg‚Íu‚ç‚Ú‚¢‚ñF{“üŽºŽžŠÔ\1}v
+@@™ê‚«ƒ{ƒ^ƒ“‚Ì—LŒø‚ÍƒIƒ“
+@‚à‚µAtwi_flag==1‚È‚ç‚ÎAtwi_setting_load
+@Ý’èî•ñ•`‰æˆ—
+
+//‰‰ñ‹N“®Žž‚ÌÝ’è
+œ‰ŠúÝ’èˆ—
+@‚à‚µAÝ’è•Û‘¶æ‚ª‘¶Ý‚Å‚È‚¯‚ê‚ÎA
+@@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚Ö‘ã“ü
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuVERSIONv‚ÉVERSION‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuÅŒã‚É‘}“ü‚µ‚½IDv‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚ÌuTwitterv‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒƒ‚‹@”\v‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìué“`ƒtƒ‰ƒOv‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu“üŽº•¶v‚É“üŽº•¶‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‘ÞŽº•¶v‚É‘ÞŽº•¶‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚ÌuƒnƒbƒVƒ…ƒ^ƒOv‚ÉƒnƒbƒVƒ…ƒ^ƒO‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð“üŽºŽž–¼Ìv‚É—š—ð“üŽºŽž–¼Ì‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu—š—ð‘ÞŽºŽž–¼Ìv‚É—š—ð‘ÞŽºŽž–¼Ì‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‚È‚¤•¶v‚É‚È‚¤•¶‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìué“`ƒtƒ‰ƒOv‚Éu0v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@@u‚ç‚Ú‚Á‚½‚  {VERSION}‚Ö‚æ‚¤‚±‚»I{~}Ú‚µ‚¢Žg‚¢•û‚É‚Â‚¢‚Ä‚ÍƒEƒBƒ“ƒhƒE‰E‰º‚ÌwŽg‚¢•ûx‚ðƒNƒŠƒbƒN‚µ‚Ä‚­‚¾‚³‚¢Bv‚Æ‚¢‚¤
+@@
+//Ý’èƒEƒBƒ“ƒhƒEŠÖ˜A
+œƒ{ƒ^ƒ“2__ƒNƒŠƒbƒN‚µ‚½Žž
+@@Ý’èƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é
+
+œƒ{ƒ^ƒ“1__ƒNƒŠƒbƒN‚µ‚½Žž
+@@Ý’èî•ñã‘•Û‘¶ˆ—
+
+œÝ’èî•ñ•`‰æˆ—
+@ƒGƒfƒBƒ^1‚ÌƒeƒLƒXƒg‚Í“üŽº•¶
+@ƒGƒfƒBƒ^2‚ÌƒeƒLƒXƒg‚Í‘ÞŽº•¶
+@ƒGƒfƒBƒ^3‚ÌƒeƒLƒXƒg‚Í‚È‚¤•¶
+@ƒGƒfƒBƒ^4‚ÌƒeƒLƒXƒg‚ÍƒnƒbƒVƒ…ƒ^ƒO
+@ƒƒ‚‹@”\ƒ`ƒFƒbƒN‚Ì’l‚ÍMemo_flag
+@é“`ƒ`ƒFƒbƒN‚Ì’l‚Ílabourl_flag
+
+œÝ’èî•ñã‘•Û‘¶ˆ—
+@“üŽº•¶‚ÍƒGƒfƒBƒ^1‚ÌƒeƒLƒXƒg
+@‘ÞŽº•¶‚ÍƒGƒfƒBƒ^2‚ÌƒeƒLƒXƒg
+@‚È‚¤•¶‚ÍƒGƒfƒBƒ^3‚ÌƒeƒLƒXƒg
+@ƒnƒbƒVƒ…ƒ^ƒO‚ÍƒGƒfƒBƒ^4‚ÌƒeƒLƒXƒg
+@Memo_flag‚Íƒƒ‚‹@”\ƒ`ƒFƒbƒN‚Ì’l
+@labourl_flag‚Íé“`ƒ`ƒFƒbƒN‚Ì’l
+@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚É‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu“üŽº•¶v‚É“üŽº•¶‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‘ÞŽº•¶v‚É‘ÞŽº•¶‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìu‚È‚¤•¶v‚É‚È‚¤•¶‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚ÌuƒnƒbƒVƒ…ƒ^ƒOv‚ÉƒnƒbƒVƒ…ƒ^ƒO‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒƒ‚‹@”\v‚ÉMemo_flag‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuƒJƒXƒ^ƒ}ƒCƒYv‚Ìué“`ƒtƒ‰ƒOv‚Élabourl_flag‚ðINI‘‚­
+@Ý’èƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é
+@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+
+œÝ’èƒEƒBƒ“ƒhƒEŠJˆ—
+@Ý’èƒEƒBƒ“ƒhƒE‚ð’†‰›ˆÚ“®
+@Ý’èî•ñ•`‰æˆ—
+@Ý’èƒEƒBƒ“ƒhƒE‚ðƒ‚[ƒ_ƒ‹•\Ž¦
+
+œDBŒŸõˆ—
+@@ŒŸõ’ŠoŒ‹‰Ê=uSELECT id AS "ID", start AS "{—š—ð“üŽºŽž–¼Ì}", end AS "{—š—ð‘ÞŽºŽž–¼Ì}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "‘ØÝŽžŠÔ",memo AS "ƒƒ‚" FROM ltt WHERE start LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' or end LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' or memo LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' OR id LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%'  ORDER BY id DESC;v‚ðSQLITE3ŽÀs
+@@—ÝŒv‘ØÝŽžŠÔ=uSELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"“ú"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"ŽžŠÔ"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"•ª" from ltt where start LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' or end LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' ORDER BY id DESC;v‚ðSQLITE3ŽÀs
+@@•½‹Ï‘ØÝŽžŠÔ=uSELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"“ú"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"ŽžŠÔ"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"•ª" from ltt where start LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' or end LIKE '%{—š—ð•ÒW‚ÌƒeƒLƒXƒg}%' ORDER BY id DESC;v‚ðSQLITE3ŽÀs
+@@—š—ðƒXƒe[ƒ^ƒXƒo[‚ÌƒeƒLƒXƒg‚Íu—ÝŒvŽžŠÔ‚Í{—ÝŒv‘ØÝŽžŠÔ\1}@•½‹ÏŽžŠÔ‚Í{•½‹Ï‘ØÝŽžŠÔ\1}v
+@@’¼‹ß“ü‘ÞŽº—š—ð‚ÌƒAƒCƒeƒ€‚ÍŒŸõ’ŠoŒ‹‰Ê
+//Twitterˆ—ŠÖŒW
+œtwi_oauth
+@‚à‚µAƒCƒ“ƒ^[ƒlƒbƒgÚ‘±”»’è==0‚È‚ç‚ÎA
+@@–ß‚é
+@ƒGƒ‰[ŠÄŽ‹
+@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚Å”FØ‚·‚éB
+@@”FØî•ñ‚Í‚»‚êB
+@@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚Ö‘ã“ü
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒL[v‚Éu{”FØî•ñ@oauth_token}v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒV[ƒNƒŒƒbƒgƒL[v‚Éu{”FØî•ñ@oauth_token_secret}v‚ðINI‘‚­
+@@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@ƒGƒ‰[‚È‚ç‚ÎA
+@@twi_nako_error_view
+
+œtwi_setting_load
+@ƒGƒ‰[ŠÄŽ‹
+@@‚à‚µAtwi_flag==0‚È‚ç‚ÎAtwi_oauth
+@@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚É‘ã“üB
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒL[v‚ðINI“Ç‚ñ‚ÅTWI_TOKEN_KEY‚Ö‘ã“ü
+@@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒV[ƒNƒŒƒbƒgƒL[v‚ðINI“Ç‚ñ‚ÅTWI_TOKEN_SECRET‚Ö‘ã“ü
+@@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@@‚à‚µA(TWI_TOKEN_KEY==‹ó)‚Ü‚½‚Í(TWI_TOKEN_SECRET==‹ó)‚È‚ç‚ÎA
+@@@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚Íu”FØƒL[‚ª‚ ‚è‚Ü‚¹‚ñv
+@@@twi_flag=0
+@@ˆá‚¦‚ÎA
+@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚Ìoauth‚Ìƒg[ƒNƒ“ƒL[=TWI_TOKEN_KEY
+@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚Ìoauth‚ÌƒV[ƒNƒŒƒbƒg=TWI_TOKEN_SECRET
+@@@twi_flag=1
+@@twi_button_refresh
+@ƒGƒ‰[‚È‚ç‚ÎA
+@@ƒGƒ‰[ƒƒbƒZ[ƒW‚ð‚¢‚¤
+@@twi_nako_error_view
+
+œtwi_setting_delete
+@twi_flag=0
+@Ý’è•Û‘¶æ‚ÌINIŠJ‚¢‚ÄÝ’èƒnƒ“ƒhƒ‹‚Ö‘ã“ü
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒL[v‚Éuv‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÅuÝ’èv‚Ìuƒg[ƒNƒ“ƒV[ƒNƒŒƒbƒgƒL[v‚Éuv‚ðINI‘‚­
+@Ý’èƒnƒ“ƒhƒ‹‚ÌINI•Â‚¶‚é
+@twi_button_refresh
+
+œtwi_labo_now
+@Œ»ÝŽž=(¡“ú‚Ìu/v‚ðu-v‚É’uŠ·)&u v&¡
+@‚à‚µAtwi_flag==1‚È‚ç‚ÎA
+@@ƒGƒ‰[ŠÄŽ‹
+@@@‚à‚µAlabourl_flag==1‚È‚ç‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{‚È‚¤•¶} {Œ»ÝŽž} {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­
+@@@ˆá‚¦‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{‚È‚¤•¶} {Œ»ÝŽž} {Œã•t•¶} {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­
+@@@‚»‚ê‚Åtwi_tweet_error_check
+@@ƒGƒ‰[‚È‚ç‚ÎAtwi_nako_error_view
+@ˆá‚¦‚ÎAuTwitter”FØ‚ð‚·‚é‚ÆA‚ç‚Ú‚È‚¤I‚Æ™ê‚¯‚Ü‚·Bv‚Æ‚¢‚¤
+œtwi_labo_in
+@‚à‚µAtwi_flag==1‚È‚ç‚ÎA
+@@ƒGƒ‰[ŠÄŽ‹
+@@@‚à‚µAlabourl_flag==1‚È‚ç‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{“üŽº•¶}{Œ»ÝŽž} {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­
+@@@ˆá‚¦‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{“üŽº•¶}{Œ»ÝŽž} {Œã•t•¶} {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­
+@@@‚»‚ê‚Åtwi_tweet_error_check
+@@ƒGƒ‰[‚È‚ç‚ÎAtwi_nako_error_view
+œtwi_labo_out
+@‚à‚µAtwi_flag==1‚È‚ç‚ÎA
+@@ƒGƒ‰[ŠÄŽ‹
+@@@—ÝŒvŽž=uSELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"“ú"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"ŽžŠÔ"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"•ª" from ltt where id = {LAST_ID};v‚ðSQLITE3ŽÀs
+@@@‚à‚µAlabourl_flag==1‚È‚ç‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{‘ÞŽº•¶}{Œ»ÝŽž} ¡‰ñ‚Ì‚ç‚Ú‘ØÝŽžŠÔ‚Í{—ÝŒvŽž\1}‚Å‚µ‚½B {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­
+@@@ˆá‚¦‚ÎA
+@@@@‚È‚±‚Á‚½[ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çu{‘ÞŽº•¶}{Œ»ÝŽž} ¡‰ñ‚Ì‚ç‚Ú‘ØÝŽžŠÔ‚Í{—ÝŒvŽž\1}‚Å‚µ‚½B {Œã•t•¶} {ƒnƒbƒVƒ…ƒ^ƒO}v‚Æ‚Â‚Ô‚â‚­@@
+@@@‚»‚ê‚Åtwi_tweet_error_check
+@@ƒGƒ‰[‚È‚ç‚ÎAtwi_nako_error_view
+œtwi_tweet_error_check(S‚Å)
+@‚à‚µAS‚ªuerrors*v‚Éˆê’v‚È‚ç‚ÎA//ƒGƒ‰[‚È‚ç‚Î
+@@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚ÍuTwitterÚ‘±ƒGƒ‰[(ƒR[ƒh:{S@`errors`@`code`})v
+@ˆá‚¦‚ÎA
+@@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚ÍuTwitter‚É‚Â‚Ô‚â‚«‚Ü‚µ‚½v//{~}{S@`user`@`name`}{~}{S@`text`}v
+œtwi_button_refresh
+@‚à‚µAtwi_flag==1‚È‚ç‚ÎA
+@@TWI‚ÌƒeƒLƒXƒg‚ÍuTwitter”FØ‰ðœv
+@@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚ÍuTwitter”FØÏ‚Ýv
+@ˆá‚¦‚ÎA
+@@TWI‚ÌƒeƒLƒXƒg‚ÍuTwitter”FØv
+@@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚ÍuTwitter–¢”FØv
+@@
+œtwi_nako_error_view
+@ƒXƒeƒo[‚ÌƒeƒLƒXƒg‚ÍuƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½(Twitter”FØ‚ÉŽ¸”s)v
+@@
 # nakotter ver.0.43
 # http://www.undefin.net/nadesiko/nako/nakotter-ver.0.42.zip
 
-ï¼å¤‰æ•°å®£è¨€ã¯å¿…è¦
+I•Ï”éŒ¾‚Í•K—v
 
-â—UNIXæ™‚é–“å–å¾—
-ã€€ä»Šæ—¥&` `&ä»Šã‚’UNIXTIMEå¤‰æ›
+œUNIXŽžŠÔŽæ“¾
+@¡“ú&` `&¡‚ðUNIXTIME•ÏŠ·
 
 #resource http://nadesiko.g.hatena.ne.jp/white-ball/20100402/1270147724
 
-â—HMACSHA1å–å¾—(ç§˜å¯†éµã§å†…å®¹ã®)
-ã€€Bã¨ã¯æ•´æ•°=64ã€‚Lã¨ã¯æ•´æ•°=20
-ã€€ï¼ƒç§˜å¯†éµã®é•·ã•ã®èª¿æ•´
-ã€€ç§˜å¯†éµã®ãƒã‚¤ãƒˆæ•°
-ã€€ã‚‚ã—ãã‚Œï¼žBãªã‚‰ã°
-ã€€ã€€ç§˜å¯†éµã‹ã‚‰SHA1å–å¾—
-ã€€ã€€2ã§è¡Œæƒãˆ
-ã€€ã€€åå¾©
-ã€€ã€€ã€€INT(ã€Œ$ã€ï¼†å¯¾è±¡)ã‚’ç§˜å¯†éµã®å›žæ•°ã«ã€Œbyteã€ã§ãƒã‚¤ãƒŠãƒªè¨­å®šï¼ƒãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®å‡ºåŠ›ã®ãƒã‚¤ãƒŠãƒªå¤‰æ›
-ã€€ã€€ç§˜å¯†éµã¯ç§˜å¯†éµã®L ãƒã‚¤ãƒˆå·¦éƒ¨åˆ†
-ã€€ã€€ç§˜å¯†éµã®ãƒã‚¤ãƒˆæ•°
-ã€€ã‚‚ã—ãã‚Œï¼œBãªã‚‰ã°
-ã€€ã€€ã€Œ{\0}ã€ã‚’(B-ãã‚Œ)ã ã‘ãƒªãƒ•ãƒ¬ã‚¤ãƒ³
-ã€€ã€€ç§˜å¯†éµã¯ç§˜å¯†éµ&ãã‚Œ
-ã€€
-ã€€ï¼ƒéµã‹ã‚‰ä½œã‚‹2ã¤ã®æ–‡å­—åˆ—ã®æº–å‚™
-ã€€éµIã¨ã¯æ–‡å­—åˆ—ã€‚éµIã«Bã‚’ç¢ºä¿
-ã€€éµOã¨ã¯æ–‡å­—åˆ—ã€‚éµOã«Bã‚’ç¢ºä¿
-ã€€æ–‡å­—ã¨ã¯æ•´æ•°
-ã€€B/4å›ž
-ã€€ã€€ç§˜å¯†éµã®(å›žæ•°-1)*4+1 ã‚’ã€ŒDWORDã€ã§ãƒã‚¤ãƒŠãƒªå–å¾—
-ã€€ã€€æ–‡å­—ã¯ãã‚Œ
-ã€€ã€€XOR(æ–‡å­—,$36363636)ã‚’éµIã®(å›žæ•°-1)*4+1 ã«ã€ŒDWORDã€ã§ãƒã‚¤ãƒŠãƒªè¨­å®š
-ã€€ã€€XOR(æ–‡å­—,$5C5C5C5C)ã‚’éµOã®(å›žæ•°-1)*4+1 ã«ã€ŒDWORDã€ã§ãƒã‚¤ãƒŠãƒªè¨­å®š
-ã€€
-ã€€ï¼ƒãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®é©ç”¨
-ã€€çµŒéŽã¨ã¯æ–‡å­—åˆ—
-ã€€çµŒéŽã«Lã‚’ç¢ºä¿
-ã€€
-ã€€(éµIï¼†å†…å®¹)ã‹ã‚‰SHA1å–å¾—
-ã€€2ã§è¡Œæƒãˆ
-ã€€åå¾©
-ã€€ã€€INT(ã€Œ$ã€ï¼†å¯¾è±¡)ã‚’çµŒéŽã®å›žæ•°ã«ã€Œbyteã€ã§ãƒã‚¤ãƒŠãƒªè¨­å®šï¼ƒãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®å‡ºåŠ›ã®ãƒã‚¤ãƒŠãƒªå¤‰æ›
-ã€€
-ã€€(éµOï¼†çµŒéŽ)ã‹ã‚‰SHA1å–å¾—
-ã€€2ã§è¡Œæƒãˆ
-ã€€åå¾©
-ã€€ã€€INT(ã€Œ$ã€ï¼†å¯¾è±¡)ã‚’çµŒéŽã®å›žæ•°ã«ã€Œbyteã€ã§ãƒã‚¤ãƒŠãƒªè¨­å®šï¼ƒãƒãƒƒã‚·ãƒ¥é–¢æ•°ã®å‡ºåŠ›ã®ãƒã‚¤ãƒŠãƒªå¤‰æ›
-ã€€
-ã€€çµŒéŽã‚’æˆ»ã™
+œHMACSHA1Žæ“¾(”é–§Œ®‚Å“à—e‚Ì)
+@B‚Æ‚Í®”=64BL‚Æ‚Í®”=20
+@””é–§Œ®‚Ì’·‚³‚Ì’²®
+@”é–§Œ®‚ÌƒoƒCƒg”
+@‚à‚µ‚»‚ê„B‚È‚ç‚Î
+@@”é–§Œ®‚©‚çSHA1Žæ“¾
+@@2‚Ås‘µ‚¦
+@@”½•œ
+@@@INT(u$v•‘ÎÛ)‚ð”é–§Œ®‚Ì‰ñ”‚Éubytev‚ÅƒoƒCƒiƒŠÝ’è”ƒnƒbƒVƒ…ŠÖ”‚Ìo—Í‚ÌƒoƒCƒiƒŠ•ÏŠ·
+@@”é–§Œ®‚Í”é–§Œ®‚ÌL ƒoƒCƒg¶•”•ª
+@@”é–§Œ®‚ÌƒoƒCƒg”
+@‚à‚µ‚»‚êƒB‚È‚ç‚Î
+@@u{\0}v‚ð(B-‚»‚ê)‚¾‚¯ƒŠƒtƒŒƒCƒ“
+@@”é–§Œ®‚Í”é–§Œ®&‚»‚ê
+@
+@”Œ®‚©‚çì‚é2‚Â‚Ì•¶Žš—ñ‚Ì€”õ
+@Œ®I‚Æ‚Í•¶Žš—ñBŒ®I‚ÉB‚ðŠm•Û
+@Œ®O‚Æ‚Í•¶Žš—ñBŒ®O‚ÉB‚ðŠm•Û
+@•¶Žš‚Æ‚Í®”
+@B/4‰ñ
+@@”é–§Œ®‚Ì(‰ñ”-1)*4+1 ‚ðuDWORDv‚ÅƒoƒCƒiƒŠŽæ“¾
+@@•¶Žš‚Í‚»‚ê
+@@XOR(•¶Žš,$36363636)‚ðŒ®I‚Ì(‰ñ”-1)*4+1 ‚ÉuDWORDv‚ÅƒoƒCƒiƒŠÝ’è
+@@XOR(•¶Žš,$5C5C5C5C)‚ðŒ®O‚Ì(‰ñ”-1)*4+1 ‚ÉuDWORDv‚ÅƒoƒCƒiƒŠÝ’è
+@
+@”ƒnƒbƒVƒ…ŠÖ”‚Ì“K—p
+@Œo‰ß‚Æ‚Í•¶Žš—ñ
+@Œo‰ß‚ÉL‚ðŠm•Û
+@
+@(Œ®I•“à—e)‚©‚çSHA1Žæ“¾
+@2‚Ås‘µ‚¦
+@”½•œ
+@@INT(u$v•‘ÎÛ)‚ðŒo‰ß‚Ì‰ñ”‚Éubytev‚ÅƒoƒCƒiƒŠÝ’è”ƒnƒbƒVƒ…ŠÖ”‚Ìo—Í‚ÌƒoƒCƒiƒŠ•ÏŠ·
+@
+@(Œ®O•Œo‰ß)‚©‚çSHA1Žæ“¾
+@2‚Ås‘µ‚¦
+@”½•œ
+@@INT(u$v•‘ÎÛ)‚ðŒo‰ß‚Ì‰ñ”‚Éubytev‚ÅƒoƒCƒiƒŠÝ’è”ƒnƒbƒVƒ…ŠÖ”‚Ìo—Í‚ÌƒoƒCƒiƒŠ•ÏŠ·
+@
+@Œo‰ß‚ð–ß‚·
 
 
 # hmacsha1.nako
 ##############################
 
 
-â– ãƒˆãƒ¼ã‚¯ãƒ³
-ã€€ãƒ»{æ–‡å­—åˆ—}ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ã€€ãƒ»{æ–‡å­—åˆ—}ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ
+¡ƒg[ƒNƒ“
+@E{•¶Žš—ñ}ƒg[ƒNƒ“ƒL[
+@E{•¶Žš—ñ}ƒV[ƒNƒŒƒbƒg
 
-â– OAuthã€€+ãƒˆãƒ¼ã‚¯ãƒ³
-ã€€ãƒ»{æ–‡å­—åˆ—}ãƒãƒ¼ã‚¸ãƒ§ãƒ³{="1.0"}
-ã€€ãƒ»{æ–‡å­—åˆ—}ç½²åæ–¹å¼{="HMAC-SHA1"}
-ã€€ãƒ»{ãƒˆãƒ¼ã‚¯ãƒ³}ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒž
-ã€€ãƒ»{æ–‡å­—åˆ—}ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³URL
-ã€€ãƒ»{æ–‡å­—åˆ—}ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³URL
-ã€€ãƒ»{æ–‡å­—åˆ—}èªè¨¼URL
-ã€€ãƒ»{ãƒˆãƒ¼ã‚¯ãƒ³}ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
-ã€€ãƒ»{éžå…¬é–‹}åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç”Ÿæˆ({ãƒãƒƒã‚·ãƒ¥=?}PARAMã‹ã‚‰)ï½ž
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = PARAM
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_consumer_keyã€    = ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_nonceã€           = GUIDç”Ÿæˆã®11æ–‡å­—å³éƒ¨åˆ†ã‚’å°æ–‡å­—å¤‰æ›
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_signature_methodã€= ç½²åæ–¹å¼
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_timestampã€       = UNIXæ™‚é–“å–å¾—
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_versionã€         = ãƒãƒ¼ã‚¸ãƒ§ãƒ³
-ã€€ã€€_ = ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
-ã€€ãƒ»{éžå…¬é–‹}ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžãƒã‚§ãƒƒã‚¯ï½ž
-ã€€ã€€ã‚‚ã—ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ãŒç©ºãªã‚‰ã°
-ã€€ã€€ã€€ã€Žã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ãŒç©ºã§ã™ã€‚ã€ã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
-ã€€ã€€ã‚‚ã—ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆãŒç©ºãªã‚‰ã°
-ã€€ã€€ã€€ã€Žã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆãŒç©ºã§ã™ã€‚ã€ã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
-ã€€ãƒ»HTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆ({æ–‡å­—åˆ—}URLã¸{ãƒãƒƒã‚·ãƒ¥}PARAMã§)ï½ž
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ç›£è¦–
-ã€€ã€€ã€€URL&ã€Ž?ã€&(PARAMã®URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›)ã‹ã‚‰HTTPãƒ‡ãƒ¼ã‚¿å–å¾—
-ã€€ã€€ã‚¨ãƒ©ãƒ¼ãªã‚‰ã°
-ã€€ã€€ã€€ã€ŽHTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¤±æ•—ã€‚ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æŒ‡å®šãŒé–“é•ã£ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚ã€ã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
-ã€€ãƒ»POST({æ–‡å­—åˆ—}URLã¸{ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžãƒã‚§ãƒƒã‚¯
-ã€€ã€€éµã¨ã¯æ–‡å­—åˆ— = (ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ)&ã€Ž&ã€&ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç”Ÿæˆ
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_tokenã€= ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ”ãƒ¼
-ã€€ã€€ç½²åã¨ã¯æ–‡å­—åˆ— = ã€ŽPOST&ã€&(URLã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰)&ã€Ž&ã€
-ã€€ã€€PARAMã®ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼åˆ—æŒ™ã—ã¦åå¾©ã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@å¯¾è±¡ = PARAM@å¯¾è±¡
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›ã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’ç½²åã«è¿½åŠ 
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_signatureã€ = éµã§ç½²åã®éžå…¬é–‹ç½²åç”Ÿæˆã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰
-ã€€ã€€HEADã¨ã¯æ–‡å­—åˆ— = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‹ã‚‰ãƒ˜ãƒƒãƒ€ç”Ÿæˆ
-ã€€ã€€HEADã«"{\13}{\10}" & `Content-Type: application/x-www-form-urlencoded` & "{\13}{\10}"ã‚’è¿½åŠ 
-ã€€ã€€BODYã¨ã¯æ–‡å­—åˆ— = PARAMã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›
-ã€€ã€€ãã‚Œã¯ç©ºã€‚HEADã¨BODYã‚’URLã¸HTTPãƒã‚¹ãƒˆ
-ã€€ãƒ»GET({æ–‡å­—åˆ—}URLã¸{ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžãƒã‚§ãƒƒã‚¯
-ã€€ã€€éµã¨ã¯æ–‡å­—åˆ— = (ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ)&ã€Ž&ã€&ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç”Ÿæˆ
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_tokenã€= ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ”ãƒ¼
-ã€€ã€€ç½²åã¨ã¯æ–‡å­—åˆ— = ã€ŽGET&ã€&(URLã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰)&ã€Ž&ã€
-ã€€ã€€PARAMã®ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼åˆ—æŒ™ã—ã¦åå¾©ã€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@å¯¾è±¡ = PARAM@å¯¾è±¡
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›ã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’ç½²åã«è¿½åŠ 
-ã€€ã€€åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_signatureã€ = éµã§ç½²åã®éžå…¬é–‹ç½²åç”Ÿæˆã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰
-ã€€ã€€HEADã¨ã¯æ–‡å­—åˆ— = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‹ã‚‰ãƒ˜ãƒƒãƒ€ç”Ÿæˆ
-ã€€ã€€ã‚‚ã—PARAMã®ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼åˆ—æŒ™ã®è¦ç´ æ•°ãŒ0ã§ãªã‘ã‚Œã°
-ã€€ã€€ã€€URLã«ã€Ž?ã€&(PARAMã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›)ã‚’è¿½åŠ 
-ã€€ã€€ãã‚Œã¯ç©ºã€‚HEADã‚’URLã¸HTTPã‚²ãƒƒãƒˆ
-ã€€ãƒ»ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³å–å¾—å‡¦ç†ï½ž
-ã€€ã€€ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžãƒã‚§ãƒƒã‚¯
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç”Ÿæˆ
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_callbackã€         = "oob" //ã“ã‚Œã¤ã‘ãªã„ã¨PINã‚³ãƒ¼ãƒ‰å…¥åŠ›ç”»é¢ã«å¤‰ç•°ã—ãªããªã£ã¦ã—ã¾ã£ãŸ
-ã€€ã€€éµã¨ã¯æ–‡å­—åˆ—   = (ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ)&ã€Ž&ã€
-ã€€ã€€ç½²åã¨ã¯æ–‡å­—åˆ— = ã€ŽGET&ã€&(ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³URLã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰)&ã€Ž&ã€
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›ã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’ç½²åã«è¿½åŠ 
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_signatureã€ = éµã§ç½²åã®éžå…¬é–‹ç½²åç”Ÿæˆ
-ã€€ã€€ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³URLã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§HTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆ
-ã€€ã€€ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœ = ãã‚Œã®ã€Ž&ã€ã‚’æ”¹è¡Œã«ç½®ãæ›ãˆã¦ãƒãƒƒã‚·ãƒ¥å¤‰æ›
-ã€€ã€€ã‚‚ã—ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœ@`oauth_callback_confirmed`ãŒ`true`ã§ãªã‘ã‚Œã°
-ã€€ã€€ã€€ã€Žãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³ã®å–å¾—ã«å¤±æ•—ã€‚ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®æŒ‡å®šãŒé–“é•ã£ã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚ã€ã§ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ
-ã€€ã€€ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ = ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœ@`oauth_token`
-ã€€ã€€ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ = ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœ@`oauth_token_secret`
-ã€€ã€€_ = ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³çµæžœ
-ã€€ãƒ»èªè¨¼URLå–å¾—ï½ž
-ã€€ã€€èªè¨¼URL&ã€Ž?oauth_token=ã€&(ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼)ã‚’æˆ»ã™
-ã€€ãƒ»ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—å‡¦ç†({æ–‡å­—åˆ—}æš—è¨¼ç•ªå·ã§)ï½ž
-ã€€ã€€ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžãƒã‚§ãƒƒã‚¯
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = åŸºæœ¬ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ç”Ÿæˆ
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_tokenã€    = ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_verifierã€ = æš—è¨¼ç•ªå·
-ã€€ã€€éµã¨ã¯æ–‡å­—åˆ—   = (ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ)&ã€Ž&ã€&(ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ)
-ã€€ã€€ç½²åã¨ã¯æ–‡å­—åˆ— = ã€ŽGET&ã€&(ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³URLã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰)&ã€Ž&ã€
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›ã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã‚’ç½²åã«è¿½åŠ 
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@ã€Žoauth_signatureã€ = éµã§ç½²åã®éžå…¬é–‹ç½²åç”Ÿæˆ
-ã€€ã€€ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³çµæžœã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³URLã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§HTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆ
-ã€€ã€€ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³çµæžœ = ãã‚Œã®ã€Ž&ã€ã‚’æ”¹è¡Œã«ç½®ãæ›ãˆã¦ãƒãƒƒã‚·ãƒ¥å¤‰æ›
-ã€€ã€€ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ = ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³çµæžœ@`oauth_token`
-ã€€ã€€ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ = ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³çµæžœ@`oauth_token_secret`
-ã€€ã€€_ = ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³çµæžœ
-ã€€ãƒ»{éžå…¬é–‹}éžå…¬é–‹ç½²åç”Ÿæˆ(KEYã§STRã®)ï½ž
-ã€€ã€€éµã¨ã¯æ–‡å­—åˆ—
-ã€€ã€€éµã«64ã‚’ç¢ºä¿
-ã€€ã€€éµ = KEY
-ã€€ã€€éµã§STRã®HMACSHA1å–å¾—
-ã€€ã€€ãã‚Œã‚’BASE64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰
-ã€€ãƒ»{éžå…¬é–‹}ãƒ˜ãƒƒãƒ€ç”Ÿæˆ({ãƒãƒƒã‚·ãƒ¥}PARAMã‹ã‚‰)ï½ž
-ã€€ã€€çµæžœã¨ã¯æ–‡å­—åˆ— = ã€ŽAuthorization: OAuth ã€
-ã€€ã€€ã€Žoauth_nonce,oauth_timestamp,oauth_consumer_key,oauth_signature_method,oauth_version,oauth_token,oauth_signatureã€ã‚’ã€
-ã€€ã€€ã€Ž,ã€ã§åŒºåˆ‡ã£ã¦åå¾©
-ã€€ã€€ã€€çµæžœã«å¯¾è±¡&ã€Ž="ã€&(PARAM@å¯¾è±¡)&ã€Ž", ã€ã‚’è¿½åŠ 
-ã€€ã€€çµæžœã‹ã‚‰2æ–‡å­—å³ç«¯å‰Šé™¤
-ã€€ã€€_ = çµæžœ
-ã€€ãƒ»URLãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰æ›({ãƒãƒƒã‚·ãƒ¥}PARAMã‚’|PARAMã®)ï½ž
-ã€€ã€€çµæžœã¨ã¯æ–‡å­—åˆ—
-ã€€ã€€KEYSã¨ã¯é…åˆ—=PARAMã®ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼åˆ—æŒ™
-ã€€ã€€KEYSã‚’é…åˆ—ã‚½ãƒ¼ãƒˆ
-ã€€ã€€KEYSã‚’åå¾©
-ã€€ã€€ã€€çµæžœã«å¯¾è±¡&ã€Ž=ã€&(PARAM@å¯¾è±¡ã‚’ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰)&ã€Ž&ã€ã‚’è¿½åŠ 
-ã€€ã€€çµæžœã‹ã‚‰1æ–‡å­—å³ç«¯å‰Šé™¤
-ã€€ãƒ»{éžå…¬é–‹}ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰({æ–‡å­—åˆ—}Sã‚’)ï½ž
-ã€€ã€€Sã‚’UTF8Nå¤‰æ›ã‚’URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®ã€Ž+ã€ã‚’ã€Ž%20ã€ã«ç½®æ›
+¡OAuth@+ƒg[ƒNƒ“
+@E{•¶Žš—ñ}ƒo[ƒWƒ‡ƒ“{="1.0"}
+@E{•¶Žš—ñ}–¼•ûŽ®{="HMAC-SHA1"}
+@E{ƒg[ƒNƒ“}ƒRƒ“ƒVƒ…[ƒ}
+@E{•¶Žš—ñ}ƒŠƒNƒGƒXƒgƒg[ƒNƒ“URL
+@E{•¶Žš—ñ}ƒAƒNƒZƒXƒg[ƒNƒ“URL
+@E{•¶Žš—ñ}”FØURL
+@E{ƒg[ƒNƒ“}ƒŠƒNƒGƒXƒg
+@E{”ñŒöŠJ}Šî–{ƒpƒ‰ƒ[ƒ^¶¬({ƒnƒbƒVƒ…=?}PARAM‚©‚ç)`
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = PARAM
+@@ƒpƒ‰ƒ[ƒ^@woauth_consumer_keyx    = ƒRƒ“ƒVƒ…[ƒ}‚Ìƒg[ƒNƒ“ƒL[
+@@ƒpƒ‰ƒ[ƒ^@woauth_noncex           = GUID¶¬‚Ì11•¶Žš‰E•”•ª‚ð¬•¶Žš•ÏŠ·
+@@ƒpƒ‰ƒ[ƒ^@woauth_signature_methodx= –¼•ûŽ®
+@@ƒpƒ‰ƒ[ƒ^@woauth_timestampx       = UNIXŽžŠÔŽæ“¾
+@@ƒpƒ‰ƒ[ƒ^@woauth_versionx         = ƒo[ƒWƒ‡ƒ“
+@@_ = ƒpƒ‰ƒ[ƒ^
+@E{”ñŒöŠJ}ƒRƒ“ƒVƒ…[ƒ}ƒ`ƒFƒbƒN`
+@@‚à‚µƒRƒ“ƒVƒ…[ƒ}‚Ìƒg[ƒNƒ“ƒL[‚ª‹ó‚È‚ç‚Î
+@@@wƒRƒ“ƒVƒ…[ƒ}‚Ìƒg[ƒNƒ“ƒL[‚ª‹ó‚Å‚·Bx‚ÅƒGƒ‰[”­¶
+@@‚à‚µƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg‚ª‹ó‚È‚ç‚Î
+@@@wƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg‚ª‹ó‚Å‚·Bx‚ÅƒGƒ‰[”­¶
+@EHTTPƒŠƒNƒGƒXƒg({•¶Žš—ñ}URL‚Ö{ƒnƒbƒVƒ…}PARAM‚Å)`
+@@ƒGƒ‰[ŠÄŽ‹
+@@@URL&w?x&(PARAM‚ÌURLƒpƒ‰ƒ[ƒ^•ÏŠ·)‚©‚çHTTPƒf[ƒ^Žæ“¾
+@@ƒGƒ‰[‚È‚ç‚Î
+@@@wHTTPƒŠƒNƒGƒXƒg‚ÉŽ¸”sBƒpƒ‰ƒ[ƒ^‚ÌŽw’è‚ªŠÔˆá‚Á‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·Bx‚ÅƒGƒ‰[”­¶
+@EPOST({•¶Žš—ñ}URL‚Ö{ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@ƒRƒ“ƒVƒ…[ƒ}ƒ`ƒFƒbƒN
+@@Œ®‚Æ‚Í•¶Žš—ñ = (ƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg)&w&x&ƒV[ƒNƒŒƒbƒg
+@@Šî–{ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = Šî–{ƒpƒ‰ƒ[ƒ^¶¬
+@@Šî–{ƒpƒ‰ƒ[ƒ^@woauth_tokenx= ƒg[ƒNƒ“ƒL[
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ…Bƒpƒ‰ƒ[ƒ^‚ÉŠî–{ƒpƒ‰ƒ[ƒ^‚ðƒf[ƒ^ƒRƒs[
+@@–¼‚Æ‚Í•¶Žš—ñ = wPOST&x&(URL‚ðURLƒGƒ“ƒR[ƒh)&w&x
+@@PARAM‚ÌƒnƒbƒVƒ…ƒL[—ñ‹“‚µ‚Ä”½•œAƒpƒ‰ƒ[ƒ^@‘ÎÛ = PARAM@‘ÎÛ
+@@ƒpƒ‰ƒ[ƒ^‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·‚ðURLƒGƒ“ƒR[ƒh‚ð–¼‚É’Ç‰Á
+@@Šî–{ƒpƒ‰ƒ[ƒ^@woauth_signaturex = Œ®‚Å–¼‚Ì”ñŒöŠJ–¼¶¬‚ðURLƒGƒ“ƒR[ƒh
+@@HEAD‚Æ‚Í•¶Žš—ñ = Šî–{ƒpƒ‰ƒ[ƒ^‚©‚çƒwƒbƒ_¶¬
+@@HEAD‚É"{\13}{\10}" & `Content-Type: application/x-www-form-urlencoded` & "{\13}{\10}"‚ð’Ç‰Á
+@@BODY‚Æ‚Í•¶Žš—ñ = PARAM‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·
+@@‚»‚ê‚Í‹óBHEAD‚ÆBODY‚ðURL‚ÖHTTPƒ|ƒXƒg
+@EGET({•¶Žš—ñ}URL‚Ö{ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@ƒRƒ“ƒVƒ…[ƒ}ƒ`ƒFƒbƒN
+@@Œ®‚Æ‚Í•¶Žš—ñ = (ƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg)&w&x&ƒV[ƒNƒŒƒbƒg
+@@Šî–{ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = Šî–{ƒpƒ‰ƒ[ƒ^¶¬
+@@Šî–{ƒpƒ‰ƒ[ƒ^@woauth_tokenx= ƒg[ƒNƒ“ƒL[
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ…Bƒpƒ‰ƒ[ƒ^‚ÉŠî–{ƒpƒ‰ƒ[ƒ^‚ðƒf[ƒ^ƒRƒs[
+@@–¼‚Æ‚Í•¶Žš—ñ = wGET&x&(URL‚ðURLƒGƒ“ƒR[ƒh)&w&x
+@@PARAM‚ÌƒnƒbƒVƒ…ƒL[—ñ‹“‚µ‚Ä”½•œAƒpƒ‰ƒ[ƒ^@‘ÎÛ = PARAM@‘ÎÛ
+@@ƒpƒ‰ƒ[ƒ^‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·‚ðURLƒGƒ“ƒR[ƒh‚ð–¼‚É’Ç‰Á
+@@Šî–{ƒpƒ‰ƒ[ƒ^@woauth_signaturex = Œ®‚Å–¼‚Ì”ñŒöŠJ–¼¶¬‚ðURLƒGƒ“ƒR[ƒh
+@@HEAD‚Æ‚Í•¶Žš—ñ = Šî–{ƒpƒ‰ƒ[ƒ^‚©‚çƒwƒbƒ_¶¬
+@@‚à‚µPARAM‚ÌƒnƒbƒVƒ…ƒL[—ñ‹“‚Ì—v‘f”‚ª0‚Å‚È‚¯‚ê‚Î
+@@@URL‚Éw?x&(PARAM‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·)‚ð’Ç‰Á
+@@‚»‚ê‚Í‹óBHEAD‚ðURL‚ÖHTTPƒQƒbƒg
+@EƒŠƒNƒGƒXƒgƒg[ƒNƒ“Žæ“¾ˆ—`
+@@ƒRƒ“ƒVƒ…[ƒ}ƒ`ƒFƒbƒN
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = Šî–{ƒpƒ‰ƒ[ƒ^¶¬
+@@ƒpƒ‰ƒ[ƒ^@woauth_callbackx         = "oob" //‚±‚ê‚Â‚¯‚È‚¢‚ÆPINƒR[ƒh“ü—Í‰æ–Ê‚É•ÏˆÙ‚µ‚È‚­‚È‚Á‚Ä‚µ‚Ü‚Á‚½
+@@Œ®‚Æ‚Í•¶Žš—ñ   = (ƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg)&w&x
+@@–¼‚Æ‚Í•¶Žš—ñ = wGET&x&(ƒŠƒNƒGƒXƒgƒg[ƒNƒ“URL‚ðURLƒGƒ“ƒR[ƒh)&w&x
+@@ƒpƒ‰ƒ[ƒ^‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·‚ðURLƒGƒ“ƒR[ƒh‚ð–¼‚É’Ç‰Á
+@@ƒpƒ‰ƒ[ƒ^@woauth_signaturex = Œ®‚Å–¼‚Ì”ñŒöŠJ–¼¶¬
+@@ƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê‚Æ‚ÍƒnƒbƒVƒ…
+@@ƒŠƒNƒGƒXƒgƒg[ƒNƒ“URL‚Öƒpƒ‰ƒ[ƒ^‚ÅHTTPƒŠƒNƒGƒXƒg
+@@ƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê = ‚»‚ê‚Ìw&x‚ð‰üs‚É’u‚«Š·‚¦‚ÄƒnƒbƒVƒ…•ÏŠ·
+@@‚à‚µƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê@`oauth_callback_confirmed`‚ª`true`‚Å‚È‚¯‚ê‚Î
+@@@wƒŠƒNƒGƒXƒgƒg[ƒNƒ“‚ÌŽæ“¾‚ÉŽ¸”sBƒpƒ‰ƒ[ƒ^‚ÌŽw’è‚ªŠÔˆá‚Á‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·Bx‚ÅƒGƒ‰[”­¶
+@@ƒŠƒNƒGƒXƒg‚Ìƒg[ƒNƒ“ƒL[ = ƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê@`oauth_token`
+@@ƒŠƒNƒGƒXƒg‚ÌƒV[ƒNƒŒƒbƒg = ƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê@`oauth_token_secret`
+@@_ = ƒŠƒNƒGƒXƒgƒg[ƒNƒ“Œ‹‰Ê
+@E”FØURLŽæ“¾`
+@@”FØURL&w?oauth_token=x&(ƒŠƒNƒGƒXƒg‚Ìƒg[ƒNƒ“ƒL[)‚ð–ß‚·
+@EƒAƒNƒZƒXƒg[ƒNƒ“Žæ“¾ˆ—({•¶Žš—ñ}ˆÃØ”Ô†‚Å)`
+@@ƒRƒ“ƒVƒ…[ƒ}ƒ`ƒFƒbƒN
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = Šî–{ƒpƒ‰ƒ[ƒ^¶¬
+@@ƒpƒ‰ƒ[ƒ^@woauth_tokenx    = ƒŠƒNƒGƒXƒg‚Ìƒg[ƒNƒ“ƒL[
+@@ƒpƒ‰ƒ[ƒ^@woauth_verifierx = ˆÃØ”Ô†
+@@Œ®‚Æ‚Í•¶Žš—ñ   = (ƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg)&w&x&(ƒŠƒNƒGƒXƒg‚ÌƒV[ƒNƒŒƒbƒg)
+@@–¼‚Æ‚Í•¶Žš—ñ = wGET&x&(ƒAƒNƒZƒXƒg[ƒNƒ“URL‚ðURLƒGƒ“ƒR[ƒh)&w&x
+@@ƒpƒ‰ƒ[ƒ^‚ðURLƒpƒ‰ƒ[ƒ^•ÏŠ·‚ðURLƒGƒ“ƒR[ƒh‚ð–¼‚É’Ç‰Á
+@@ƒpƒ‰ƒ[ƒ^@woauth_signaturex = Œ®‚Å–¼‚Ì”ñŒöŠJ–¼¶¬
+@@ƒAƒNƒZƒXƒg[ƒNƒ“Œ‹‰Ê‚Æ‚ÍƒnƒbƒVƒ…
+@@ƒAƒNƒZƒXƒg[ƒNƒ“URL‚Öƒpƒ‰ƒ[ƒ^‚ÅHTTPƒŠƒNƒGƒXƒg
+@@ƒAƒNƒZƒXƒg[ƒNƒ“Œ‹‰Ê = ‚»‚ê‚Ìw&x‚ð‰üs‚É’u‚«Š·‚¦‚ÄƒnƒbƒVƒ…•ÏŠ·
+@@ƒg[ƒNƒ“ƒL[ = ƒAƒNƒZƒXƒg[ƒNƒ“Œ‹‰Ê@`oauth_token`
+@@ƒV[ƒNƒŒƒbƒg = ƒAƒNƒZƒXƒg[ƒNƒ“Œ‹‰Ê@`oauth_token_secret`
+@@_ = ƒAƒNƒZƒXƒg[ƒNƒ“Œ‹‰Ê
+@E{”ñŒöŠJ}”ñŒöŠJ–¼¶¬(KEY‚ÅSTR‚Ì)`
+@@Œ®‚Æ‚Í•¶Žš—ñ
+@@Œ®‚É64‚ðŠm•Û
+@@Œ® = KEY
+@@Œ®‚ÅSTR‚ÌHMACSHA1Žæ“¾
+@@‚»‚ê‚ðBASE64ƒGƒ“ƒR[ƒh
+@E{”ñŒöŠJ}ƒwƒbƒ_¶¬({ƒnƒbƒVƒ…}PARAM‚©‚ç)`
+@@Œ‹‰Ê‚Æ‚Í•¶Žš—ñ = wAuthorization: OAuth x
+@@woauth_nonce,oauth_timestamp,oauth_consumer_key,oauth_signature_method,oauth_version,oauth_token,oauth_signaturex‚ðA
+@@w,x‚Å‹æØ‚Á‚Ä”½•œ
+@@@Œ‹‰Ê‚É‘ÎÛ&w="x&(PARAM@‘ÎÛ)&w", x‚ð’Ç‰Á
+@@Œ‹‰Ê‚©‚ç2•¶Žš‰E’[íœ
+@@_ = Œ‹‰Ê
+@EURLƒpƒ‰ƒ[ƒ^•ÏŠ·({ƒnƒbƒVƒ…}PARAM‚ð|PARAM‚Ì)`
+@@Œ‹‰Ê‚Æ‚Í•¶Žš—ñ
+@@KEYS‚Æ‚Í”z—ñ=PARAM‚ÌƒnƒbƒVƒ…ƒL[—ñ‹“
+@@KEYS‚ð”z—ñƒ\[ƒg
+@@KEYS‚ð”½•œ
+@@@Œ‹‰Ê‚É‘ÎÛ&w=x&(PARAM@‘ÎÛ‚ðƒpƒ‰ƒ[ƒ^ƒGƒ“ƒR[ƒh)&w&x‚ð’Ç‰Á
+@@Œ‹‰Ê‚©‚ç1•¶Žš‰E’[íœ
+@E{”ñŒöŠJ}ƒpƒ‰ƒ[ƒ^ƒGƒ“ƒR[ƒh({•¶Žš—ñ}S‚ð)`
+@@S‚ðUTF8N•ÏŠ·‚ðURLƒGƒ“ƒR[ƒh‚Ìw+x‚ðw%20x‚É’uŠ·
 
 
 
@@ -1097,242 +1093,242 @@ TWIã®ãƒ†ã‚­ã‚¹ãƒˆã¯ã€ŒTwitterèªè¨¼ã€
 
 # Cf. http://apiwiki.twitter.com/Twitter-API-Documentation
 
-â– Nakotter
-ã€€ãƒ»{æ•°å€¤}ãƒãƒ¼ã‚¸ãƒ§ãƒ³{=0.43}
-ã€€ãƒ»{æ–‡å­—åˆ—}APIURL{="https://api.twitter.com/1.1/"}
-ã€€ãƒ»{æ–‡å­—åˆ—}ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ{=".json"}
-ã€€ãƒ»{OAuth}oauth
-ã€€ãƒ»ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†
-ã€€ãƒ»ãƒ›ãƒ¼ãƒ TLå–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/home_timelineã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ¦ãƒ¼ã‚¶TLå–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§{æ–‡å­—åˆ—}IDNAMEã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/user_timelineã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = PARAM
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€URLã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»è¿”ä¿¡å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€PARAMã§è¿”ä¿¡ä¸€è¦§å–å¾—
-ã€€ãƒ»è¿”ä¿¡ä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/mentions_timelineã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒªãƒ„ã‚¤ãƒ¼ãƒˆä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/retweets_of_meã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ã¤ã¶ã‚„ãå–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§{æ–‡å­—åˆ—}STATUS_IDã‚’|STATUS_IDã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/show/ã€ & STATUS_ID & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ã¤ã¶ã‚„ã({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§{æ–‡å­—åˆ—}STRã¨)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/updateã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥ = PARAM
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@`status` = STR
-ã€€ã€€URLã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ã¤ã¶ã‚„ãå‰Šé™¤({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§{æ–‡å­—åˆ—}STATUS_IDã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/destroy/ã€ & STATUS_ID & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒªãƒ„ã‚¤ãƒ¼ãƒˆ({æ–‡å­—åˆ—}STATUS_IDã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/retweet/ã€ & STATUS_ID & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒªãƒ„ã‚¤ãƒ¼ãƒˆã—ãŸãƒ¦ãƒ¼ã‚¶ä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§{æ–‡å­—åˆ—}STATUS_IDã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žstatuses/retweets/ã€ & STATUS_ID & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ¦ãƒ¼ã‚¶åˆ—æŒ™({æ–‡å­—åˆ—}SCREEN_NAMESã§|SCREEN_NAMESã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žusers/lookupã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€ã‚‚ã—SCREEN_NAMESã®å¤‰æ•°åž‹ç¢ºèªãŒ`é…åˆ—`ãªã‚‰ã°
-ã€€ã€€ã€€SCREEN_NAMES = SCREEN_NAMESã‚’`,`ã§é…åˆ—çµåˆ
-ã€€ã€€PARAM@`screen_name` = SCREEN_NAMES
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»IDãƒ¦ãƒ¼ã‚¶åˆ—æŒ™({æ–‡å­—åˆ—}USER_IDSã§|USER_IDSã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žusers/lookupã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€ã‚‚ã—USER_IDSã®å¤‰æ•°åž‹ç¢ºèªãŒ`é…åˆ—`ãªã‚‰ã°
-ã€€ã€€ã€€USER_IDS = USER_IDSã‚’`,`ã§é…åˆ—çµåˆ
-ã€€ã€€PARAM@`user_id` = USER_IDS
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»å‹é”ä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfriends/idsã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ•ã‚©ãƒ­ãƒ¯ãƒ¼ä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfollowers/idsã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»å—ä¿¡DMä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Ždirect_messagesã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»é€ä¿¡DMä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Ždirect_messages/sentã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»DMé€ä¿¡({æ–‡å­—åˆ—}IDNAMEã¸{æ–‡å­—åˆ—}STRã¨|IDNAMEã«STRã®|STRã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Ždirect_messages/newã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€PARAMã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€PARAM@`text` = STR
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»DMå‰Šé™¤({æ–‡å­—åˆ—}IDã®|IDã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Ždirect_messages/destroyã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€PARAM@`id` = ID
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ•ã‚©ãƒ­ãƒ¼({æ–‡å­—åˆ—}IDNAMEã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfriendships/createã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€PARAMã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒªãƒ ãƒ¼ãƒ–({æ–‡å­—åˆ—}IDNAMEã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfriendships/destroyã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€PARAMã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ•ã‚©ãƒ­ãƒ¼é–¢ä¿‚å–å¾—({æ–‡å­—åˆ—}SOURCE_IDNAMEã¨{æ–‡å­—åˆ—}TARGET_IDNAMEã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfriendships/showã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥ã€‚
-ã€€ã€€PARAMã«SOURCE_IDNAMEã‚’`source_`ã¸IDNAMEè¨­å®š
-ã€€ã€€PARAMã«TARGET_IDNAMEã‚’`target_`ã¸IDNAMEè¨­å®š
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãµãã¼ã‚Šä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfavorites/listã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãµãã¼ã‚‹({æ–‡å­—åˆ—}STATUS_IDã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfavorites/createã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€PARAM@`id` = STATUS_ID
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãµãã¼ã‚Šå‰Šé™¤({æ–‡å­—åˆ—}STATUS_IDã‚’|STATUS_IDã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žfavorites/destroyã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€PARAM@`id` = STATUS_ID
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ–ãƒ­ãƒƒã‚¯({æ–‡å­—åˆ—}IDNAMEã‚’)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žblocks/createã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€PARAMã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ–ãƒ­ãƒƒã‚¯è§£é™¤({æ–‡å­—åˆ—}IDNAMEã‚’|IDNAMEã®)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žblocks/destroyã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€PARAMã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€PARAMã«IDNAMEã‚’IDNAMEè¨­å®š
-ã€€ã€€URLã¸PARAMã§oauth.POST
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»ãƒ–ãƒ­ãƒƒã‚¯ãƒ¦ãƒ¼ã‚¶ä¸€è¦§å–å¾—({ãƒãƒƒã‚·ãƒ¥=?}PARAMã§)ï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žblocks/listã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸PARAMã§oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»APIç¢ºèªï½ž
-ã€€ã€€URLã¨ã¯æ–‡å­—åˆ— = APIURL & ã€Žhelp/tosã€ & ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
-ã€€ã€€URLã¸oauth.GET
-ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã€‚
-ã€€ãƒ»è¿”ä¿¡ã™ã‚‹({æ–‡å­—åˆ—}STRã¨{æ–‡å­—åˆ—}STATUS_IDã«|STATUS_IDã¸)ï½ž
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¨ã¯ãƒãƒƒã‚·ãƒ¥
-ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿@`in_reply_to_status_id` = STATUS_ID
-ã€€ã€€STRã¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§ã¤ã¶ã‚„ã
-ã€€ãƒ»èªè¨¼ï½ž
-ã€€ã€€oauthã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³å–å¾—å‡¦ç†
-ã€€ã€€oauthã®èªè¨¼URLå–å¾—ã—ã¦ã‚³ãƒ”ãƒ¼ã—ã¦èµ·å‹•
-ã€€ã€€3ç§’å¾…ã¤ã€‚
-ã€€ã€€TEMPã¨ã¯æ•´æ•° = ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æ•°å€¤å¤‰æ›
-ã€€ã€€ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æ•°å€¤å¤‰æ›ã¯ã‚ªãƒ•
-ã€€ã€€ã€Žæš—è¨¼ç•ªå·ã¯ï¼Ÿã€ã¨å°‹ã­ã‚‹
-ã€€ã€€oauthã‹ã‚‰ãã‚Œã§ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—å‡¦ç†
-ã€€ã€€ãƒ€ã‚¤ã‚¢ãƒ­ã‚°æ•°å€¤å¤‰æ› = TEMP
-ã€€ãƒ»ä½œã‚‹ï½ž
-ã€€ã€€# Twitter OAuth API
-ã€€ã€€oauthã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒˆãƒ¼ã‚¯ãƒ³URL      = ã€Žhttps://api.twitter.com/oauth/request_tokenã€
-ã€€ã€€oauthã®ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³URL        = ã€Žhttps://api.twitter.com/oauth/access_tokenã€
-ã€€ã€€oauthã®èªè¨¼URL                    = ã€Žhttps://api.twitter.com/oauth/authorizeã€
-ã€€ã€€# Nakotter ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒž
-ã€€ã€€oauthã®ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚­ãƒ¼ = ã€Žã€
-ã€€ã€€oauthã®ã‚³ãƒ³ã‚·ãƒ¥ãƒ¼ãƒžã®ã‚·ãƒ¼ã‚¯ãƒ¬ãƒƒãƒˆ = ã€Žã€
-ã€€ã€€# HTTP Response ã®å‡¦ç†ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯ JSON æƒ³å®š
-ã€€ã€€ã‚‚ã—ãƒŠãƒ‡ã‚·ã‚³ãƒãƒ¼ã‚¸ãƒ§ãƒ³â‰¦1.5329ãªã‚‰ã°
-ã€€ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã¯
-ã€€ã€€ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹éƒ¨åˆ†
-ã€€ã€€ã€€ã€€JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_nako_v_1_5329
-ã€€ã€€é•ãˆã°ã€ã‚‚ã—ãƒŠãƒ‡ã‚·ã‚³ãƒãƒ¼ã‚¸ãƒ§ãƒ³â‰§1.533ãªã‚‰ã°
-ã€€ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã¯
-ã€€ã€€ã€€ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹éƒ¨åˆ†
-ã€€ã€€ã€€ã€€JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_nako_v_1_533
-ã€€ã€€#é•ãˆã°
-ã€€ã€€#ã€€ãƒ¬ã‚¹ãƒãƒ³ã‚¹å‡¦ç†ã¯ï½žãƒ¬ã‚¹ãƒãƒ³ã‚¹éƒ¨åˆ†ã‚’JSONãƒ‡ã‚³ãƒ¼ãƒ‰
-ã€€ãƒ»IDNAMEè¨­å®š({å‚ç…§æ¸¡ã— ãƒãƒƒã‚·ãƒ¥}PARAMã«{æ–‡å­—åˆ—}IDNAMEã‚’{æ–‡å­—åˆ—=``}PREFIXã¸)ï½ž
-ã€€ã€€ã‚‚ã—ã€IDNAMEãŒ`^[0-9]+$`ã«æ­£è¦è¡¨ç¾ä¸€è‡´ãªã‚‰ã°ã€
-ã€€ã€€ã€€PARAM@"{PREFIX}user_id" = IDNAME
-ã€€ã€€é•ãˆã°ã€
-ã€€ã€€ã€€PARAM@"{PREFIX}screen_name" = IDNAME
+¡Nakotter
+@E{”’l}ƒo[ƒWƒ‡ƒ“{=0.43}
+@E{•¶Žš—ñ}APIURL{="https://api.twitter.com/1.1/"}
+@E{•¶Žš—ñ}ƒtƒH[ƒ}ƒbƒg{=".json"}
+@E{OAuth}oauth
+@EƒŒƒXƒ|ƒ“ƒXˆ—
+@Eƒz[ƒ€TLŽæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/home_timelinex & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@Eƒ†[ƒUTLŽæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å{•¶Žš—ñ}IDNAME‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/user_timelinex & ƒtƒH[ƒ}ƒbƒg
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = PARAM
+@@ƒpƒ‰ƒ[ƒ^‚ÉIDNAME‚ðIDNAMEÝ’è
+@@URL‚Öƒpƒ‰ƒ[ƒ^‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E•ÔMŽæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@PARAM‚Å•ÔMˆê——Žæ“¾
+@E•ÔMˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/mentions_timelinex & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒŠƒcƒC[ƒgˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/retweets_of_mex & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Â‚Ô‚â‚«Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å{•¶Žš—ñ}STATUS_ID‚ð|STATUS_ID‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/show/x & STATUS_ID & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Â‚Ô‚â‚­({ƒnƒbƒVƒ…=?}PARAM‚Å{•¶Žš—ñ}STR‚Æ)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/updatex & ƒtƒH[ƒ}ƒbƒg
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ… = PARAM
+@@ƒpƒ‰ƒ[ƒ^@`status` = STR
+@@URL‚Öƒpƒ‰ƒ[ƒ^‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Â‚Ô‚â‚«íœ({ƒnƒbƒVƒ…=?}PARAM‚Å{•¶Žš—ñ}STATUS_ID‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/destroy/x & STATUS_ID & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒŠƒcƒC[ƒg({•¶Žš—ñ}STATUS_ID‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/retweet/x & STATUS_ID & ƒtƒH[ƒ}ƒbƒg
+@@URL‚Öoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒŠƒcƒC[ƒg‚µ‚½ƒ†[ƒUˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å{•¶Žš—ñ}STATUS_ID‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wstatuses/retweets/x & STATUS_ID & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@Eƒ†[ƒU—ñ‹“({•¶Žš—ñ}SCREEN_NAMES‚Å|SCREEN_NAMES‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wusers/lookupx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@‚à‚µSCREEN_NAMES‚Ì•Ï”Œ^Šm”F‚ª`”z—ñ`‚È‚ç‚Î
+@@@SCREEN_NAMES = SCREEN_NAMES‚ð`,`‚Å”z—ñŒ‹‡
+@@PARAM@`screen_name` = SCREEN_NAMES
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EIDƒ†[ƒU—ñ‹“({•¶Žš—ñ}USER_IDS‚Å|USER_IDS‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wusers/lookupx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@‚à‚µUSER_IDS‚Ì•Ï”Œ^Šm”F‚ª`”z—ñ`‚È‚ç‚Î
+@@@USER_IDS = USER_IDS‚ð`,`‚Å”z—ñŒ‹‡
+@@PARAM@`user_id` = USER_IDS
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E—F’Bˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfriends/idsx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒtƒHƒƒ[ˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfollowers/idsx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EŽóMDMˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wdirect_messagesx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‘—MDMˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wdirect_messages/sentx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EDM‘—M({•¶Žš—ñ}IDNAME‚Ö{•¶Žš—ñ}STR‚Æ|IDNAME‚ÉSTR‚Ì|STR‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wdirect_messages/newx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@PARAM‚ÉIDNAME‚ðIDNAMEÝ’è
+@@PARAM@`text` = STR
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EDMíœ({•¶Žš—ñ}ID‚Ì|ID‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wdirect_messages/destroyx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…
+@@PARAM@`id` = ID
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒtƒHƒ[({•¶Žš—ñ}IDNAME‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfriendships/createx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@PARAM‚ÉIDNAME‚ðIDNAMEÝ’è
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒŠƒ€[ƒu({•¶Žš—ñ}IDNAME‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfriendships/destroyx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@PARAM‚ÉIDNAME‚ðIDNAMEÝ’è
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒtƒHƒ[ŠÖŒWŽæ“¾({•¶Žš—ñ}SOURCE_IDNAME‚Æ{•¶Žš—ñ}TARGET_IDNAME‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfriendships/showx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…B
+@@PARAM‚ÉSOURCE_IDNAME‚ð`source_`‚ÖIDNAMEÝ’è
+@@PARAM‚ÉTARGET_IDNAME‚ð`target_`‚ÖIDNAMEÝ’è
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Ó‚Ÿ‚Ú‚èˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfavorites/listx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Ó‚Ÿ‚Ú‚é({•¶Žš—ñ}STATUS_ID‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfavorites/createx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…
+@@PARAM@`id` = STATUS_ID
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E‚Ó‚Ÿ‚Ú‚èíœ({•¶Žš—ñ}STATUS_ID‚ð|STATUS_ID‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wfavorites/destroyx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…
+@@PARAM@`id` = STATUS_ID
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒuƒƒbƒN({•¶Žš—ñ}IDNAME‚ð)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wblocks/createx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…
+@@PARAM‚ÉIDNAME‚ðIDNAMEÝ’è
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒuƒƒbƒN‰ðœ({•¶Žš—ñ}IDNAME‚ð|IDNAME‚Ì)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wblocks/destroyx & ƒtƒH[ƒ}ƒbƒg
+@@PARAM‚Æ‚ÍƒnƒbƒVƒ…
+@@PARAM‚ÉIDNAME‚ðIDNAMEÝ’è
+@@URL‚ÖPARAM‚Åoauth.POST
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EƒuƒƒbƒNƒ†[ƒUˆê——Žæ“¾({ƒnƒbƒVƒ…=?}PARAM‚Å)`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & wblocks/listx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚ÖPARAM‚Åoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@EAPIŠm”F`
+@@URL‚Æ‚Í•¶Žš—ñ = APIURL & whelp/tosx & ƒtƒH[ƒ}ƒbƒg
+@@URL‚Öoauth.GET
+@@ƒŒƒXƒ|ƒ“ƒXˆ—B
+@E•ÔM‚·‚é({•¶Žš—ñ}STR‚Æ{•¶Žš—ñ}STATUS_ID‚É|STATUS_ID‚Ö)`
+@@ƒpƒ‰ƒ[ƒ^‚Æ‚ÍƒnƒbƒVƒ…
+@@ƒpƒ‰ƒ[ƒ^@`in_reply_to_status_id` = STATUS_ID
+@@STR‚Æƒpƒ‰ƒ[ƒ^‚Å‚Â‚Ô‚â‚­
+@E”FØ`
+@@oauth‚ÌƒŠƒNƒGƒXƒgƒg[ƒNƒ“Žæ“¾ˆ—
+@@oauth‚Ì”FØURLŽæ“¾‚µ‚ÄƒRƒs[‚µ‚Ä‹N“®
+@@3•b‘Ò‚ÂB
+@@TEMP‚Æ‚Í®” = ƒ_ƒCƒAƒƒO”’l•ÏŠ·
+@@ƒ_ƒCƒAƒƒO”’l•ÏŠ·‚ÍƒIƒt
+@@wˆÃØ”Ô†‚ÍHx‚Æq‚Ë‚é
+@@oauth‚©‚ç‚»‚ê‚ÅƒAƒNƒZƒXƒg[ƒNƒ“Žæ“¾ˆ—
+@@ƒ_ƒCƒAƒƒO”’l•ÏŠ· = TEMP
+@Eì‚é`
+@@# Twitter OAuth API
+@@oauth‚ÌƒŠƒNƒGƒXƒgƒg[ƒNƒ“URL      = whttps://api.twitter.com/oauth/request_tokenx
+@@oauth‚ÌƒAƒNƒZƒXƒg[ƒNƒ“URL        = whttps://api.twitter.com/oauth/access_tokenx
+@@oauth‚Ì”FØURL                    = whttps://api.twitter.com/oauth/authorizex
+@@# Nakotter ƒRƒ“ƒVƒ…[ƒ}
+@@oauth‚ÌƒRƒ“ƒVƒ…[ƒ}‚Ìƒg[ƒNƒ“ƒL[ = wx
+@@oauth‚ÌƒRƒ“ƒVƒ…[ƒ}‚ÌƒV[ƒNƒŒƒbƒg = wx
+@@# HTTP Response ‚Ìˆ—BƒfƒtƒHƒ‹ƒg‚Å‚Í JSON ‘z’è
+@@‚à‚µƒiƒfƒVƒRƒo[ƒWƒ‡ƒ“…1.5329‚È‚ç‚Î
+@@@ƒŒƒXƒ|ƒ“ƒXˆ—‚Í
+@@@@ƒŒƒXƒ|ƒ“ƒX•”•ª
+@@@@JSONƒf[ƒ^C³_nako_v_1_5329
+@@ˆá‚¦‚ÎA‚à‚µƒiƒfƒVƒRƒo[ƒWƒ‡ƒ“†1.533‚È‚ç‚Î
+@@@ƒŒƒXƒ|ƒ“ƒXˆ—‚Í
+@@@@ƒŒƒXƒ|ƒ“ƒX•”•ª
+@@@@JSONƒf[ƒ^C³_nako_v_1_533
+@@#ˆá‚¦‚Î
+@@#@ƒŒƒXƒ|ƒ“ƒXˆ—‚Í`ƒŒƒXƒ|ƒ“ƒX•”•ª‚ðJSONƒfƒR[ƒh
+@EIDNAMEÝ’è({ŽQÆ“n‚µ ƒnƒbƒVƒ…}PARAM‚É{•¶Žš—ñ}IDNAME‚ð{•¶Žš—ñ=``}PREFIX‚Ö)`
+@@‚à‚µAIDNAME‚ª`^[0-9]+$`‚É³‹K•\Œ»ˆê’v‚È‚ç‚ÎA
+@@@PARAM@"{PREFIX}user_id" = IDNAME
+@@ˆá‚¦‚ÎA
+@@@PARAM@"{PREFIX}screen_name" = IDNAME
 
-â—ãƒ¬ã‚¹ãƒãƒ³ã‚¹éƒ¨åˆ†
-ã€€ã€€STRã¨ã¯æ–‡å­—åˆ— = ãã‚Œ
-ã€€ã€€STRã®æ”¹è¡Œ&æ”¹è¡Œ&æ”¹è¡Œã¾ã§åˆ‡ã‚Šå–ã‚‹
-ã€€ã€€_ = STR
-â—JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_nako_v_1_5329
-ã€€ã€€JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_HOTFIX_201010
-ã€€ã€€ãã‚Œã®ã€Ž:nullã€ã‚’ã€Ž:""ã€ã«ç½®æ›ã®ã€Ž:(\d{11,})ã€ã‚’ã€Ž:"$1"ã€ã«æ­£è¦è¡¨ç¾ç½®æ›ã‚’JSONãƒ‡ã‚³ãƒ¼ãƒ‰
-â—JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_nako_v_1_533
-ã€€ã€€JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_HOTFIX_201010
-ã€€ã€€ãã‚Œã®ã€Ž:nullã€ã‚’ã€Ž:""ã€ã«ç½®æ›ã‚’JSONãƒ‡ã‚³ãƒ¼ãƒ‰
+œƒŒƒXƒ|ƒ“ƒX•”•ª
+@@STR‚Æ‚Í•¶Žš—ñ = ‚»‚ê
+@@STR‚Ì‰üs&‰üs&‰üs‚Ü‚ÅØ‚èŽæ‚é
+@@_ = STR
+œJSONƒf[ƒ^C³_nako_v_1_5329
+@@JSONƒf[ƒ^C³_HOTFIX_201010
+@@‚»‚ê‚Ìw:nullx‚ðw:""x‚É’uŠ·‚Ìw:(\d{11,})x‚ðw:"$1"x‚É³‹K•\Œ»’uŠ·‚ðJSONƒfƒR[ƒh
+œJSONƒf[ƒ^C³_nako_v_1_533
+@@JSONƒf[ƒ^C³_HOTFIX_201010
+@@‚»‚ê‚Ìw:nullx‚ðw:""x‚É’uŠ·‚ðJSONƒfƒR[ƒh
 
-UTF8å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«ã¨ã¯ãƒãƒƒã‚·ãƒ¥=ã€Ž\u003C=<
-\u003E=>ã€
+UTF8•ÏŠ·ƒe[ƒuƒ‹‚Æ‚ÍƒnƒbƒVƒ…=w\u003C=<
+\u003E=>x
 
-â—JSONãƒ‡ãƒ¼ã‚¿ä¿®æ­£_HOTFIX_201010
-ã€€JSONã¨ã¯æ–‡å­—åˆ—=ãã‚Œ
-ã€€UTF8å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒãƒƒã‚·ãƒ¥ã‚­ãƒ¼åˆ—æŒ™ã—ã¦åå¾©
-ã€€ã€€JSON=JSONã®å¯¾è±¡ã‚’UTF8å¤‰æ›ãƒ†ãƒ¼ãƒ–ãƒ«@å¯¾è±¡ã«ç½®æ›
-ã€€_=JSON
+œJSONƒf[ƒ^C³_HOTFIX_201010
+@JSON‚Æ‚Í•¶Žš—ñ=‚»‚ê
+@UTF8•ÏŠ·ƒe[ƒuƒ‹‚ÌƒnƒbƒVƒ…ƒL[—ñ‹“‚µ‚Ä”½•œ
+@@JSON=JSON‚Ì‘ÎÛ‚ðUTF8•ÏŠ·ƒe[ƒuƒ‹@‘ÎÛ‚É’uŠ·
+@_=JSON
 
-//å¤šé‡èµ·å‹•ã®ç¦æ­¢
-â—CreateMutex(sec,owner,{å‚ç…§æ¸¡ã—}neme) =DLL("kernel32.dll",
-ã€€"HANDLE CreateMutexA(
-LONG pSAttr,//0å›ºå®š
-BOOL fOwner,//æ‰€æœ‰è€…
-LPCTSTR sMutexName//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå
+//‘½d‹N“®‚Ì‹ÖŽ~
+œCreateMutex(sec,owner,{ŽQÆ“n‚µ}neme) =DLL("kernel32.dll",
+@"HANDLE CreateMutexA(
+LONG pSAttr,//0ŒÅ’è
+BOOL fOwner,//Š—LŽÒ
+LPCTSTR sMutexName//ƒIƒuƒWƒFƒNƒg–¼
 )")
-â—ReleaseMutex(hMutex) =DLL("kernel32.dll",
-ã€€"BOOL ReleaseMutex(
-HANDLE hMutex // ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã®ãƒãƒ³ãƒ‰ãƒ«
+œReleaseMutex(hMutex) =DLL("kernel32.dll",
+@"BOOL ReleaseMutex(
+HANDLE hMutex // ƒ~ƒ…[ƒeƒbƒNƒX‚Ìƒnƒ“ƒhƒ‹
 )")
-â—CloseHandle(hObject)=DLL("kernel32.dll",
-ã€€"BOOL CloseHandle(
-HANDLE hObject // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ³ãƒ‰ãƒ«
+œCloseHandle(hObject)=DLL("kernel32.dll",
+@"BOOL CloseHandle(
+HANDLE hObject // ƒIƒuƒWƒFƒNƒg‚Ìƒnƒ“ƒhƒ‹
 )")
-â—GetLastError()=DLL("kernel32.dll","DWORD GetLastError()")
-ã€€ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã¯CreateMutex(0,0,ãƒŸãƒ¥ãƒ¼ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰)
-ã€€GetLastError()
-ã€€ã‚‚ã—ãã‚ŒãŒ/*ERROR_ALREADY_EXISTS*/183ãªã‚‰ã°ã€å¤šé‡èµ·å‹•æ¤œçŸ¥å‡¦ç†ã€‚
-â—å¤šé‡èµ·å‹•æ¤œçŸ¥å‡¦ç†
-ã€€ã€Žæ—¢ã«èµ·å‹•ã—ã¦ã„ã¾ã™ã€ã¨ã„ã†ã€‚
-ã€€çµ‚ã‚ã‚Šã€‚
+œGetLastError()=DLL("kernel32.dll","DWORD GetLastError()")
+@ƒ~ƒ…[ƒeƒbƒNƒX‚ÍCreateMutex(0,0,ƒ~ƒ…[ƒL[ƒ[ƒh)
+@GetLastError()
+@‚à‚µ‚»‚ê‚ª/*ERROR_ALREADY_EXISTS*/183‚È‚ç‚ÎA‘½d‹N“®ŒŸ’mˆ—B
+œ‘½d‹N“®ŒŸ’mˆ—
+@wŠù‚É‹N“®‚µ‚Ä‚¢‚Ü‚·x‚Æ‚¢‚¤B
+@I‚í‚èB
 
-â—MessageBox(h,t,c,u) =DLL("user32.dll", "int MessageBoxA(
+œMessageBox(h,t,c,u) =DLL("user32.dll", "int MessageBoxA(
         HWND hWnd, // handle of owner window
         LPCTSTR lpText, // address of text in message box
         LPCTSTR lpCaption, // address of title of message box  
         UINT uType  // style of message box
     )")#"
     
-// INiã‚­ãƒ¼ã‚’å‰Šé™¤ã™ã‚‹
+// INiƒL[‚ðíœ‚·‚é
 // http://nako.ezpoppa.com/sample/inisetting
-â—INIè¨­å®š(ã‚»ã‚¯ã‚·ãƒ§ãƒ³å,ã‚­ãƒ¼å,æ–‡å­—åˆ—,ãƒ•ã‚¡ã‚¤ãƒ«å)=DLL("kernel32.dll","BOOL WritePrivateProfileStringA(LPCTSTR lpAppName,LPCTSTR lpKeyName,LPCTSTR lpString,LPCTSTR lpFileName)")
+œINIÝ’è(ƒZƒNƒVƒ‡ƒ“–¼,ƒL[–¼,•¶Žš—ñ,ƒtƒ@ƒCƒ‹–¼)=DLL("kernel32.dll","BOOL WritePrivateProfileStringA(LPCTSTR lpAppName,LPCTSTR lpKeyName,LPCTSTR lpString,LPCTSTR lpFileName)")
