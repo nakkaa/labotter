@@ -1,13 +1,13 @@
 // ラボ入退室記録アプリ らぼったあ
-// Version 1.14 (2022/02/22)
+// Version 1.2.0 (2022/03/05)
 // 開発者: nakkaa(としつーる)
 // 連絡先:tnakkaa[at]gmail.com //[at]を@へ置換
-//
-// ※らぼったあはNakotterを利用しています。
+
+!「nakotter.nako」を取り込む
 
 //定数
-VERSION=「1.14」//バージョン番号
-EDITION=「」//テスト版かどうか
+VERSION=「1.15.0」//バージョン番号
+IN_VERSION=「1.150」//内部バージョン
 WINDOW_TITLE=「らぼったあ」//ウィンドウのタイトル
 
 //文字列
@@ -55,6 +55,17 @@ SQLITE3自動変換=オン
 　閉じた時は～
 　　終了処理
 
+//メインメニュー
+『,f1,ファイル(&F)
+-,f2,設定(&S),,,設定ウィンドウ開処理
+-,f3,履歴(&H),,,履歴画面表示処理
+-,-
+-,f9,終了(&X),,,終了処理
+,h1,ヘルプ(&H)
+-,h2,使い方(&M),F1,,URL_HELPを起動
+-,-
+-,h3,バージョン情報(&A),,,「らぼったあ v1{~}{~}バージョン {VERSION} (Build {ナデシコバージョン}){~}{~}Copyright (C) 2016-2022 としつーる(nakkaa)」をいう』のメニュー一括作成
+
 //起動時に行う処理
 起動時処理
 
@@ -98,9 +109,7 @@ SQLITE3自動変換=オン
 　H=40
 　Y=150
 　クリックした時は～
-　　履歴ウィンドウを中央移動
-　　履歴描画処理
-　　履歴ウィンドウをモーダル表示
+　　履歴画面表示処理
 
 //設定ボタン
 設定とはボタン
@@ -113,23 +122,6 @@ SQLITE3自動変換=オン
 　ヒントは「Twitter連携やツイート内容の変更ができます」
 　クリックした時は～
 　　設定ウィンドウ開処理
-
-//バージョン情報を表示するラベル
-情報ラベルとはラベル
-これについて
-　X=10
-　Y=210
-　テキストは「バージョン {VERSION} {EDITION}」
-　
-VER_TLとはボタン
-これについて
-　Y=210
-　X=190
-　//文字書体は「メイリオ|10|下線」
-　テキストは「使い方(&M)」
-　ヒントは「オンラインヘルプを開きます」
-　クリックした時は～
-　　URL_HELPを起動
 
 //入退室の時刻を表示するラベル　
 入室情報とはラベル
@@ -483,14 +475,14 @@ VER_TLとはボタン
 ●設定保存処理
 　エラー監視
 　　修正開始日時=開始日付のテキスト&「 」&開始時のテキスト&「:」&開始分のテキスト&「:」&開始秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
-　エラーならば、「[エラー]{~}開始日時の値がおかしいめう。」という
+　エラーならば、「[エラー]{~}開始日時の値がおかしいです。」という
 　　戻る
 　もし、修正ID==LAST_IDならば、
 　　修正終了日時=「」
 　違えば、
 　　エラー監視
 　　　修正終了日時=終了日付のテキスト&「 」&終了時のテキスト&「:」&終了分のテキスト&「:」&終了秒のテキストを「yyyy-mm-dd hh:nn:ss」に日時形式変換
-　　エラーならば、「[エラー]{~}終了日時の値がおかしいめう。」という
+　　エラーならば、「[エラー]{~}終了日時の値がおかしいです。」という
 　　　戻る
 　「UPDATE ltt set start = '{修正開始日時}', end = '{修正終了日時}', memo = '{メモ欄のテキスト}' where id = {修正ID};」をSQLITE3実行
 　日時編集ウィンドウを閉じる
@@ -687,7 +679,7 @@ TWIのテキストは「Twitter認証」
 　　キー保存先を開いてTwiKeyへ代入
 　　プログラム側キー=TwiKey\0
 　　プログラム側シークレット=TwiKey\1
-　エラーならば、「[エラー]{~}key.txtが存在しないめう」という
+　エラーならば、「[エラー]{~}key.txtが存在しないです。」という
 　　終了処理
 　初期設定処理
 　もし、DB保存先が存在でなければ、
@@ -720,7 +712,7 @@ TWIのテキストは「Twitter認証」
 　エラー監視
 　　経過ダイアログはオフ
 　　「https://7ka.org/file/ltr/version.txt」からHTTPデータ取得して最新版情報へ代入
-　　もし、最新版情報\0>VERSIONならば、
+　　もし、最新版情報\0>IN_VERSIONならば、
 　　　MessageBox((母艦の、ハンドル),「らぼったあの新しいバージョンがあります。
 ダウンロードしますか？」,「らぼったあの更新」,$42044)。
 　　　もし、それが6/*はい*/ならば、最新版情報\1を起動
@@ -740,10 +732,10 @@ TWIのテキストは「Twitter認証」
 　　設定ハンドルで「カスタマイズ」の「履歴退室時名称」に履歴退室時名称をINI書く
 　　INI設定(「カスタマイズ」,「入室ボタン名」,空,設定保存先) //INIキーの削除
 　　INI設定(「カスタマイズ」,「退室ボタン名」,空,設定保存先) 
+　//配布URLをつぶやかないオプションを追加
 　もし、設定バージョン<1.13ならば、
 　　設定ハンドルで「カスタマイズ」の「宣伝フラグ」に「0」をINI書く
-　　設定ハンドルで「設定」の「VERSION」にVERSIONをINI書く
-　　「バージョンアップが完了しました。{~}{~}【新機能など】{~}軽微なバグ修正と、らぼったあの配布ページのURLを呟かない選択肢を追加しました。{~}{~}詳しい使い方についてはウィンドウ右下の『使い方』をクリックしてください。」という
+　設定ハンドルで「設定」の「VERSION」にIN_VERSIONをINI書く
 　設定ハンドルで「カスタマイズ」の「履歴入室時名称」をINI読んで履歴入室時名称へ代入
 　設定ハンドルで「カスタマイズ」の「履歴退室時名称」をINI読んで履歴退室時名称へ代入
 　設定ハンドルで「カスタマイズ」の「なう文」をINI読んでなう文へ代入
@@ -821,6 +813,11 @@ TWIのテキストは「Twitter認証」
 　設定ウィンドウを中央移動
 　設定情報描画処理
 　設定ウィンドウをモーダル表示
+
+●履歴画面表示処理
+　履歴ウィンドウを中央移動
+　履歴描画処理
+　履歴ウィンドウをモーダル表示
 
 ●DB検索処理
 　　検索抽出結果=「SELECT id AS "ID", start AS "{履歴入室時名称}", end AS "{履歴退室時名称}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "滞在時間",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
@@ -914,390 +911,6 @@ TWIのテキストは「Twitter認証」
 　　
 ●twi_nako_error_view
 　ステバーのテキストは「エラーが発生しました(Twitter認証に失敗)」
-　　
-# nakotter ver.0.43
-# http://www.undefin.net/nadesiko/nako/nakotter-ver.0.42.zip
-
-！変数宣言は必要
-
-●UNIX時間取得
-　今日&` `&今をUNIXTIME変換
-
-#resource http://nadesiko.g.hatena.ne.jp/white-ball/20100402/1270147724
-
-●HMACSHA1取得(秘密鍵で内容の)
-　Bとは整数=64。Lとは整数=20
-　＃秘密鍵の長さの調整
-　秘密鍵のバイト数
-　もしそれ＞Bならば
-　　秘密鍵からSHA1取得
-　　2で行揃え
-　　反復
-　　　INT(「$」＆対象)を秘密鍵の回数に「byte」でバイナリ設定＃ハッシュ関数の出力のバイナリ変換
-　　秘密鍵は秘密鍵のL バイト左部分
-　　秘密鍵のバイト数
-　もしそれ＜Bならば
-　　「{\0}」を(B-それ)だけリフレイン
-　　秘密鍵は秘密鍵&それ
-　
-　＃鍵から作る2つの文字列の準備
-　鍵Iとは文字列。鍵IにBを確保
-　鍵Oとは文字列。鍵OにBを確保
-　文字とは整数
-　B/4回
-　　秘密鍵の(回数-1)*4+1 を「DWORD」でバイナリ取得
-　　文字はそれ
-　　XOR(文字,$36363636)を鍵Iの(回数-1)*4+1 に「DWORD」でバイナリ設定
-　　XOR(文字,$5C5C5C5C)を鍵Oの(回数-1)*4+1 に「DWORD」でバイナリ設定
-　
-　＃ハッシュ関数の適用
-　経過とは文字列
-　経過にLを確保
-　
-　(鍵I＆内容)からSHA1取得
-　2で行揃え
-　反復
-　　INT(「$」＆対象)を経過の回数に「byte」でバイナリ設定＃ハッシュ関数の出力のバイナリ変換
-　
-　(鍵O＆経過)からSHA1取得
-　2で行揃え
-　反復
-　　INT(「$」＆対象)を経過の回数に「byte」でバイナリ設定＃ハッシュ関数の出力のバイナリ変換
-　
-　経過を戻す
-
-
-# hmacsha1.nako
-##############################
-
-
-■トークン
-　・{文字列}トークンキー
-　・{文字列}シークレット
-
-■OAuth　+トークン
-　・{文字列}バージョン{="1.0"}
-　・{文字列}署名方式{="HMAC-SHA1"}
-　・{トークン}コンシューマ
-　・{文字列}リクエストトークンURL
-　・{文字列}アクセストークンURL
-　・{文字列}認証URL
-　・{トークン}リクエスト
-　・{非公開}基本パラメータ生成({ハッシュ=?}PARAMから)～
-　　パラメータとはハッシュ = PARAM
-　　パラメータ@『oauth_consumer_key』    = コンシューマのトークンキー
-　　パラメータ@『oauth_nonce』           = GUID生成の11文字右部分を小文字変換
-　　パラメータ@『oauth_signature_method』= 署名方式
-　　パラメータ@『oauth_timestamp』       = UNIX時間取得
-　　パラメータ@『oauth_version』         = バージョン
-　　_ = パラメータ
-　・{非公開}コンシューマチェック～
-　　もしコンシューマのトークンキーが空ならば
-　　　『コンシューマのトークンキーが空です。』でエラー発生
-　　もしコンシューマのシークレットが空ならば
-　　　『コンシューマのシークレットが空です。』でエラー発生
-　・HTTPリクエスト({文字列}URLへ{ハッシュ}PARAMで)～
-　　エラー監視
-　　　URL&『?』&(PARAMのURLパラメータ変換)からHTTPデータ取得
-　　エラーならば
-　　　『HTTPリクエストに失敗。パラメータの指定が間違っている可能性があります。』でエラー発生
-　・POST({文字列}URLへ{ハッシュ=?}PARAMで)～
-　　コンシューマチェック
-　　鍵とは文字列 = (コンシューマのシークレット)&『&』&シークレット
-　　基本パラメータとはハッシュ = 基本パラメータ生成
-　　基本パラメータ@『oauth_token』= トークンキー
-　　パラメータとはハッシュ。パラメータに基本パラメータをデータコピー
-　　署名とは文字列 = 『POST&』&(URLをURLエンコード)&『&』
-　　PARAMのハッシュキー列挙して反復、パラメータ@対象 = PARAM@対象
-　　パラメータをURLパラメータ変換をURLエンコードを署名に追加
-　　基本パラメータ@『oauth_signature』 = 鍵で署名の非公開署名生成をURLエンコード
-　　HEADとは文字列 = 基本パラメータからヘッダ生成
-　　HEADに"{\13}{\10}" & `Content-Type: application/x-www-form-urlencoded` & "{\13}{\10}"を追加
-　　BODYとは文字列 = PARAMをURLパラメータ変換
-　　それは空。HEADとBODYをURLへHTTPポスト
-　・GET({文字列}URLへ{ハッシュ=?}PARAMで)～
-　　コンシューマチェック
-　　鍵とは文字列 = (コンシューマのシークレット)&『&』&シークレット
-　　基本パラメータとはハッシュ = 基本パラメータ生成
-　　基本パラメータ@『oauth_token』= トークンキー
-　　パラメータとはハッシュ。パラメータに基本パラメータをデータコピー
-　　署名とは文字列 = 『GET&』&(URLをURLエンコード)&『&』
-　　PARAMのハッシュキー列挙して反復、パラメータ@対象 = PARAM@対象
-　　パラメータをURLパラメータ変換をURLエンコードを署名に追加
-　　基本パラメータ@『oauth_signature』 = 鍵で署名の非公開署名生成をURLエンコード
-　　HEADとは文字列 = 基本パラメータからヘッダ生成
-　　もしPARAMのハッシュキー列挙の要素数が0でなければ
-　　　URLに『?』&(PARAMをURLパラメータ変換)を追加
-　　それは空。HEADをURLへHTTPゲット
-　・リクエストトークン取得処理～
-　　コンシューマチェック
-　　パラメータとはハッシュ = 基本パラメータ生成
-　　パラメータ@『oauth_callback』         = "oob" //これつけないとPINコード入力画面に変異しなくなってしまった
-　　鍵とは文字列   = (コンシューマのシークレット)&『&』
-　　署名とは文字列 = 『GET&』&(リクエストトークンURLをURLエンコード)&『&』
-　　パラメータをURLパラメータ変換をURLエンコードを署名に追加
-　　パラメータ@『oauth_signature』 = 鍵で署名の非公開署名生成
-　　リクエストトークン結果とはハッシュ
-　　リクエストトークンURLへパラメータでHTTPリクエスト
-　　リクエストトークン結果 = それの『&』を改行に置き換えてハッシュ変換
-　　もしリクエストトークン結果@`oauth_callback_confirmed`が`true`でなければ
-　　　『リクエストトークンの取得に失敗。パラメータの指定が間違っている可能性があります。』でエラー発生
-　　リクエストのトークンキー = リクエストトークン結果@`oauth_token`
-　　リクエストのシークレット = リクエストトークン結果@`oauth_token_secret`
-　　_ = リクエストトークン結果
-　・認証URL取得～
-　　認証URL&『?oauth_token=』&(リクエストのトークンキー)を戻す
-　・アクセストークン取得処理({文字列}暗証番号で)～
-　　コンシューマチェック
-　　パラメータとはハッシュ = 基本パラメータ生成
-　　パラメータ@『oauth_token』    = リクエストのトークンキー
-　　パラメータ@『oauth_verifier』 = 暗証番号
-　　鍵とは文字列   = (コンシューマのシークレット)&『&』&(リクエストのシークレット)
-　　署名とは文字列 = 『GET&』&(アクセストークンURLをURLエンコード)&『&』
-　　パラメータをURLパラメータ変換をURLエンコードを署名に追加
-　　パラメータ@『oauth_signature』 = 鍵で署名の非公開署名生成
-　　アクセストークン結果とはハッシュ
-　　アクセストークンURLへパラメータでHTTPリクエスト
-　　アクセストークン結果 = それの『&』を改行に置き換えてハッシュ変換
-　　トークンキー = アクセストークン結果@`oauth_token`
-　　シークレット = アクセストークン結果@`oauth_token_secret`
-　　_ = アクセストークン結果
-　・{非公開}非公開署名生成(KEYでSTRの)～
-　　鍵とは文字列
-　　鍵に64を確保
-　　鍵 = KEY
-　　鍵でSTRのHMACSHA1取得
-　　それをBASE64エンコード
-　・{非公開}ヘッダ生成({ハッシュ}PARAMから)～
-　　結果とは文字列 = 『Authorization: OAuth 』
-　　『oauth_nonce,oauth_timestamp,oauth_consumer_key,oauth_signature_method,oauth_version,oauth_token,oauth_signature』を、
-　　『,』で区切って反復
-　　　結果に対象&『="』&(PARAM@対象)&『", 』を追加
-　　結果から2文字右端削除
-　　_ = 結果
-　・URLパラメータ変換({ハッシュ}PARAMを|PARAMの)～
-　　結果とは文字列
-　　KEYSとは配列=PARAMのハッシュキー列挙
-　　KEYSを配列ソート
-　　KEYSを反復
-　　　結果に対象&『=』&(PARAM@対象をパラメータエンコード)&『&』を追加
-　　結果から1文字右端削除
-　・{非公開}パラメータエンコード({文字列}Sを)～
-　　SをUTF8N変換をURLエンコードの『+』を『%20』に置換
-
-
-
-# lib\oauth.nako
-##############################
-
-
-# Cf. http://apiwiki.twitter.com/Twitter-API-Documentation
-
-■Nakotter
-　・{数値}バージョン{=0.43}
-　・{文字列}APIURL{="https://api.twitter.com/1.1/"}
-　・{文字列}フォーマット{=".json"}
-　・{OAuth}oauth
-　・レスポンス処理
-　・ホームTL取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『statuses/home_timeline』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・ユーザTL取得({ハッシュ=?}PARAMで{文字列}IDNAMEの)～
-　　URLとは文字列 = APIURL & 『statuses/user_timeline』 & フォーマット
-　　パラメータとはハッシュ = PARAM
-　　パラメータにIDNAMEをIDNAME設定
-　　URLへパラメータでoauth.GET
-　　レスポンス処理。
-　・返信取得({ハッシュ=?}PARAMで)～
-　　PARAMで返信一覧取得
-　・返信一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『statuses/mentions_timeline』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・リツイート一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『statuses/retweets_of_me』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・つぶやき取得({ハッシュ=?}PARAMで{文字列}STATUS_IDを|STATUS_IDの)～
-　　URLとは文字列 = APIURL & 『statuses/show/』 & STATUS_ID & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・つぶやく({ハッシュ=?}PARAMで{文字列}STRと)～
-　　URLとは文字列 = APIURL & 『statuses/update』 & フォーマット
-　　パラメータとはハッシュ = PARAM
-　　パラメータ@`status` = STR
-　　URLへパラメータでoauth.POST
-　　レスポンス処理。
-　・つぶやき削除({ハッシュ=?}PARAMで{文字列}STATUS_IDの)～
-　　URLとは文字列 = APIURL & 『statuses/destroy/』 & STATUS_ID & フォーマット
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・リツイート({文字列}STATUS_IDを)～
-　　URLとは文字列 = APIURL & 『statuses/retweet/』 & STATUS_ID & フォーマット
-　　URLへoauth.POST
-　　レスポンス処理。
-　・リツイートしたユーザ一覧取得({ハッシュ=?}PARAMで{文字列}STATUS_IDを)～
-　　URLとは文字列 = APIURL & 『statuses/retweets/』 & STATUS_ID & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・ユーザ列挙({文字列}SCREEN_NAMESで|SCREEN_NAMESの)～
-　　URLとは文字列 = APIURL & 『users/lookup』 & フォーマット
-　　PARAMとはハッシュ。
-　　もしSCREEN_NAMESの変数型確認が`配列`ならば
-　　　SCREEN_NAMES = SCREEN_NAMESを`,`で配列結合
-　　PARAM@`screen_name` = SCREEN_NAMES
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・IDユーザ列挙({文字列}USER_IDSで|USER_IDSの)～
-　　URLとは文字列 = APIURL & 『users/lookup』 & フォーマット
-　　PARAMとはハッシュ。
-　　もしUSER_IDSの変数型確認が`配列`ならば
-　　　USER_IDS = USER_IDSを`,`で配列結合
-　　PARAM@`user_id` = USER_IDS
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・友達一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『friends/ids』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・フォロワー一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『followers/ids』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・受信DM一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『direct_messages』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・送信DM一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『direct_messages/sent』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・DM送信({文字列}IDNAMEへ{文字列}STRと|IDNAMEにSTRの|STRを)～
-　　URLとは文字列 = APIURL & 『direct_messages/new』 & フォーマット
-　　PARAMとはハッシュ。
-　　PARAMにIDNAMEをIDNAME設定
-　　PARAM@`text` = STR
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・DM削除({文字列}IDの|IDを)～
-　　URLとは文字列 = APIURL & 『direct_messages/destroy』 & フォーマット
-　　PARAMとはハッシュ
-　　PARAM@`id` = ID
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・フォロー({文字列}IDNAMEを)～
-　　URLとは文字列 = APIURL & 『friendships/create』 & フォーマット
-　　PARAMとはハッシュ。
-　　PARAMにIDNAMEをIDNAME設定
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・リムーブ({文字列}IDNAMEを)～
-　　URLとは文字列 = APIURL & 『friendships/destroy』 & フォーマット
-　　PARAMとはハッシュ。
-　　PARAMにIDNAMEをIDNAME設定
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・フォロー関係取得({文字列}SOURCE_IDNAMEと{文字列}TARGET_IDNAMEの)～
-　　URLとは文字列 = APIURL & 『friendships/show』 & フォーマット
-　　PARAMとはハッシュ。
-　　PARAMにSOURCE_IDNAMEを`source_`へIDNAME設定
-　　PARAMにTARGET_IDNAMEを`target_`へIDNAME設定
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・ふぁぼり一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『favorites/list』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・ふぁぼる({文字列}STATUS_IDを)～
-　　URLとは文字列 = APIURL & 『favorites/create』 & フォーマット
-　　PARAMとはハッシュ
-　　PARAM@`id` = STATUS_ID
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・ふぁぼり削除({文字列}STATUS_IDを|STATUS_IDの)～
-　　URLとは文字列 = APIURL & 『favorites/destroy』 & フォーマット
-　　PARAMとはハッシュ
-　　PARAM@`id` = STATUS_ID
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・ブロック({文字列}IDNAMEを)～
-　　URLとは文字列 = APIURL & 『blocks/create』 & フォーマット
-　　PARAMとはハッシュ
-　　PARAMにIDNAMEをIDNAME設定
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・ブロック解除({文字列}IDNAMEを|IDNAMEの)～
-　　URLとは文字列 = APIURL & 『blocks/destroy』 & フォーマット
-　　PARAMとはハッシュ
-　　PARAMにIDNAMEをIDNAME設定
-　　URLへPARAMでoauth.POST
-　　レスポンス処理。
-　・ブロックユーザ一覧取得({ハッシュ=?}PARAMで)～
-　　URLとは文字列 = APIURL & 『blocks/list』 & フォーマット
-　　URLへPARAMでoauth.GET
-　　レスポンス処理。
-　・API確認～
-　　URLとは文字列 = APIURL & 『help/tos』 & フォーマット
-　　URLへoauth.GET
-　　レスポンス処理。
-　・返信する({文字列}STRと{文字列}STATUS_IDに|STATUS_IDへ)～
-　　パラメータとはハッシュ
-　　パラメータ@`in_reply_to_status_id` = STATUS_ID
-　　STRとパラメータでつぶやく
-　・認証～
-　　oauthのリクエストトークン取得処理
-　　oauthの認証URL取得してコピーして起動
-　　3秒待つ。
-　　TEMPとは整数 = ダイアログ数値変換
-　　ダイアログ数値変換はオフ
-　　『暗証番号は？』と尋ねる
-　　oauthからそれでアクセストークン取得処理
-　　ダイアログ数値変換 = TEMP
-　・作る～
-　　# Twitter OAuth API
-　　oauthのリクエストトークンURL      = 『https://api.twitter.com/oauth/request_token』
-　　oauthのアクセストークンURL        = 『https://api.twitter.com/oauth/access_token』
-　　oauthの認証URL                    = 『https://api.twitter.com/oauth/authorize』
-　　# Nakotter コンシューマ
-　　oauthのコンシューマのトークンキー = 『』
-　　oauthのコンシューマのシークレット = 『』
-　　# HTTP Response の処理。デフォルトでは JSON 想定
-　　もしナデシコバージョン≦1.5329ならば
-　　　レスポンス処理は
-　　　　レスポンス部分
-　　　　JSONデータ修正_nako_v_1_5329
-　　違えば、もしナデシコバージョン≧1.533ならば
-　　　レスポンス処理は
-　　　　レスポンス部分
-　　　　JSONデータ修正_nako_v_1_533
-　　#違えば
-　　#　レスポンス処理は～レスポンス部分をJSONデコード
-　・IDNAME設定({参照渡し ハッシュ}PARAMに{文字列}IDNAMEを{文字列=``}PREFIXへ)～
-　　もし、IDNAMEが`^[0-9]+$`に正規表現一致ならば、
-　　　PARAM@"{PREFIX}user_id" = IDNAME
-　　違えば、
-　　　PARAM@"{PREFIX}screen_name" = IDNAME
-
-●レスポンス部分
-　　STRとは文字列 = それ
-　　STRの改行&改行&改行まで切り取る
-　　_ = STR
-●JSONデータ修正_nako_v_1_5329
-　　JSONデータ修正_HOTFIX_201010
-　　それの『:null』を『:""』に置換の『:(\d{11,})』を『:"$1"』に正規表現置換をJSONデコード
-●JSONデータ修正_nako_v_1_533
-　　JSONデータ修正_HOTFIX_201010
-　　それの『:null』を『:""』に置換をJSONデコード
-
-UTF8変換テーブルとはハッシュ=『\u003C=<
-\u003E=>』
-
-●JSONデータ修正_HOTFIX_201010
-　JSONとは文字列=それ
-　UTF8変換テーブルのハッシュキー列挙して反復
-　　JSON=JSONの対象をUTF8変換テーブル@対象に置換
-　_=JSON
 
 //多重起動の禁止
 ●CreateMutex(sec,owner,{参照渡し}neme) =DLL("kernel32.dll",
@@ -1306,18 +919,22 @@ LONG pSAttr,//0固定
 BOOL fOwner,//所有者
 LPCTSTR sMutexName//オブジェクト名
 )")
+
 ●ReleaseMutex(hMutex) =DLL("kernel32.dll",
 　"BOOL ReleaseMutex(
 HANDLE hMutex // ミューテックスのハンドル
 )")
+
 ●CloseHandle(hObject)=DLL("kernel32.dll",
 　"BOOL CloseHandle(
 HANDLE hObject // オブジェクトのハンドル
 )")
+
 ●GetLastError()=DLL("kernel32.dll","DWORD GetLastError()")
 　ミューテックスはCreateMutex(0,0,ミューキーワード)
 　GetLastError()
 　もしそれが/*ERROR_ALREADY_EXISTS*/183ならば、多重起動検知処理。
+
 ●多重起動検知処理
 　『既に起動しています』という。
 　終わり。
