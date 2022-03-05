@@ -1,0 +1,10 @@
+●MessageBox(h,t,c,u) =DLL("user32.dll", "int MessageBoxA(
+        HWND hWnd, // handle of owner window
+        LPCTSTR lpText, // address of text in message box
+        LPCTSTR lpCaption, // address of title of message box  
+        UINT uType  // style of message box
+    )")#"
+    
+// INiキーを削除する
+// http://nako.ezpoppa.com/sample/inisetting
+●INI設定(セクション名,キー名,文字列,ファイル名)=DLL("kernel32.dll","BOOL WritePrivateProfileStringA(LPCTSTR lpAppName,LPCTSTR lpKeyName,LPCTSTR lpString,LPCTSTR lpFileName)")
