@@ -1,6 +1,6 @@
 ―――――――――――――――――――――――――――――――――――――――
 【ソフト名】らぼったあ
-【開発者】nakkaa(としつーる)
+【開発者】nakkaa
 【種　別】フリーソフト
 【連絡先】tnakkaa@gmail.com
 【配布元】 https://7ka.org/software/labotter/

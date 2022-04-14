@@ -1,5 +1,5 @@
 // らぼったあ ラボ入退室記録アプリ
-// 開発者: nakkaa(としつーる)
+// 開発者: nakkaa
 // 連絡先:tnakkaa[at]gmail.com //[at]を@へ置換
 
 !「lib_sengen.nako」を取り込む
@@ -9,9 +9,9 @@
 !「lib_gui_history.nako」を取り込む
 
 //定数
-VERSION=「1.16.0」//バージョン番号
-IN_VERSION=「1.160」//内部バージョン
-WINDOW_TITLE=「らぼったあ v1」//ウィンドウのタイトル
+VERSION=「1.17.0」//バージョン番号
+IN_VERSION=「1.170」//内部バージョン
+WINDOW_TITLE=「らぼったあ v{VERSION}」//ウィンドウのタイトル
 
 //メインウィンドウの設定
 !母艦設計=『母艦の可視はオフ』
@@ -34,7 +34,7 @@ WINDOW_TITLE=「らぼったあ v1」//ウィンドウのタイトル
 ,h1,ヘルプ(&H)
 -,h2,使い方(&M),F1,,URL_HELPを起動
 -,-
--,h3,バージョン情報(&A),,,「らぼったあ v1{~}{~}バージョン {VERSION} (Build {ナデシコバージョン}){~}{~}Copyright (C) 2016-2022 としつーる(nakkaa)」をいう』のメニュー一括作成
+-,h3,バージョン情報(&A),,,「らぼったあ v1{~}{~}バージョン {VERSION} (Build {ナデシコバージョン}){~}{~}Copyright (C) 2016-2022 nakkaa」をいう』のメニュー一括作成
 
 //起動時に行う処理
 起動時処理
@@ -97,7 +97,25 @@ WINDOW_TITLE=「らぼったあ v1」//ウィンドウのタイトル
 　テキストは「{履歴退室時名称}：」
 　Y=120
 
+//アラート出す
+アラートタイマーとはタイマー
+これについて
+　間隔は1/*sec*/
+　時満ちた時は～
+　　アラート処理
+
 //GUI設計ここまで
+
+●アラート処理
+　もし、LAST_ID==0ならば、
+　　抜ける
+　違えば、
+　　入室時間=「SELECT start FROM ltt WHERE id=」&LAST_ID&「;」をSQLITE3実行
+　　現在時刻=(今日の「/」を「-」に置換)&「 」&今
+　　もし、入室時間\1と現在時刻の時間差>=24ならば、
+　　　アラートタイマーを停止
+　　　MessageBox((母艦の、ハンドル),「らぼったあのボタンを押してから24時間以上が経過しました。
+ボタンを押し忘れていませんか？」,「らぼったあ」,$42010)。
 
 ●日時編集情報描画処理
 　直近入退室履歴のテキストを修正データへ代入
@@ -182,6 +200,7 @@ TWIのテキストは「Twitter認証」
 母艦を中央移動
 母艦の可視はオン
 設定ウィンドウを中央移動
+アラートタイマーを開始
 
 ●入退室処理
 　もし、LAST_ID==0ならば、
@@ -323,6 +342,7 @@ TWIのテキストは「Twitter認証」
 　　呟きボタンの有効はオフ
 　違えば、
 　　入退室ボタンのテキストは「{退室時名称}」
+
 　　入室時間=「SELECT start FROM ltt WHERE id=」&LAST_ID&「;」をSQLITE3実行
 　　入室情報のテキストは「{履歴入室時名称}：{入室時間\1}」
 　　呟きボタンの有効はオン
@@ -413,11 +433,11 @@ TWIのテキストは「Twitter認証」
 　履歴ウィンドウをモーダル表示
 
 ●DB検索処理
-　　検索抽出結果=「SELECT id AS "ID", start AS "{履歴入室時名称}", end AS "{履歴退室時名称}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "{滞在時間文言}",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
-　　累計滞在時間=「SELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"日"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
-　　平均滞在時間=「SELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"日"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
-　　履歴ステータスバーのテキストは「累計時間は{累計滞在時間\1}　平均時間は{平均滞在時間\1}」
-　　直近入退室履歴のアイテムは検索抽出結果
+　検索抽出結果=「SELECT id AS "ID", start AS "{履歴入室時名称}", end AS "{履歴退室時名称}",cast((julianday(end) - julianday(start)) as integer)||":"||(time(strftime('%s', end, 'localtime') - strftime('%s', start, 'localtime'),'unixepoch')) as "{滞在時間文言}",memo AS "メモ" FROM ltt WHERE start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' or memo LIKE '%{履歴編集のテキスト}%' OR id LIKE '%{履歴編集のテキスト}%'  ORDER BY id DESC;」をSQLITE3実行
+　累計滞在時間=「SELECT cast((sum(julianday(end) - julianday(start)))%24 as int)||"日"||cast((sum(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((sum(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
+　平均滞在時間=「SELECT cast((avg(julianday(end) - julianday(start)))%24 as int)||"日"||cast((avg(julianday(end) - julianday(start))*24)%24 as int)||"時間"||cast((avg(julianday(end) - julianday(start))*24*60)%60 as int)||"分" from ltt where start LIKE '%{履歴編集のテキスト}%' or end LIKE '%{履歴編集のテキスト}%' ORDER BY id DESC;」をSQLITE3実行
+　履歴ステータスバーのテキストは「累計時間は{累計滞在時間\1}　平均時間は{平均滞在時間\1}」
+　直近入退室履歴のアイテムは検索抽出結果
 
 //Twitter処理関係
 ●twi_oauth
